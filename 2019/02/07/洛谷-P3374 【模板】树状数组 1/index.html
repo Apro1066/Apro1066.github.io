@@ -6,20 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>洛谷-P2661 信息传递 | A.pro&#39;s blog</title>
+  <title>洛谷-P3374 【模板】树状数组 1 | A.pro&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="思路(Posted on 2018.09.25)可以把这些关系看成一个有向图。对于任意一个节点进入，因为每个点的出度均为1，所以最多只能构成三种情况：1、一条链；2、一个环链；3、一条链连接着一个环链。12345678910111213141516171819202122232425262728293031323334353637383940#include &amp;lt;stdio.h&amp;gt;#inc">
-<meta name="keywords" content="普及&#x2F;提高-,图论,图论-图的遍历">
+  <meta name="description" content="思路(Posted on 2019.02.07)123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354#include &amp;lt;stdio.h&amp;gt;#include &amp;lt;iostream&amp;gt;using namespace std;int n,m,">
+<meta name="keywords" content="普及&#x2F;提高-,数据结构,模板,数据结构-树状数组">
 <meta property="og:type" content="article">
-<meta property="og:title" content="洛谷-P2661 信息传递">
-<meta property="og:url" content="http://yoursite.com/2018/09/25/洛谷-P2661 信息传递/index.html">
+<meta property="og:title" content="洛谷-P3374 【模板】树状数组 1">
+<meta property="og:url" content="http://yoursite.com/2019/02/07/洛谷-P3374 【模板】树状数组 1/index.html">
 <meta property="og:site_name" content="A.pro&#39;s blog">
-<meta property="og:description" content="思路(Posted on 2018.09.25)可以把这些关系看成一个有向图。对于任意一个节点进入，因为每个点的出度均为1，所以最多只能构成三种情况：1、一条链；2、一个环链；3、一条链连接着一个环链。12345678910111213141516171819202122232425262728293031323334353637383940#include &amp;lt;stdio.h&amp;gt;#inc">
+<meta property="og:description" content="思路(Posted on 2019.02.07)123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354#include &amp;lt;stdio.h&amp;gt;#include &amp;lt;iostream&amp;gt;using namespace std;int n,m,">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-03-01T15:29:39.003Z">
+<meta property="og:updated_time" content="2019-03-01T16:26:44.419Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="洛谷-P2661 信息传递">
-<meta name="twitter:description" content="思路(Posted on 2018.09.25)可以把这些关系看成一个有向图。对于任意一个节点进入，因为每个点的出度均为1，所以最多只能构成三种情况：1、一条链；2、一个环链；3、一条链连接着一个环链。12345678910111213141516171819202122232425262728293031323334353637383940#include &amp;lt;stdio.h&amp;gt;#inc">
+<meta name="twitter:title" content="洛谷-P3374 【模板】树状数组 1">
+<meta name="twitter:description" content="思路(Posted on 2019.02.07)123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354#include &amp;lt;stdio.h&amp;gt;#include &amp;lt;iostream&amp;gt;using namespace std;int n,m,">
   
     <link rel="alternative" href="/atom.xml" title="A.pro&#39;s blog" type="application/atom+xml">
   
@@ -171,27 +171,27 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-洛谷-P2661 信息传递" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-洛谷-P3374 【模板】树状数组 1" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      洛谷-P2661 信息传递
+      洛谷-P3374 【模板】树状数组 1
     </h1>
   
 
         
-        <a href="/2018/09/25/洛谷-P2661 信息传递/" class="archive-article-date">
-  	<time datetime="2018-09-25T01:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-09-25</time>
+        <a href="/2019/02/07/洛谷-P3374 【模板】树状数组 1/" class="archive-article-date">
+  	<time datetime="2019-02-07T01:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-02-07</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>(Posted on 2018.09.25)<br>可以把这些关系看成一个有向图。<br>对于任意一个节点进入，因为每个点的出度均为1，所以最多只能构成三种情况：1、一条链；2、一个环链；3、一条链连接着一个环链。<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> a[<span class="number">200001</span>],n,minx=<span class="number">1</span>&lt;&lt;<span class="number">30</span>,weight[<span class="number">200001</span>];<span class="comment">//a数组一个人传话对象，weight数组记录第一次到节点所用边数 </span></span><br><span class="line"><span class="keyword">bool</span> b[<span class="number">200001</span>],v[<span class="number">200001</span>];<span class="comment">//b数组存每次查找中被查的点，v是该点是否被走过 </span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> i,<span class="keyword">int</span> dis)</span><span class="comment">//i是当前节点 </span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(v[i])<span class="comment">//被访问过的点不必查找 </span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">return</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span>(b[i])<span class="comment">//在当前查找中出现过 </span></span><br><span class="line">	&#123;</span><br><span class="line">		minx=min(minx,dis-weight[i]);<span class="comment">//更新最小值 </span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">	&#123;</span><br><span class="line">		b[i]=<span class="number">1</span>;<span class="comment">//在当前出现过 </span></span><br><span class="line">		weight[i]=dis;<span class="comment">//记录第一次到达的步数 </span></span><br><span class="line">		dfs(a[i],dis+<span class="number">1</span>);<span class="comment">//往下走一层 </span></span><br><span class="line">		v[i]=<span class="number">1</span>;<span class="comment">//已经搜过 </span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	ios::sync_with_stdio(<span class="literal">false</span>);</span><br><span class="line">	<span class="built_in">cin</span>.tie(<span class="number">0</span>);</span><br><span class="line">	<span class="keyword">int</span> i;</span><br><span class="line">	<span class="built_in">cin</span>&gt;&gt;n;</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">cin</span>&gt;&gt;a[i];</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		dfs(i,<span class="number">0</span>);<span class="comment">//搜所有节点 </span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">cout</span>&lt;&lt;minx&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+        <h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>(Posted on 2019.02.07)<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> n,m,bit[<span class="number">2000001</span>],s;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">lowbit</span><span class="params">(<span class="keyword">int</span> x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> x&amp;(-x);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> x,<span class="keyword">int</span> k)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">while</span>(x&lt;=n)</span><br><span class="line">	&#123;</span><br><span class="line">		bit[x]+=k;</span><br><span class="line">		x+=lowbit(x);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">sum</span><span class="params">(<span class="keyword">int</span> x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">int</span> <span class="title">ans</span><span class="params">(<span class="number">0</span>)</span></span>;</span><br><span class="line">	<span class="keyword">while</span>(x!=<span class="number">0</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		ans+=bit[x];</span><br><span class="line">		x-=lowbit(x);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	ios::sync_with_stdio(<span class="literal">false</span>);</span><br><span class="line">	<span class="built_in">cin</span>.tie(<span class="number">0</span>);</span><br><span class="line">	<span class="built_in">cout</span>.tie(<span class="number">0</span>);</span><br><span class="line">	<span class="keyword">register</span> <span class="keyword">int</span> i,j;</span><br><span class="line">	<span class="built_in">cin</span>&gt;&gt;n&gt;&gt;m;</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">int</span> x;</span><br><span class="line">		<span class="built_in">cin</span>&gt;&gt;x;</span><br><span class="line">		add(i,x);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=m;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">int</span> a,b,c;</span><br><span class="line">		<span class="built_in">cin</span>&gt;&gt;a&gt;&gt;b&gt;&gt;c;</span><br><span class="line">		<span class="keyword">if</span>(a==<span class="number">1</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			add(b,c);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">		&#123;</span><br><span class="line">			<span class="built_in">cout</span>&lt;&lt;sum(c)-sum(b<span class="number">-1</span>)&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 
       
 
@@ -209,11 +209,15 @@
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">图论</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据结构</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">图论-图的遍历</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">模板</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据结构-树状数组</a>
         		</li>
       		
 		</ul>
@@ -280,7 +284,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2018/09/25/洛谷-P2661 信息传递/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/02/07/洛谷-P3374 【模板】树状数组 1/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -294,18 +298,18 @@
   
 <nav id="article-nav">
   
-    <a href="/2018/10/15/洛谷-P1095 守望者的逃离/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2019/02/08/洛谷-P1111 修复公路/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          洛谷-P1095 守望者的逃离
+          洛谷-P1111 修复公路
         
       </div>
     </a>
   
   
-    <a href="/2018/09/20/洛谷-P1301 魔鬼之城/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">洛谷-P1301 魔鬼之城</div>
+    <a href="/2019/02/07/洛谷-P1440 求m区间内的最小值/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">洛谷-P1440 求m区间内的最小值</div>
       <i class="icon-circle-right"></i>
     </a>
   
