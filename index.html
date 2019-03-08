@@ -168,6 +168,99 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-洛谷-P5238 整数校验器" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/03/08/洛谷-P5238 整数校验器/">洛谷-P5238 整数校验器</a>
+    </h1>
+  
+
+        
+        <a href="/2019/03/08/洛谷-P5238 整数校验器/" class="archive-article-date">
+  	<time datetime="2019-03-08T05:30:09.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-03-08</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>模拟，不过有很多细节，读入字符串str，先判断合不合法，然后转成数字检查是否在区间[l,r]里。<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">long</span> <span class="keyword">long</span> <span class="keyword">int</span> n,r,l,s,len;</span><br><span class="line"><span class="keyword">unsigned</span> <span class="keyword">long</span> <span class="keyword">long</span> <span class="keyword">int</span> x;</span><br><span class="line"><span class="keyword">char</span> str[<span class="number">257</span>];</span><br><span class="line"><span class="function"><span class="keyword">signed</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	ios::sync_with_stdio(<span class="literal">false</span>);</span><br><span class="line">	<span class="built_in">cin</span>.tie(<span class="number">0</span>);</span><br><span class="line">	<span class="built_in">cout</span>.tie(<span class="number">0</span>);</span><br><span class="line">	<span class="keyword">register</span> <span class="keyword">long</span> <span class="keyword">long</span> <span class="keyword">int</span> i,j;</span><br><span class="line">	<span class="built_in">cin</span>&gt;&gt;l&gt;&gt;r&gt;&gt;n;</span><br><span class="line">	<span class="keyword">while</span>(n--)</span><br><span class="line">	&#123;</span><br><span class="line">		x=<span class="number">0</span>,i=<span class="number">0</span>,j=<span class="number">0</span>;</span><br><span class="line">		<span class="built_in">cin</span>&gt;&gt;str+<span class="number">1</span>;</span><br><span class="line">		len=<span class="built_in">strlen</span>(str+<span class="number">1</span>);</span><br><span class="line">		<span class="keyword">if</span>(str[<span class="number">1</span>]==<span class="string">'0'</span> &amp;&amp; len!=<span class="number">1</span>)<span class="comment">//如果形如0000这样的 </span></span><br><span class="line">		&#123;</span><br><span class="line">			<span class="built_in">cout</span>&lt;&lt;<span class="number">1</span>&lt;&lt;<span class="built_in">endl</span>;<span class="comment">//不合法 </span></span><br><span class="line">			<span class="keyword">continue</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span>(str[<span class="number">1</span>]==<span class="string">'-'</span>)<span class="comment">//如果是负数 </span></span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span>(len==<span class="number">1</span>)<span class="comment">//单独一个负号不合法 </span></span><br><span class="line">			&#123;</span><br><span class="line">				<span class="built_in">cout</span>&lt;&lt;<span class="number">1</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">else</span> <span class="keyword">if</span>(str[<span class="number">2</span>]==<span class="string">'0'</span>)<span class="comment">//-0不合法 </span></span><br><span class="line">			&#123;</span><br><span class="line">				<span class="built_in">cout</span>&lt;&lt;<span class="number">1</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">else</span> <span class="keyword">if</span>(len&gt;<span class="number">20</span>)<span class="comment">//过大了 </span></span><br><span class="line">			&#123;</span><br><span class="line">				<span class="built_in">cout</span>&lt;&lt;<span class="number">2</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">else</span><span class="comment">//转数 </span></span><br><span class="line">			&#123;</span><br><span class="line">				<span class="keyword">int</span> position(<span class="number">2</span>);</span><br><span class="line">				<span class="keyword">while</span>(position&lt;=len)</span><br><span class="line">				&#123;</span><br><span class="line">					x=x*<span class="number">10</span>+(<span class="keyword">int</span>)str[position]<span class="number">-48</span>;</span><br><span class="line">					position++;</span><br><span class="line">				&#125;</span><br><span class="line">				x=-x;<span class="comment">//注意这是个负数 </span></span><br><span class="line">				<span class="keyword">if</span>(x&gt;=l)<span class="comment">//检查是否在区间里，只需要比较l，因为x是负数 </span></span><br><span class="line">				&#123;</span><br><span class="line">					<span class="built_in">cout</span>&lt;&lt;<span class="number">0</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">				&#125;</span><br><span class="line">				<span class="keyword">else</span></span><br><span class="line">				&#123;</span><br><span class="line">					<span class="built_in">cout</span>&lt;&lt;<span class="number">2</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span><span class="comment">//整数 </span></span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span>(len&gt;<span class="number">19</span>)<span class="comment">//长度过大 </span></span><br><span class="line">			&#123;</span><br><span class="line">				<span class="built_in">cout</span>&lt;&lt;<span class="number">2</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">else</span><span class="comment">//转数 </span></span><br><span class="line">			&#123;</span><br><span class="line">				<span class="keyword">int</span> position(<span class="number">1</span>);</span><br><span class="line">				<span class="keyword">while</span>(position&lt;=len)</span><br><span class="line">				&#123;</span><br><span class="line">					x=x*<span class="number">10</span>+(<span class="keyword">int</span>)str[position]<span class="number">-48</span>;</span><br><span class="line">					position++;</span><br><span class="line">				&#125;</span><br><span class="line">				<span class="keyword">if</span>(x&lt;=r)<span class="comment">//到r就行了，因为是正数 </span></span><br><span class="line">				&#123;</span><br><span class="line">					<span class="built_in">cout</span>&lt;&lt;<span class="number">0</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">				&#125;</span><br><span class="line">				<span class="keyword">else</span></span><br><span class="line">				&#123;</span><br><span class="line">					<span class="built_in">cout</span>&lt;&lt;<span class="number">2</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">普及/提高-</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">模拟</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">洛谷月赛</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/洛谷OJ题解//" class="article-tag-list-link color2">洛谷OJ题解</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/03/08/洛谷-P5238 整数校验器/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-洛谷-P1118 [USACO06FEB]数字三角形" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1000,107 +1093,6 @@
 
 
   
-    <article id="post-洛谷-P1537 弹珠" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/02/14/洛谷-P1537 弹珠/">洛谷-P1537 弹珠</a>
-    </h1>
-  
-
-        
-        <a href="/2019/02/14/洛谷-P1537 弹珠/" class="archive-article-date">
-  	<time datetime="2019-02-14T01:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-02-14</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>(Posted on 2019.02.14)<br>正解应该是背包，但是我不会写。。你们动态规划那么难的么？<br>因为正解是背包，所以标签会打上背包dp。<br>dfs：<br>暴力枚举每个弹珠，看看是否能凑成两个弹珠总价值的一半。（一开始我写的暴力6重循环，后来一直20分）<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> n,s,a[<span class="number">7</span>],flag;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> now,<span class="keyword">int</span> v)</span><span class="comment">//now是当前的总价值，cnt是已经凑够几个弹珠总价值的一般 </span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(now==s)<span class="comment">//如果当前总价值是所有弹珠价值一半 </span></span><br><span class="line">	&#123;</span><br><span class="line">		v++;<span class="comment">//凑够弹珠+1 </span></span><br><span class="line">		now=<span class="number">0</span>;<span class="comment">//总价值=0 </span></span><br><span class="line">		<span class="keyword">if</span>(v==<span class="number">2</span>)<span class="comment">//如果已经找到了2个弹珠总价值的一半 </span></span><br><span class="line">		&#123;</span><br><span class="line">			flag=<span class="number">1</span>;<span class="comment">//标记 </span></span><br><span class="line">			<span class="keyword">return</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">register</span> <span class="keyword">int</span> i;</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">6</span>;i&gt;=<span class="number">1</span>;i--)<span class="comment">//不知道为什么倒着搞就能很快 </span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span>(a[i] &amp;&amp; now+i&lt;=s)<span class="comment">//如果还有价值为i的弹珠并且当前总价值加上这个弹珠的价值不超过所有弹珠总价值的一半 </span></span><br><span class="line">		&#123;</span><br><span class="line">			a[i]--;</span><br><span class="line">			dfs(now+i,v);</span><br><span class="line">			<span class="keyword">if</span>(flag)<span class="comment">//如果找到解 </span></span><br><span class="line">			&#123;</span><br><span class="line">				<span class="keyword">return</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			a[i]++;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	ios::sync_with_stdio(<span class="literal">false</span>);</span><br><span class="line">	<span class="built_in">cin</span>.tie(<span class="number">0</span>);</span><br><span class="line">	<span class="built_in">cout</span>.tie(<span class="number">0</span>);</span><br><span class="line">	<span class="keyword">register</span> <span class="keyword">int</span> i,j,k(<span class="number">1</span>);</span><br><span class="line">	<span class="keyword">while</span>(<span class="built_in">cin</span>&gt;&gt;a[<span class="number">1</span>]&gt;&gt;a[<span class="number">2</span>]&gt;&gt;a[<span class="number">3</span>]&gt;&gt;a[<span class="number">4</span>]&gt;&gt;a[<span class="number">5</span>]&gt;&gt;a[<span class="number">6</span>])</span><br><span class="line">	&#123;</span><br><span class="line">		flag=<span class="number">0</span>,s=<span class="number">0</span>;</span><br><span class="line">		<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=<span class="number">6</span>;i++)</span><br><span class="line">		&#123;</span><br><span class="line">			s+=a[i]*i;<span class="comment">//总价值 </span></span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span>(s==<span class="number">0</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="built_in">cout</span>&lt;&lt;<span class="string">"Collection #"</span>&lt;&lt;k&lt;&lt;<span class="string">":"</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">		<span class="keyword">if</span>(s%<span class="number">2</span>==<span class="number">1</span>)<span class="comment">//如果是奇数必然无解 </span></span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">goto</span> lp;</span><br><span class="line">		&#125;</span><br><span class="line">		s&gt;&gt;=<span class="number">1</span>;<span class="comment">//总价值一半 </span></span><br><span class="line">		dfs(<span class="number">0</span>,<span class="number">0</span>);</span><br><span class="line">		<span class="keyword">if</span>(flag==<span class="number">1</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="built_in">cout</span>&lt;&lt;<span class="string">"Can be divided."</span>&lt;&lt;<span class="built_in">endl</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">			k++;</span><br><span class="line">			<span class="keyword">continue</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">goto</span> lp;</span><br><span class="line">		&#125;</span><br><span class="line">		lp:</span><br><span class="line">			<span class="built_in">cout</span>&lt;&lt;<span class="string">"Can't be divided."</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">			k++;</span><br><span class="line">			<span class="built_in">cout</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">动态规划</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">普及+/提高</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">搜索</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">搜索-dfs</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">动态规划-背包dp</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/洛谷OJ题解//" class="article-tag-list-link color2">洛谷OJ题解</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/02/14/洛谷-P1537 弹珠/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
@@ -1242,18 +1234,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">搜索</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">搜索-dfs</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">闲聊</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">动态规划-线性dp</a>
               </li>
              
@@ -1266,15 +1246,31 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">闲聊</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">搜索</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">搜索-dfs</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">图论</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">图论-最短路</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">贪心</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">模拟</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">图论</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1287,10 +1283,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">搜索-bfs</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">图论-最短路</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1314,15 +1306,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">NOI</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">图论-图的遍历</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">模板</a>
+                <a href="javascript:void(0)" class="js-tag color1">数学-素数</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1330,11 +1314,23 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">图论-二分图</a>
+                <a href="javascript:void(0)" class="js-tag color3">提高+/省选-</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">提高+/省选-</a>
+                <a href="javascript:void(0)" class="js-tag color3">图论-图的遍历</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">NOI</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">模板</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">图论-二分图</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1342,7 +1338,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">数学-素数</a>
+                <a href="javascript:void(0)" class="js-tag color5">洛谷月赛</a>
               </li>
              
               <li class="article-tag-list-item">

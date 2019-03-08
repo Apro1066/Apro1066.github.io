@@ -168,6 +168,117 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-洛谷-P2772 寻找平面上的极大点" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/07/17/洛谷-P2772 寻找平面上的极大点/">洛谷-P2772 寻找平面上的极大点</a>
+    </h1>
+  
+
+        
+        <a href="/2018/07/17/洛谷-P2772 寻找平面上的极大点/" class="archive-article-date">
+  	<time datetime="2018-07-17T01:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-07-17</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>(Posted on 2018.07.17)<br>这道题应该是单调队列的模版题，但是A.pro的水平有限，不用数据结构做，就纯贪心。</p>
+<p>好的，回归题目。题目对于“极大值点”的定义如下：</p>
+<p>对于任意一个点，如果它的y值不小于任何一个点使这个“任何一个点”x值大于给定点的x值，那么该点为极大点。</p>
+<p>什么？没看懂？看样子这段话说了不少废话，那我们参见图片。</p>
+<p><img src="https://img-blog.csdn.net/20180717202331691?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0Fwcm8xMDY2/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="例1"><br>图中有序数对前的星号都表示极大值点。</p>
+<p>由图中不难发现：对于一个坐标点，如果y坐标比它大的点全部都在它的左边，那么该点为极大点。</p>
+<p>比如图中的坐标(2,3)，它的y值为3，比3大的点(1,4)在点(2,3)的左边，所以(2,3)就是极大值点了。</p>
+<p>好，我们先上代码。</p>
+<p>//90分程序 </p>
+<p>#include &lt;stdio.h&gt;</p>
+<p>#include <iostream></iostream></p>
+<p>#include <algorithm><br>using namespace std;<br>struct node<br>{<br>    int x;//x轴<br>    int y;//y轴<br>}pos[50001];//定义一个结构类型，是来存储各个坐标的<br>int compare(node a,node b)<br>{<br>    return a.x&lt;b.x;<br>}//compare函数，是用于STL算法库中函数sort附加函数的，不然编译不过。至于为什么这样写请goto至Line27<br>int main()<br>{<br>    ios::sync_with_stdio(false);//数据流读入优化<br>    auto int n,i,j,k(-1);//k用于不断寻找最大值，也就是尽可能大的坐标<br>    static int s;//静态变量static，没什么新鲜的<br>    auto int a[50001]={};//a数组用来标记极大值点，和自动变量s配套使用<br>    cin&gt;&gt;n;//n读入n个坐标<br>    for(i=1;i&lt;=n;i++)<br>    {<br>        cin&gt;&gt;pos[i].x&gt;&gt;pos[i].y;//读入坐标(xi,yi)<br>    }<br>    sort(pos+1,pos+n+1,compare);//将x坐标排序，这里我从小往大排，当然从大往小排也可以<br>    for(i=n;i&gt;=1;i–)//从小往大，就逆序处理<br>    {<br>        if(pos[i].y&gt;k)//如果当前y坐标大于之前的y坐标<br>        {<br>            s++;//那么很显然，这个坐标需要我们标记，s代表标记到多少个极大值点<br>            a[s]=i;//将当前坐标标记至a数组<br>            k=pos[i].y;//最大值更新<br>        }<br>    }//ok,这就是贪心策略了<br>    for(i=s;i&gt;1;i–)//仍然地，还要从大往小检索。之所以从s开始，是因为我们要输出的极大值点在之前已经用s累计过了<br>    {<br>        printf(“(%d,%d),”,pos[a[i]].x,pos[a[i]].y);<br>    }<br>    printf(“(%d,%d)”,pos[a[i]].x,pos[a[i]].y);//特殊处理最后的逗号<br>    return 0;<br>}</algorithm></p>
+<p>很可惜，这份算法，只能得90分。(艹)</p>
+<p>难道是极大值点的定义和图片在骗我？</p>
+<p>那好吧，我们再回归图片。</p>
+<p><img src="https://img-blog.csdn.net/20180717203931720?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0Fwcm8xMDY2/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="例2"></p>
+<p>发现问题了吧？</p>
+<p>是的，判定条件包括这一列！</p>
+<p>所以我们要在排序时，当x相等时比较y。这样，才能AC。（哈，任何题目都有它嘴恶的丑脸。啊不，丑恶的嘴脸。）</p>
+<p>//100分程序 </p>
+<p>#include &lt;stdio.h&gt;</p>
+<p>#include <iostream></iostream></p>
+<p>#include <algorithm><br>using namespace std;<br>struct node<br>{<br>    int x;//x轴<br>    int y;//y轴<br>}pos[50001];//定义一个结构类型，是来存储各个坐标的<br>int compare(node a,node b)<br>{<br>    if(a.x!=b.x)<br>        return a.x&lt;b.x;<br>    else  return a.y&lt;b.y;//本题的一个大坑。请在Line16看极大值点的定义。<br>//对于任意一个点，如果它的y值比它右边（包括这一列）的点都要大，那么该点为极大点。<br>//包括这一列！！也就是说，当x坐标相等的时候，我们就需要比较y坐标，本题AC。<br>}//compare函数，是用于STL算法库中函数sort附加函数的，不然编译不过。至于为什么这样写请goto至Line31<br>int main()<br>{<br>    ios::sync_with_stdio(false);//数据流读入优化<br>    auto int n,i,j,k(-1);//k用于不断寻找最大值，也就是尽可能大的坐标<br>    static int s;//静态变量static，没什么新鲜的<br>    auto int a[50001]={};//a数组用来标记极大值点，和自动变量s配套使用<br>    cin&gt;&gt;n;//n读入n个坐标<br>    for(i=1;i&lt;=n;i++)<br>    {<br>        cin&gt;&gt;pos[i].x&gt;&gt;pos[i].y;//读入坐标(xi,yi)<br>    }<br>    sort(pos+1,pos+n+1,compare);//将x坐标排序，这里我从小往大排，当然从大往小排也可以<br>    for(i=n;i&gt;=1;i–)//从小往大，就逆序处理<br>    {<br>        if(pos[i].y&gt;k)//如果当前y坐标大于之前的y坐标<br>        {<br>            s++;//那么很显然，这个坐标需要我们标记，s代表标记到多少个极大值点<br>            a[s]=i;//将当前坐标标记至a数组<br>            k=pos[i].y;//最大值更新<br>        }<br>    }//ok,这就是贪心策略了<br>    for(i=s;i&gt;1;i–)//仍然地，还要从大往小检索。之所以从s开始，是因为我们要输出的极大值点在之前已经用s累计过了<br>    {<br>        printf(“(%d,%d),”,pos[a[i]].x,pos[a[i]].y);<br>    }<br>    printf(“(%d,%d)”,pos[a[i]].x,pos[a[i]].y);//特殊处理最后的逗号<br>    return 0;<br>}</algorithm></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">普及/提高-</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">贪心</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/洛谷OJ题解//" class="article-tag-list-link color2">洛谷OJ题解</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/07/17/洛谷-P2772 寻找平面上的极大点/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-洛谷-P1090 合并果子" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -406,18 +517,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">搜索</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">搜索-dfs</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">闲聊</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">动态规划-线性dp</a>
               </li>
              
@@ -430,15 +529,31 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">闲聊</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">搜索</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">搜索-dfs</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">图论</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">图论-最短路</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">贪心</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">模拟</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">图论</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -451,10 +566,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">搜索-bfs</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">图论-最短路</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -478,15 +589,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">NOI</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">图论-图的遍历</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">模板</a>
+                <a href="javascript:void(0)" class="js-tag color1">数学-素数</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -494,11 +597,23 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">图论-二分图</a>
+                <a href="javascript:void(0)" class="js-tag color3">提高+/省选-</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">提高+/省选-</a>
+                <a href="javascript:void(0)" class="js-tag color3">图论-图的遍历</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">NOI</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">模板</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">图论-二分图</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -506,7 +621,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">数学-素数</a>
+                <a href="javascript:void(0)" class="js-tag color5">洛谷月赛</a>
               </li>
              
               <li class="article-tag-list-item">
