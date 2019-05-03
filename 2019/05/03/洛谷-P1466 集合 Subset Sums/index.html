@@ -6,20 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>洛谷-P1323 删数问题 | A.pro&#39;s blog</title>
+  <title>洛谷-P1466 集合 Subset Sums | A.pro&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="思路(Posted on 2019.02.12)水你mmp啊……这个我看了题解，看到了一大堆用优先队列的..都那么神犇的吗。。还有用链表，to_string操作，太强啦，先%各位大佬。123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585">
-<meta name="keywords" content="普及+&#x2F;提高,数据结构,数据结构-单调队列,数据结构-优先队列">
+  <meta name="description" content="思路这几天一直在看洛谷五一网课orz，这是will老师的一道例题。题目大意：对于任意一个$n$，求能装满$(1+2+3+…+N)/2$的大小的背包的方案总数；那么我们先判断数字总和能否被$2$整除。把每一个集合里数字的和 定义为背包的体积，然后我们就可以求背包问题的方案总数，也就是在空间为$v$的状态下填满的方案总数。每个数只有$2$个情况，所以可以转换为01背包。则有： $dp[j]=dp[j]">
+<meta name="keywords" content="普及&#x2F;提高-,动态规划,动态规划-背包dp">
 <meta property="og:type" content="article">
-<meta property="og:title" content="洛谷-P1323 删数问题">
-<meta property="og:url" content="http://yoursite.com/2019/02/12/洛谷-P1323 删数问题/index.html">
+<meta property="og:title" content="洛谷-P1466 集合 Subset Sums">
+<meta property="og:url" content="http://yoursite.com/2019/05/03/洛谷-P1466 集合 Subset Sums/index.html">
 <meta property="og:site_name" content="A.pro&#39;s blog">
-<meta property="og:description" content="思路(Posted on 2019.02.12)水你mmp啊……这个我看了题解，看到了一大堆用优先队列的..都那么神犇的吗。。还有用链表，to_string操作，太强啦，先%各位大佬。123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585">
+<meta property="og:description" content="思路这几天一直在看洛谷五一网课orz，这是will老师的一道例题。题目大意：对于任意一个$n$，求能装满$(1+2+3+…+N)/2$的大小的背包的方案总数；那么我们先判断数字总和能否被$2$整除。把每一个集合里数字的和 定义为背包的体积，然后我们就可以求背包问题的方案总数，也就是在空间为$v$的状态下填满的方案总数。每个数只有$2$个情况，所以可以转换为01背包。则有： $dp[j]=dp[j]">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-03-01T16:14:06.579Z">
+<meta property="og:updated_time" content="2019-05-03T09:03:57.198Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="洛谷-P1323 删数问题">
-<meta name="twitter:description" content="思路(Posted on 2019.02.12)水你mmp啊……这个我看了题解，看到了一大堆用优先队列的..都那么神犇的吗。。还有用链表，to_string操作，太强啦，先%各位大佬。123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585">
+<meta name="twitter:title" content="洛谷-P1466 集合 Subset Sums">
+<meta name="twitter:description" content="思路这几天一直在看洛谷五一网课orz，这是will老师的一道例题。题目大意：对于任意一个$n$，求能装满$(1+2+3+…+N)/2$的大小的背包的方案总数；那么我们先判断数字总和能否被$2$整除。把每一个集合里数字的和 定义为背包的体积，然后我们就可以求背包问题的方案总数，也就是在空间为$v$的状态下填满的方案总数。每个数只有$2$个情况，所以可以转换为01背包。则有： $dp[j]=dp[j]">
   
     <link rel="alternative" href="/atom.xml" title="A.pro&#39;s blog" type="application/atom+xml">
   
@@ -171,27 +171,29 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-洛谷-P1323 删数问题" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-洛谷-P1466 集合 Subset Sums" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      洛谷-P1323 删数问题
+      洛谷-P1466 集合 Subset Sums
     </h1>
   
 
         
-        <a href="/2019/02/12/洛谷-P1323 删数问题/" class="archive-article-date">
-  	<time datetime="2019-02-12T01:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-02-12</time>
+        <a href="/2019/05/03/洛谷-P1466 集合 Subset Sums/" class="archive-article-date">
+  	<time datetime="2019-05-03T08:55:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-05-03</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>(Posted on 2019.02.12)<br><del>水你mmp啊……</del><br>这个我看了题解，看到了一大堆用优先队列的..都那么神犇的吗。。还有用链表，to_string操作，太强啦，先%各位大佬。<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//看了优先队列的题解，然后自己写了一个优先队列+单调队列的 </span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> n,m,s[<span class="number">300001</span>],que[<span class="number">600001</span>],position[<span class="number">300001</span>],cnt;</span><br><span class="line"><span class="comment">//s取每一位上的数，que是单调队列，position是单调队列中每一位的位置 </span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">lxydl</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="keyword">int</span> data;</span><br><span class="line">	<span class="keyword">bool</span> <span class="keyword">operator</span> &lt; (<span class="keyword">const</span> lxydl a)<span class="keyword">const</span>&#123;<span class="keyword">return</span> data&gt;a.data;&#125;<span class="comment">//优先级 </span></span><br><span class="line">&#125;;</span><br><span class="line">lxydl a,b;</span><br><span class="line">priority_queue&lt;lxydl&gt; p_que;<span class="comment">//优先队列 </span></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">xsyation</span><span class="params">(<span class="keyword">int</span> a)</span><span class="comment">//将分开的数放进s </span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> b=cnt+<span class="number">1</span>,c;</span><br><span class="line">	<span class="keyword">while</span>(a)<span class="comment">//注意这里是顺着搞的，也就是说数组是从高位到低位存 </span></span><br><span class="line">	&#123;</span><br><span class="line">		s[++cnt]=a%<span class="number">10</span>;</span><br><span class="line">		a/=<span class="number">10</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	c=cnt;</span><br><span class="line">	<span class="keyword">while</span>(b&lt;c)<span class="comment">//所以要把它反转 </span></span><br><span class="line">	&#123;</span><br><span class="line">		swap(s[b++],s[c--]); </span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	ios::sync_with_stdio(<span class="literal">false</span>);</span><br><span class="line">	<span class="built_in">cin</span>.tie(<span class="number">0</span>);</span><br><span class="line">	<span class="built_in">cout</span>.tie(<span class="number">0</span>);</span><br><span class="line">	<span class="keyword">register</span> <span class="keyword">int</span> i,j;</span><br><span class="line">	<span class="built_in">cin</span>&gt;&gt;n&gt;&gt;m;</span><br><span class="line">	a.data=<span class="number">1</span>;</span><br><span class="line">	p_que.push(a);</span><br><span class="line">	<span class="keyword">while</span>(n--)</span><br><span class="line">	&#123;</span><br><span class="line">		a=p_que.top();</span><br><span class="line">		xsyation(a.data);</span><br><span class="line">		<span class="built_in">cout</span>&lt;&lt;a.data;</span><br><span class="line">		p_que.pop();</span><br><span class="line">		b.data=a.data*<span class="number">2</span>+<span class="number">1</span>; p_que.push(b);</span><br><span class="line">		b.data=a.data*<span class="number">4</span>+<span class="number">5</span>; p_que.push(b); </span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">cout</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">	int head(1),tail(0),l=m+1;</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=cnt;i++)<span class="comment">//删数操作，可以用单调队列 </span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">while</span>(head&lt;=tail &amp;&amp; s[i]&gt;que[tail]) tail--;</span><br><span class="line">		que[++tail]=s[i];</span><br><span class="line">		position[tail]=i;</span><br><span class="line">		<span class="keyword">if</span>(i-position[head]+<span class="number">1</span>&gt;l) head++;</span><br><span class="line">		<span class="keyword">if</span>(i&gt;=l)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="built_in">cout</span>&lt;&lt;que[head];</span><br><span class="line">			head++;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">cout</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+        <h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>这几天一直在看洛谷五一网课orz，这是will老师的一道例题。<br>题目大意：对于任意一个$n$，求能装满$(1+2+3+…+N)/2$的大小的背包的方案总数；那么我们先判断数字总和能否被$2$整除。<br>把每一个集合里数字的和 定义为背包的体积，然后我们就可以求背包问题的方案总数，也就是在空间为$v$的状态下填满的方案总数。每个数只有$2$个情况，所以可以转换为01背包。则有：</p>
+<p>$dp[j]=dp[j]+dp[j-i]$</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">long</span> <span class="keyword">long</span> <span class="keyword">int</span> n,m,dp[<span class="number">41</span>],s;</span><br><span class="line"><span class="function"><span class="keyword">signed</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	ios::sync_with_stdio(<span class="literal">false</span>);</span><br><span class="line">	<span class="built_in">cin</span>.tie(<span class="number">0</span>);</span><br><span class="line">	<span class="built_in">cout</span>.tie(<span class="number">0</span>);</span><br><span class="line">	<span class="keyword">register</span> <span class="keyword">long</span> <span class="keyword">long</span> <span class="keyword">int</span> i,j;</span><br><span class="line">	<span class="built_in">cin</span>&gt;&gt;n;</span><br><span class="line">	m=(n*(n+<span class="number">1</span>))/<span class="number">2</span>;</span><br><span class="line">	<span class="keyword">if</span>(m%<span class="number">2</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">cout</span>&lt;&lt;<span class="number">0</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">		<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	m/=<span class="number">2</span>;</span><br><span class="line">	dp[<span class="number">0</span>]=<span class="number">1</span>;</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">for</span>(j=m;j&gt;=i;j--)</span><br><span class="line">		&#123;</span><br><span class="line">			dp[j]+=dp[j-i];</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">cout</span>&lt;&lt;dp[m]/<span class="number">2</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
       
 
@@ -205,19 +207,15 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">普及+/提高</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">普及/提高-</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据结构</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">动态规划</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据结构-单调队列</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据结构-优先队列</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">动态规划-背包dp</a>
         		</li>
       		
 		</ul>
@@ -284,7 +282,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/02/12/洛谷-P1323 删数问题/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/05/03/洛谷-P1466 集合 Subset Sums/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -298,18 +296,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2019/02/12/洛谷-P1725 琪露诺/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          洛谷-P1725 琪露诺
-        
-      </div>
-    </a>
   
-  
-    <a href="/2019/02/11/洛谷-P3388 【模板】割点（割顶）/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">洛谷-P3388 【模板】割点（割顶）</div>
+    <a href="/2019/04/30/CF1015C Songs Compression/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">CF1015C Songs Compression</div>
       <i class="icon-circle-right"></i>
     </a>
   
