@@ -9,7 +9,7 @@
   <title>洛谷-P1622 释放囚犯 | A.pro&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="思路(Posted on 2019.02.08)区间dp的典型题目。 设dp[i][j]为区间释放 i~j 号囚犯所需最少的肉，枚举所有分界点 k，则：dp[i][j]=min{dp[i][j],dp[i][k-1]+dp[k+1][j]+a[j+1]-a[i-1]-1-1}; a[j+1]-a[i-1]-1 是第 j+1 个要放出的囚犯到第 i-1 个要放出的囚犯之间的人数，也即要发的肉的数量。">
-<meta name="keywords" content="动态规划,普及+&#x2F;提高,动态规划-区间dp">
+<meta name="keywords" content="普及+&#x2F;提高,动态规划,动态规划-区间dp">
 <meta property="og:type" content="article">
 <meta property="og:title" content="洛谷-P1622 释放囚犯">
 <meta property="og:url" content="http://yoursite.com/2019/02/08/洛谷-P1622 释放囚犯/index.html">
@@ -208,11 +208,11 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">动态规划</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">普及+/提高</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">普及+/提高</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">动态规划</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
@@ -297,18 +297,18 @@
   
 <nav id="article-nav">
   
-    <a href="/2019/02/08/洛谷-P1111 修复公路/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2019/02/10/洛谷-P2158 [SDOI2008]仪仗队/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          洛谷-P1111 修复公路
+          洛谷-P2158 [SDOI2008]仪仗队
         
       </div>
     </a>
   
   
-    <a href="/2019/02/07/洛谷-P1440 求m区间内的最小值/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">洛谷-P1440 求m区间内的最小值</div>
+    <a href="/2019/02/08/洛谷-P1111 修复公路/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">洛谷-P1111 修复公路</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -459,6 +459,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">贪心</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">普及+/提高</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">数学/数论</a>
               </li>
              
@@ -471,6 +479,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">数据结构-线段树</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">搜索</a>
               </li>
              
@@ -479,7 +495,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">贪心</a>
+                <a href="javascript:void(0)" class="js-tag color3">Noip提高组</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -491,15 +507,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">普及+/提高</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">闲聊</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Noip提高组</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -547,15 +555,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">搜索-bfs</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">二分答案</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
+                <a href="javascript:void(0)" class="js-tag color2">搜索-bfs</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -575,6 +579,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">数据结构-栈</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">数学-素数</a>
               </li>
              
@@ -591,7 +599,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">图论-二分图</a>
+                <a href="javascript:void(0)" class="js-tag color1">国家集训队</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -599,15 +607,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">图论-二分图</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">洛谷月赛</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">数据结构-线段树</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">数据结构-栈</a>
               </li>
             
             <div class="clearfix"></div>
