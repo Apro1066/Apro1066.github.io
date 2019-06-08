@@ -6,20 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>洛谷-P2386 放苹果 | A.pro&#39;s blog</title>
+  <title>CF1157A Reachable Numbers | A.pro&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="思路看到这题突然不理解递归了……对于每个苹果和盘子，首先都知道如果只有$0$或$1$个苹果，怎么放都只有一种方案。并且只有一个盘子的时候也只有$1$个方案。1234567891011121314151617181920212223#include &amp;lt;stdio.h&amp;gt;#include &amp;lt;iostream&amp;gt;using namespace std;int n,m,s,t;int">
-<meta name="keywords" content="普及&#x2F;提高-,搜索,搜索-dfs">
+  <meta name="description" content="思路似乎并没有蓝题的难度。不要被娜高端的$f(x)$吓到了，我们知道函数是个动态的过程，因此不用管它，直接按题意模拟即可。这道题的本质：给一个数$n$，每一次$n+1$后，再去掉末尾的$04，能得到多少个数（包括自身）。显然对于每个数至少有$9$个，分别是$1$~$9$。进位以后的数将比原数小，所以可以直接循环。12345678910111213141516171819202122#include">
+<meta name="keywords" content="模拟,提高+&#x2F;省选-">
 <meta property="og:type" content="article">
-<meta property="og:title" content="洛谷-P2386 放苹果">
-<meta property="og:url" content="http://yoursite.com/2019/03/23/洛谷-P2386 放苹果/index.html">
+<meta property="og:title" content="CF1157A Reachable Numbers">
+<meta property="og:url" content="http://yoursite.com/2019/06/08/CF1157A Reachable Numbers/index.html">
 <meta property="og:site_name" content="A.pro&#39;s blog">
-<meta property="og:description" content="思路看到这题突然不理解递归了……对于每个苹果和盘子，首先都知道如果只有$0$或$1$个苹果，怎么放都只有一种方案。并且只有一个盘子的时候也只有$1$个方案。1234567891011121314151617181920212223#include &amp;lt;stdio.h&amp;gt;#include &amp;lt;iostream&amp;gt;using namespace std;int n,m,s,t;int">
+<meta property="og:description" content="思路似乎并没有蓝题的难度。不要被娜高端的$f(x)$吓到了，我们知道函数是个动态的过程，因此不用管它，直接按题意模拟即可。这道题的本质：给一个数$n$，每一次$n+1$后，再去掉末尾的$04，能得到多少个数（包括自身）。显然对于每个数至少有$9$个，分别是$1$~$9$。进位以后的数将比原数小，所以可以直接循环。12345678910111213141516171819202122#include">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-03-27T15:41:18.861Z">
+<meta property="og:updated_time" content="2019-06-08T14:46:12.398Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="洛谷-P2386 放苹果">
-<meta name="twitter:description" content="思路看到这题突然不理解递归了……对于每个苹果和盘子，首先都知道如果只有$0$或$1$个苹果，怎么放都只有一种方案。并且只有一个盘子的时候也只有$1$个方案。1234567891011121314151617181920212223#include &amp;lt;stdio.h&amp;gt;#include &amp;lt;iostream&amp;gt;using namespace std;int n,m,s,t;int">
+<meta name="twitter:title" content="CF1157A Reachable Numbers">
+<meta name="twitter:description" content="思路似乎并没有蓝题的难度。不要被娜高端的$f(x)$吓到了，我们知道函数是个动态的过程，因此不用管它，直接按题意模拟即可。这道题的本质：给一个数$n$，每一次$n+1$后，再去掉末尾的$04，能得到多少个数（包括自身）。显然对于每个数至少有$9$个，分别是$1$~$9$。进位以后的数将比原数小，所以可以直接循环。12345678910111213141516171819202122#include">
   
     <link rel="alternative" href="/atom.xml" title="A.pro&#39;s blog" type="application/atom+xml">
   
@@ -171,27 +171,27 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-洛谷-P2386 放苹果" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-CF1157A Reachable Numbers" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      洛谷-P2386 放苹果
+      CF1157A Reachable Numbers
     </h1>
   
 
         
-        <a href="/2019/03/23/洛谷-P2386 放苹果/" class="archive-article-date">
-  	<time datetime="2019-03-23T14:16:34.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-03-23</time>
+        <a href="/2019/06/08/CF1157A Reachable Numbers/" class="archive-article-date">
+  	<time datetime="2019-06-08T14:37:08.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-08</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>看到这题突然不理解递归了……<br>对于每个苹果和盘子，首先都知道如果只有$0$或$1$个苹果，怎么放都只有一种方案。并且只有一个盘子的时候也只有$1$个方案。<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> n,m,s,t;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> m,<span class="keyword">int</span> n)</span><span class="comment">//递归 </span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(m==<span class="number">0</span> || m==<span class="number">1</span> || n==<span class="number">1</span>) <span class="keyword">return</span> <span class="number">1</span>;<span class="comment">//如果&lt;=1个苹果，或者盘子只有一个，那么都是只有1种放法的 </span></span><br><span class="line">	<span class="keyword">if</span>(m&lt;n) <span class="keyword">return</span> dfs(m,m);<span class="comment">//苹果小于盘子，只有m个盘子是可以使用的 </span></span><br><span class="line">	<span class="keyword">return</span> dfs(m,n<span class="number">-1</span>)<span class="comment">/*拿一个盘子不放苹果，剩下的盘子在下一次继续考虑*/</span>+dfs(m-n,n)<span class="comment">/*所有盘子都放一个苹果*/</span>; </span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">signed</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	ios::sync_with_stdio(<span class="literal">false</span>);</span><br><span class="line">	<span class="built_in">cin</span>.tie(<span class="number">0</span>);</span><br><span class="line">	<span class="built_in">cout</span>.tie(<span class="number">0</span>);</span><br><span class="line">	<span class="built_in">cin</span>&gt;&gt;t;</span><br><span class="line">	<span class="keyword">while</span>(t--)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">cin</span>&gt;&gt;m&gt;&gt;n;<span class="comment">//m个苹果n个盘子 </span></span><br><span class="line">		<span class="built_in">cout</span>&lt;&lt;dfs(m,n)&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+        <h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>似乎并没有蓝题的难度。<br>不要被娜高端的$f(x)$吓到了，我们知道函数是个动态的过程，因此不用管它，直接按题意模拟即可。<br>这道题的本质：给一个数$n$，每一次$n+1$后，再去掉末尾的$04，能得到多少个数（包括自身）。<br>显然对于每个数至少有$9$个，分别是$1$~$9$。进位以后的数将比原数小，所以可以直接循环。<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> n,s;</span><br><span class="line"><span class="function"><span class="keyword">signed</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	ios::sync_with_stdio(<span class="literal">false</span>);</span><br><span class="line">	<span class="built_in">cin</span>.tie(<span class="number">0</span>);</span><br><span class="line">	<span class="built_in">cout</span>.tie(<span class="number">0</span>);</span><br><span class="line">	<span class="built_in">cin</span>&gt;&gt;n;</span><br><span class="line">	<span class="keyword">while</span>(n&gt;=<span class="number">10</span>)<span class="comment">//10以内的数都可以取到，1~9都能取到9个数，所以从10开始 </span></span><br><span class="line">	&#123;</span><br><span class="line">		n++;</span><br><span class="line">		<span class="keyword">while</span>(n%<span class="number">10</span>==<span class="number">0</span>)<span class="comment">//直到不能被10整除 </span></span><br><span class="line">		&#123;</span><br><span class="line">			n/=<span class="number">10</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		s++;<span class="comment">//算符数！= </span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">cout</span>&lt;&lt;s+<span class="number">9</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 
       
 
@@ -205,15 +205,11 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">普及/提高-</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">模拟</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">搜索</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">搜索-dfs</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">提高+/省选-</a>
         		</li>
       		
 		</ul>
@@ -225,7 +221,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/洛谷OJ题解//" class="article-tag-list-link color2">洛谷OJ题解</a>
+        			<a href="/categories/Codeforces题解//" class="article-tag-list-link color3">Codeforces题解</a>
         		</li>
       		
 		</ul>
@@ -280,7 +276,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/03/23/洛谷-P2386 放苹果/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/06/08/CF1157A Reachable Numbers/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -294,18 +290,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2019/03/27/洛谷-P5269 欧稳欧再次学车/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          洛谷-P5269 欧稳欧再次学车
-        
-      </div>
-    </a>
   
-  
-    <a href="/2019/03/23/洛谷-P1074 靶形数独/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">洛谷-P1074 靶形数独</div>
+    <a href="/2019/06/07/洛谷-P3918 [国家集训队]特技飞行/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">洛谷-P3918 [国家集训队]特技飞行</div>
       <i class="icon-circle-right"></i>
     </a>
   
