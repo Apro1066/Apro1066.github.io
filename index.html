@@ -168,6 +168,132 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-【AKOI2019】暑期欢乐模拟赛 T5梦境序列" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/08/05/【AKOI2019】暑期欢乐模拟赛 T5梦境序列/">【AKOI2019】暑期欢乐模拟赛 T5梦境序列</a>
+    </h1>
+  
+
+        
+        <a href="/2019/08/05/【AKOI2019】暑期欢乐模拟赛 T5梦境序列/" class="archive-article-date">
+  	<time datetime="2019-08-05T14:01:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-05</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>个人觉得这是我出过最好的题目了。这道可爱的搜索题大约绿题难度</strong><br>主要思想是搜索，然后带一小部分的图论和贪心的知识。由于题目中说要求字典序最小的字符串，不妨每次先搜$a$字符串，再搜$b$，这是没有问题的。于是我们从前往后dfs，尽可能走$a$。<br>可能很多人对于$Infinity$有很大的疑惑。其实很简单，就是判断$2$个序列中有没有出现环的情况，也就是一个点被走了$2$次。（在某点处选$b$以后有路径到终点，选$a$会回到以前来过的点，形成环，以后会在环里转无数次后选$b$到终点，路径是无限长的。）<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> a[<span class="number">400002</span>],b[<span class="number">400002</span>],n,s;</span><br><span class="line"><span class="keyword">char</span> c[<span class="number">400002</span>];</span><br><span class="line"><span class="keyword">bool</span> vis[<span class="number">400002</span>];</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> i)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(i&lt;=<span class="number">0</span> || i&gt;n)<span class="comment">//在序列之外，return掉 </span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">return</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span>(vis[i]==<span class="number">1</span>)<span class="comment">//被访问过，return掉 </span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">return</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	vis[i]=<span class="number">1</span>;<span class="comment">//标记被访问 </span></span><br><span class="line">	<span class="keyword">register</span> <span class="keyword">int</span> j,position(<span class="number">1</span>);</span><br><span class="line">	<span class="keyword">if</span>(i==n)<span class="comment">//如果到达了 </span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">memset</span>(vis,<span class="number">0</span>,<span class="keyword">sizeof</span> vis);</span><br><span class="line">	    vis[<span class="number">1</span>]=<span class="number">1</span>;</span><br><span class="line">	    <span class="keyword">for</span>(j=<span class="number">1</span>;j&lt;=s;j++)</span><br><span class="line">		&#123;</span><br><span class="line">	    	<span class="keyword">if</span>(c[j]==<span class="string">'a'</span>)<span class="comment">//先搜a </span></span><br><span class="line">			&#123;</span><br><span class="line">				position+=a[position];<span class="comment">//跳格子 </span></span><br><span class="line">			&#125;</span><br><span class="line">	    	<span class="keyword">else</span></span><br><span class="line">			&#123;</span><br><span class="line">	    		<span class="keyword">if</span> (position+a[position]&gt;<span class="number">0</span> &amp;&amp; position+a[position]&lt;=n &amp;&amp; vis[position+a[position]]==<span class="number">1</span>)<span class="comment">//判断环 </span></span><br><span class="line">				&#123;</span><br><span class="line">	    			<span class="built_in">cout</span>&lt;&lt;<span class="string">"Infinity"</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">	    			<span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">				&#125;</span><br><span class="line">	    		position+=b[position];</span><br><span class="line">			&#125;</span><br><span class="line">			vis[position]=<span class="number">1</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">for</span>(j=<span class="number">1</span>;j&lt;=s;j++)<span class="comment">//没什么特别的就可以输出了，否则无解 </span></span><br><span class="line">		&#123;</span><br><span class="line">			<span class="built_in">cout</span>&lt;&lt;c[j];</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="built_in">cout</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">		<span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	c[++s]=<span class="string">'a'</span>;<span class="comment">//选取a b两个方案 </span></span><br><span class="line">	dfs(i+a[i]);</span><br><span class="line">	s--;<span class="comment">//要回溯的 </span></span><br><span class="line">	c[++s]=<span class="string">'b'</span>;</span><br><span class="line">	dfs(i+b[i]);</span><br><span class="line">	s--;</span><br><span class="line">	<span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	ios::sync_with_stdio(<span class="literal">false</span>);</span><br><span class="line">	<span class="built_in">cin</span>.tie(<span class="number">0</span>);</span><br><span class="line">	<span class="built_in">cout</span>.tie(<span class="number">0</span>);</span><br><span class="line">	<span class="keyword">register</span> <span class="keyword">int</span> i,j;</span><br><span class="line">	<span class="built_in">cin</span>&gt;&gt;n;</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">cin</span>&gt;&gt;a[i];</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">cin</span>&gt;&gt;b[i];</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">memset</span>(c,<span class="string">'a'</span>,<span class="keyword">sizeof</span> c);</span><br><span class="line">	dfs(<span class="number">1</span>);<span class="comment">//从第1个格子开始走 </span></span><br><span class="line"> 	<span class="built_in">cout</span>&lt;&lt;<span class="string">"No solution"</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/08/05/【AKOI2019】暑期欢乐模拟赛 T5梦境序列/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-【AKOI2019】暑期欢乐模拟赛 T2罗马数字" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/08/05/【AKOI2019】暑期欢乐模拟赛 T2罗马数字/">【AKOI2019】暑期欢乐模拟赛 T2罗马数字</a>
+    </h1>
+  
+
+        
+        <a href="/2019/08/05/【AKOI2019】暑期欢乐模拟赛 T2罗马数字/" class="archive-article-date">
+  	<time datetime="2019-08-05T13:34:36.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-05</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="T2真的是送分，假如你数学不是很好T1做不出来是可以理解的，但是这种模拟题就是普及组第2题的难度。"><a href="#T2真的是送分，假如你数学不是很好T1做不出来是可以理解的，但是这种模拟题就是普及组第2题的难度。" class="headerlink" title="T2真的是送分，假如你数学不是很好T1做不出来是可以理解的，但是这种模拟题就是普及组第2题的难度。"></a>T2真的是送分，假如你数学不是很好T1做不出来是可以理解的，但是这种模拟题就是<strong>普及组第2题的难度</strong>。</h3><p>模拟题思路不想讲，看代码就好了。<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="built_in">string</span> str,str1;</span><br><span class="line"><span class="keyword">int</span> s;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">roman</span><span class="params">(<span class="built_in">string</span> str)</span><span class="comment">//将罗马数字转化成整数</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	register int cnt(0),i;</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;str.length();i++)<span class="comment">//遍历字符串</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">char</span> c=str[i];</span><br><span class="line">		<span class="keyword">if</span>(c==<span class="string">'I'</span>) cnt+=<span class="number">1</span>;</span><br><span class="line">		<span class="keyword">if</span>(c==<span class="string">'V'</span>) cnt+=<span class="number">5</span>;</span><br><span class="line">		<span class="keyword">if</span>(c==<span class="string">'X'</span>) cnt+=<span class="number">10</span>;</span><br><span class="line">		<span class="keyword">if</span>(c==<span class="string">'L'</span>) cnt+=<span class="number">50</span>;</span><br><span class="line">		<span class="keyword">if</span>(c==<span class="string">'C'</span>) cnt+=<span class="number">100</span>;</span><br><span class="line">		<span class="keyword">if</span>(c==<span class="string">'D'</span>) cnt+=<span class="number">500</span>;</span><br><span class="line">		<span class="keyword">if</span>(c==<span class="string">'M'</span>) cnt+=<span class="number">1000</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">int</span> a=str.find(<span class="string">"IV"</span>);<span class="comment">//找到满足题目中第3条特点的罗马数字</span></span><br><span class="line">	<span class="keyword">int</span> b=str.find(<span class="string">"IX"</span>);</span><br><span class="line">	<span class="keyword">int</span> c=str.find(<span class="string">"XL"</span>);</span><br><span class="line">	<span class="keyword">int</span> d=str.find(<span class="string">"XC"</span>);</span><br><span class="line">	<span class="keyword">int</span> e=str.find(<span class="string">"CD"</span>);</span><br><span class="line">	<span class="keyword">int</span> f=str.find(<span class="string">"CM"</span>);</span><br><span class="line">	<span class="keyword">if</span>(a&gt;=<span class="number">0</span>) cnt-=<span class="number">2</span>;<span class="comment">//-2。因为之前判定IV算成了6</span></span><br><span class="line">	<span class="keyword">if</span>(b&gt;=<span class="number">0</span>) cnt-=<span class="number">2</span>;<span class="comment">//同理</span></span><br><span class="line">	<span class="keyword">if</span>(c&gt;=<span class="number">0</span>) cnt-=<span class="number">20</span>;</span><br><span class="line">	<span class="keyword">if</span>(d&gt;=<span class="number">0</span>) cnt-=<span class="number">20</span>;</span><br><span class="line">	<span class="keyword">if</span>(e&gt;=<span class="number">0</span>) cnt-=<span class="number">200</span>;</span><br><span class="line">	<span class="keyword">if</span>(f&gt;=<span class="number">0</span>) cnt-=<span class="number">200</span>;</span><br><span class="line">	<span class="keyword">return</span> cnt;</span><br><span class="line">&#125; </span><br><span class="line"><span class="function"><span class="keyword">signed</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	ios::sync_with_stdio(<span class="literal">false</span>);</span><br><span class="line">	<span class="built_in">cin</span>.tie(<span class="number">0</span>);</span><br><span class="line">	<span class="built_in">cout</span>.tie(<span class="number">0</span>);</span><br><span class="line">	<span class="keyword">register</span> <span class="keyword">int</span> i,j,k;</span><br><span class="line">	<span class="built_in">cin</span>&gt;&gt;str;</span><br><span class="line">	k=<span class="number">1</span>;</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;str.length();i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span>(str[i]!=<span class="string">'+'</span> &amp;&amp; str[i]!=<span class="string">'-'</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			str1+=str[i];</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">		&#123;</span><br><span class="line">			s+=k*roman(str1);</span><br><span class="line">			str1=<span class="string">""</span>;</span><br><span class="line">			<span class="keyword">if</span>(str[i]==<span class="string">'+'</span>) k=<span class="number">1</span>;</span><br><span class="line">			<span class="keyword">else</span> k=<span class="number">-1</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	s+=k*roman(str1);</span><br><span class="line">	<span class="built_in">cout</span>&lt;&lt;s&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/08/05/【AKOI2019】暑期欢乐模拟赛 T2罗马数字/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-洛谷-P1280 尼克的任务" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -306,11 +432,11 @@
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">动态规划-区间dp</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Noip提高组</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Noip提高组</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">动态规划-区间dp</a>
         		</li>
       		
 		</ul>
@@ -780,15 +906,15 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">模拟</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
         			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">普及/提高-</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
         			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">贪心</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">模拟</a>
         		</li>
       		
 		</ul>
@@ -877,11 +1003,11 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">普及/提高-</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">模拟</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">模拟</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">普及/提高-</a>
         		</li>
       		
 		</ul>
@@ -903,198 +1029,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2019/07/25/洛谷-P1172 安全逃离/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-洛谷-P2278 [HNOI2003]操作系统" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/07/25/洛谷-P2278 [HNOI2003]操作系统/">洛谷-P2278 [HNOI2003]操作系统</a>
-    </h1>
-  
-
-        
-        <a href="/2019/07/25/洛谷-P2278 [HNOI2003]操作系统/" class="archive-article-date">
-  	<time datetime="2019-07-25T12:45:24.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-25</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>优先队列+模拟好题，还可以练思维。因为本题反复提到进程的优先级，不妨可以用优先队列来维护。<br>首先建立一个优先队列存储进程，元素的优先顺序按进程的优先级从大到小排，如果一样就按进程$id$排。<br>每当一个进程到达的时候，会有可能打断当前执行的进程。 无妨可以比较$2$个进程的优先级，运行优先级更高的进程。<br>整个过程完成之前CPU不会空闲，一旦一个进程完成，随即进行下一个进程。 所以不会存在时间浪费现象，因此也不会被打断进程。当所有进程到打完后，直接按照优先级模拟即可。<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> a,start,c,d,now,s;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">task</span>//任务进程 </span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="keyword">int</span> id,time,priority;<span class="comment">//id进程编号，time到达时间，priority </span></span><br><span class="line">	task(<span class="keyword">int</span> a,<span class="keyword">int</span> c,<span class="keyword">int</span> d)</span><br><span class="line">	&#123;</span><br><span class="line">		id=a;</span><br><span class="line">		time=c;</span><br><span class="line">		priority=d;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">bool</span> <span class="keyword">operator</span> &lt; (task x,task y)</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">if</span>(x.priority!=y.priority) <span class="keyword">return</span> x.priority&lt;y.priority;<span class="comment">//优先级从大到小 </span></span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">return</span> x.id&gt;y.id;<span class="comment">//如果优先级一样就按编号从小到大</span></span><br><span class="line">&#125;</span><br><span class="line">priority_queue&lt;task&gt; que;<span class="comment">//优先队列</span></span><br><span class="line"><span class="function"><span class="keyword">signed</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	ios::sync_with_stdio(<span class="literal">false</span>);</span><br><span class="line">	<span class="built_in">cin</span>.tie(<span class="number">0</span>);</span><br><span class="line">	<span class="built_in">cout</span>.tie(<span class="number">0</span>);</span><br><span class="line">	<span class="keyword">register</span> <span class="keyword">int</span> i,j,k;</span><br><span class="line">	<span class="keyword">while</span>(<span class="built_in">cin</span>&gt;&gt;a&gt;&gt;start&gt;&gt;c&gt;&gt;d)<span class="comment">//不断读入新的进程，我们可以这样在线处理的原因是每个进程的到达时间是有序的 </span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">while</span>(!que.empty())</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="function">task <span class="title">exe</span><span class="params">(que.top())</span></span>;<span class="comment">//取正在执行的进程 </span></span><br><span class="line">			que.pop();</span><br><span class="line">			<span class="keyword">if</span>(now+exe.time&lt;=start)<span class="comment">//如果还有剩余时间（不被打断） </span></span><br><span class="line">			&#123;</span><br><span class="line">				now+=exe.time;</span><br><span class="line">				<span class="built_in">cout</span>&lt;&lt;exe.id&lt;&lt;<span class="string">' '</span>&lt;&lt;now&lt;&lt;<span class="built_in">endl</span>;<span class="comment">//正常出队 </span></span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">else</span><span class="comment">//如果剩余时间不够，就要打断 </span></span><br><span class="line">			&#123;</span><br><span class="line">				exe.time=exe.time-(start-now);<span class="comment">//减去完成的进度 </span></span><br><span class="line">				que.push(exe);<span class="comment">//再把这个进程还回去 </span></span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		que.push(task(a,c,d));<span class="comment">//将当前进程入队 </span></span><br><span class="line">		now=start;<span class="comment">//更新当前时间 </span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">while</span>(!que.empty())<span class="comment">//不再有进程到达 </span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="function">task <span class="title">exe</span><span class="params">(que.top())</span></span>;</span><br><span class="line">		que.pop();</span><br><span class="line">		now+=exe.time;</span><br><span class="line">		<span class="built_in">cout</span>&lt;&lt;exe.id&lt;&lt;<span class="string">' '</span>&lt;&lt;now&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据结构</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据结构-优先队列</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">各省省选</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">提高/省选-</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/洛谷OJ题解//" class="article-tag-list-link color2">洛谷OJ题解</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/07/25/洛谷-P2278 [HNOI2003]操作系统/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-洛谷-P1353 [USACO08JAN]跑步Running" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/07/24/洛谷-P1353 [USACO08JAN]跑步Running/">洛谷-P1353 [USACO08JAN]跑步Running</a>
-    </h1>
-  
-
-        
-        <a href="/2019/07/24/洛谷-P1353 [USACO08JAN]跑步Running/" class="archive-article-date">
-  	<time datetime="2019-07-24T15:13:33.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-24</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>令$dp[i][j]$为第$i$分钟疲劳度为$j$时的最长距离。$j$的疲劳度要从$1$到$i$与$m$中取较小的一个。<br>我们可以分$2$种情况讨论：在疲劳度为$0$时；在疲劳度不为$0$时。<br><strong>1.当疲劳度为$0$时</strong><br>分$2$种状态，一种是当前状态（第$i$分钟疲劳度为$0$），即$dp[i][0]$；一种是上一秒疲劳度为$0$，这一秒疲劳度也为$0$的状态，即$dp[i-1][0]$。则：</p>
-<script type="math/tex; mode=display">dp[i][0]=max(dp[i][0],dp[i-1][0])</script><p><strong>2.当疲劳度不为$0$时</strong><br>前$1$秒跑的距离（此时疲劳度也少$1$）加上当前跑的距离。如果奶牛想休息，必须要一直休息到疲劳值为$0$。<br>如果接下来继续跑：</p>
-<script type="math/tex; mode=display">dp[i][j]=max(dp[i][j],dp[i-1][j-1]+a[i])</script><p>如果接下来想休息：</p>
-<script type="math/tex; mode=display">dp[i+j][0]=max(dp[i][j],dp[i+j][0])</script><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> n,m,a[<span class="number">10001</span>],dp[<span class="number">10502</span>]<span class="comment">/*max(i+j)=10000+500*/</span>[<span class="number">1001</span>],s;</span><br><span class="line"><span class="function"><span class="keyword">signed</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	ios::sync_with_stdio(<span class="literal">false</span>);</span><br><span class="line">	<span class="built_in">cin</span>.tie(<span class="number">0</span>);</span><br><span class="line">	<span class="built_in">cout</span>.tie(<span class="number">0</span>);</span><br><span class="line">	<span class="keyword">register</span> <span class="keyword">int</span> i,j;</span><br><span class="line">	<span class="built_in">cin</span>&gt;&gt;n&gt;&gt;m;</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">cin</span>&gt;&gt;a[i];</span><br><span class="line">	&#125;</span><br><span class="line">	dp[<span class="number">1</span>][<span class="number">0</span>]=<span class="number">0</span>;<span class="comment">//临界条件 </span></span><br><span class="line">	dp[<span class="number">1</span>][<span class="number">1</span>]=a[<span class="number">1</span>];</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=n;i++)<span class="comment">//枚举第i分钟 </span></span><br><span class="line">	&#123;</span><br><span class="line">		dp[i][<span class="number">0</span>]=max(dp[i][<span class="number">0</span>],dp[i<span class="number">-1</span>][<span class="number">0</span>]);<span class="comment">//情况1，疲劳度为0时 </span></span><br><span class="line">		<span class="keyword">for</span>(j=<span class="number">1</span>;j&lt;=min(i,m);j++)<span class="comment">//情况2，疲劳度不为0时 </span></span><br><span class="line">		&#123;</span><br><span class="line">			dp[i][j]=max(dp[i][j],dp[i<span class="number">-1</span>][j<span class="number">-1</span>]+a[i]);</span><br><span class="line">			dp[i+j][<span class="number">0</span>]=max(dp[i][j],dp[i+j][<span class="number">0</span>]);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">cout</span>&lt;&lt;dp[n][<span class="number">0</span>]&lt;&lt;<span class="built_in">endl</span>;;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">普及+/提高</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">动态规划</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">动态规划-线性dp</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/洛谷OJ题解//" class="article-tag-list-link color2">洛谷OJ题解</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/07/24/洛谷-P1353 [USACO08JAN]跑步Running/">展开全文 >></a>
         </p>
       
 
@@ -1233,6 +1167,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">模拟</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">提高+/省选-</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">数学/数论</a>
               </li>
              
@@ -1249,27 +1191,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">普及+/提高</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">模拟</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">提高+/省选-</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">数据结构-树状数组</a>
+                <a href="javascript:void(0)" class="js-tag color5">数据结构-优先队列</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">数据结构-优先队列</a>
+                <a href="javascript:void(0)" class="js-tag color2">普及+/提高</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">数据结构-树状数组</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1293,6 +1227,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Noip提高组</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">动态规划-树形dp</a>
               </li>
              
@@ -1301,15 +1239,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Noip提高组</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">数据结构-线段树</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">Noip普及组</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">普及-</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1333,19 +1271,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">普及-</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">搜索-bfs</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">数据结构-单调队列</a>
+                <a href="javascript:void(0)" class="js-tag color5">二分答案</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">二分答案</a>
+                <a href="javascript:void(0)" class="js-tag color5">数据结构-单调队列</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1357,6 +1291,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">NOI</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">归并排序</a>
               </li>
              
@@ -1365,15 +1303,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">各省省选</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">数学-素数</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">NOI</a>
+                <a href="javascript:void(0)" class="js-tag color5">各省省选</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">提高/省选-</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">图论-图的遍历</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1382,10 +1324,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">洛谷月赛</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">图论-图的遍历</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1402,10 +1340,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">动态规划-期望dp</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">提高/省选-</a>
               </li>
             
             <div class="clearfix"></div>

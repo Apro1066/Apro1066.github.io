@@ -168,6 +168,196 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-洛谷-P4316 绿豆蛙的归宿" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/07/19/洛谷-P4316 绿豆蛙的归宿/">洛谷-P4316 绿豆蛙的归宿</a>
+    </h1>
+  
+
+        
+        <a href="/2019/07/19/洛谷-P4316 绿豆蛙的归宿/" class="archive-article-date">
+  	<time datetime="2019-07-19T11:47:43.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-19</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>如果这题不求期望的话就是个裸的$DAG$上dp。但是本蒟蒻才初二。。什么期望。。主要是今天集训讲这题了。<br>先构造图，写dfs转移即可。<br>令$dp[i]$表示点i到终点的期望长度。则：</p>
+<script type="math/tex; mode=display">dp[i]=sum(dp[j]+weight[i][j])/k</script><p>其中$weight[i][j]$为从$i$到$j$的边权，$k$为点$i$的出度。<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iomanip&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">double</span> dp[<span class="number">100001</span>];</span><br><span class="line"><span class="keyword">int</span> n,m,s,last[<span class="number">100001</span>],out[<span class="number">100001</span>],cnt;</span><br><span class="line"><span class="keyword">bool</span> vis[<span class="number">100001</span>];</span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="keyword">int</span> to,nxt,v;</span><br><span class="line">&#125;lxydl;</span><br><span class="line">lxydl a[<span class="number">200001</span>];</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> u,<span class="keyword">int</span> v,<span class="keyword">int</span> w)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	a[++cnt].to=v;</span><br><span class="line">	a[cnt].nxt=last[u];</span><br><span class="line">	last[u]=cnt;</span><br><span class="line">	a[cnt].v=w;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> i)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(vis[i]==<span class="number">1</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">return</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	vis[i]=<span class="number">1</span>;</span><br><span class="line">	<span class="keyword">register</span> <span class="keyword">int</span> j;</span><br><span class="line">	<span class="keyword">for</span>(j=last[i];j;j=a[j].nxt)</span><br><span class="line">	&#123;</span><br><span class="line">		dfs(a[j].to);</span><br><span class="line">		dp[i]=a[j].v+dp[a[j].to]+dp[i];</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span>(out[i])</span><br><span class="line">	&#123;</span><br><span class="line">		dp[i]/=out[i];</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">signed</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	ios::sync_with_stdio(<span class="literal">false</span>);</span><br><span class="line">	<span class="built_in">cin</span>.tie(<span class="number">0</span>);</span><br><span class="line">	<span class="built_in">cout</span>.tie(<span class="number">0</span>);</span><br><span class="line">	<span class="keyword">register</span> <span class="keyword">int</span> i,j;</span><br><span class="line">	<span class="built_in">cin</span>&gt;&gt;n&gt;&gt;m;</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=m;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">int</span> u,v,w;</span><br><span class="line">		<span class="built_in">cin</span>&gt;&gt;u&gt;&gt;v&gt;&gt;w;</span><br><span class="line">		add(u,v,w);</span><br><span class="line">		out[u]++;</span><br><span class="line">	&#125;</span><br><span class="line">	dfs(<span class="number">1</span>);</span><br><span class="line">	<span class="built_in">cout</span>&lt;&lt;fixed&lt;&lt;setprecision(<span class="number">2</span>)&lt;&lt;dp[<span class="number">1</span>]&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">提高+/省选-</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">动态规划</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">动态规划-期望dp</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/洛谷OJ题解//" class="article-tag-list-link color2">洛谷OJ题解</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/07/19/洛谷-P4316 绿豆蛙的归宿/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-洛谷-P1220 关路灯" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/07/19/洛谷-P1220 关路灯/">洛谷-P1220 关路灯</a>
+    </h1>
+  
+
+        
+        <a href="/2019/07/19/洛谷-P1220 关路灯/" class="archive-article-date">
+  	<time datetime="2019-07-19T03:09:09.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-19</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>一道区间dp的好题。</p>
+<p>思考这样一个问题：老张朝某个方向走以后，他的状态有什么改变？是他把某段区间的灯全部关掉。在任何时候，所关的灯都是一段连续的区间。<br>令状态$dp[i][j]$为区间$[i,j]$的灯目前关闭时的最小消耗电功。这里的最小消耗电功是指从开始到现在的所有灯的消耗数。<br>但是我们还要知道老张在哪，所以还得再加一维。令$dp[i][j][k]$为老张在第k个位子上时，区间$[i,j]$的当目前关闭时的最小消耗电功。但是此时的复杂度达到了$O(n^{3})$，数组开销也较大。<br>注意在最优解里面，如果目前位置在$i$，那么就可以走到$i-1$，也可以花$j-i+1$的时间走到$j+1$。老张在区间$[i,j]$里，要么在$i$，要么在$j$，这是显然的。所以第3维有2种状态。令$dp[i][j][k]$代表区间$[i,j]$的灯目前关闭时老张在$i$处$(k==0)$或$j$处$(k==1)$的时间点最小消耗电功。则有：</p>
+<script type="math/tex; mode=display">dp[i][j][0]=min(dp[i+1][j][0]+elecwork(), dp[i+1][j][1]+elecwork());</script><script type="math/tex; mode=display">dp[i][j][1]=min(dp[i][j-1][0]+elecwork(), dp[i][j-1][1]+elecwork());</script><p>其中$elecwork()$计算从上一个区间转移过来时没关的路灯消耗的电。</p>
+<p>要计算某阶段消耗的电力，则需要知道这一段的路程（即时间）和没有关的电灯的功率之和。电功之和可以用前缀和计算，复杂度为$O(1)$。<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;memory.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> dp[<span class="number">51</span>][<span class="number">51</span>][<span class="number">2</span>],n,c,s,sum[<span class="number">51</span>];</span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="keyword">int</span> position,ew;</span><br><span class="line">&#125;lxydl;</span><br><span class="line">lxydl a[<span class="number">51</span>];</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">elecwork</span><span class="params">(<span class="keyword">int</span> i,<span class="keyword">int</span> j,<span class="keyword">int</span> l,<span class="keyword">int</span> r)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> (a[j].position-a[i].position)*(sum[l]+sum[n]-sum[r<span class="number">-1</span>]);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">signed</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	ios::sync_with_stdio(<span class="literal">false</span>);</span><br><span class="line">	<span class="built_in">cin</span>.tie(<span class="number">0</span>);</span><br><span class="line">	<span class="built_in">cout</span>.tie(<span class="number">0</span>);</span><br><span class="line">	<span class="keyword">register</span> <span class="keyword">int</span> i,j,k,l;</span><br><span class="line">	<span class="built_in">memset</span>(dp,<span class="number">9999999</span>,<span class="keyword">sizeof</span>(dp));</span><br><span class="line">	<span class="built_in">cin</span>&gt;&gt;n&gt;&gt;c;</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">cin</span>&gt;&gt;a[i].position&gt;&gt;a[i].ew;</span><br><span class="line">		sum[i]=sum[i<span class="number">-1</span>]+a[i].ew;</span><br><span class="line">	&#125;</span><br><span class="line">	dp[c][c][<span class="number">0</span>]=dp[c][c][<span class="number">1</span>]=<span class="number">0</span>;<span class="comment">//在初始位置上灯是关的 </span></span><br><span class="line">	<span class="keyword">for</span>(l=<span class="number">2</span>;l&lt;=n;l++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">for</span>(i=<span class="number">1</span>;i+l<span class="number">-1</span>&lt;=n;i++)</span><br><span class="line">		&#123;</span><br><span class="line">			j=i+l<span class="number">-1</span>;</span><br><span class="line">			dp[i][j][<span class="number">0</span>]=min(dp[i+<span class="number">1</span>][j][<span class="number">0</span>]+elecwork(i,i+<span class="number">1</span>,i,j+<span class="number">1</span>)<span class="comment">/*是继续走下去？*/</span>,dp[i+<span class="number">1</span>][j][<span class="number">1</span>]+elecwork(i,j,i,j+<span class="number">1</span>)<span class="comment">/*还是折返到j点？*/</span>);</span><br><span class="line">			dp[i][j][<span class="number">1</span>]=min(dp[i][j<span class="number">-1</span>][<span class="number">0</span>]+elecwork(i,j,i<span class="number">-1</span>,j),dp[i][j<span class="number">-1</span>][<span class="number">1</span>]+elecwork(j<span class="number">-1</span>,j,i<span class="number">-1</span>,j));</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">cout</span>&lt;&lt;min(dp[<span class="number">1</span>][n][<span class="number">0</span>],dp[<span class="number">1</span>][n][<span class="number">1</span>])&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">提高+/省选-</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">动态规划</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">动态规划-区间dp</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/洛谷OJ题解//" class="article-tag-list-link color2">洛谷OJ题解</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/07/19/洛谷-P1220 关路灯/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-洛谷-P3378 [模板]堆" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -575,11 +765,11 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">普及+/提高</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据结构</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据结构</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">普及+/提高</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
@@ -770,11 +960,11 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">普及+/提高</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据结构</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据结构</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">普及+/提高</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
@@ -922,218 +1112,6 @@
 
 
   
-    <article id="post-洛谷-P3353 在你窗外闪耀的星星" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/07/16/洛谷-P3353 在你窗外闪耀的星星/">洛谷-P3353 在你窗外闪耀的星星</a>
-    </h1>
-  
-
-        
-        <a href="/2019/07/16/洛谷-P3353 在你窗外闪耀的星星/" class="archive-article-date">
-  	<time datetime="2019-07-16T14:00:04.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-16</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>好感人啊，都快哭了！文笔真的好好。</p>
-<p>用$\sum i$表示前i个星星的亮度和，$\sum i-w$就是在窗户以外的亮度和了。显然有最大亮度和<script type="math/tex">maxn=max(maxn,sum(i)-sum(i-w))</script></p>
-<p>看题解的时候，有人用前缀和没考虑$w=0$的情况。其实树状数组就不用特判了，求和的时候自动特判掉了。<script type="math/tex">sum(i)-sum(i-w)=sum(i)-sum(i)=0</script></p>
-<p>所以膜拜一下写<del>重口味线段树</del> 的同学。。orz<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> bit[<span class="number">100001</span>]<span class="comment">/*树状数组*/</span>,n,m,maxn(<span class="number">-99999999</span>);</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">lowbit</span><span class="params">(<span class="keyword">int</span> x)</span><span class="comment">//将x转化成二进制数之后，只保留最低位的1及其后面的0，截断前面的内容，然后再转成10进制数 </span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> x&amp;-x;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">update</span><span class="params">(<span class="keyword">int</span> x,<span class="keyword">int</span> k)</span><span class="comment">//update操作 </span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">while</span>(x&lt;=n)</span><br><span class="line">	&#123;</span><br><span class="line">		bit[x]+=k;</span><br><span class="line">		x+=lowbit(x);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">sum</span><span class="params">(<span class="keyword">int</span> k)</span><span class="comment">//区间求和 </span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">int</span> <span class="title">i</span><span class="params">(<span class="number">0</span>)</span></span>;</span><br><span class="line">	<span class="keyword">while</span>(k&gt;<span class="number">0</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		i+=bit[k];</span><br><span class="line">		k-=lowbit(k);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> i;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">signed</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	ios::sync_with_stdio(<span class="literal">false</span>);</span><br><span class="line">	<span class="built_in">cin</span>.tie(<span class="number">0</span>);</span><br><span class="line">	<span class="built_in">cout</span>.tie(<span class="number">0</span>);</span><br><span class="line">	<span class="keyword">register</span> <span class="keyword">int</span> i,j;</span><br><span class="line">	<span class="built_in">cin</span>&gt;&gt;n&gt;&gt;m;</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">int</span> a,b;</span><br><span class="line">		<span class="built_in">cin</span>&gt;&gt;a&gt;&gt;b;</span><br><span class="line">		update(a,b);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(i=m;i&lt;=n;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		maxn=max(maxn,sum(i)-sum(i-m));</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">cout</span>&lt;&lt;maxn&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">普及/提高-</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据结构</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据结构-树状数组</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/洛谷OJ题解//" class="article-tag-list-link color2">洛谷OJ题解</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/07/16/洛谷-P3353 在你窗外闪耀的星星/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-洛谷-P3372 [模板]线段树1 — 线段树入门" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/07/16/洛谷-P3372 [模板]线段树1 — 线段树入门/">洛谷-P3372 [模板]线段树1 — 线段树入门</a>
-    </h1>
-  
-
-        
-        <a href="/2019/07/16/洛谷-P3372 [模板]线段树1 — 线段树入门/" class="archive-article-date">
-  	<time datetime="2019-07-16T11:42:59.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-16</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p><strong>让我们从这道板子题开始，详解线段树入门。</strong></p>
-<h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><h5 id="1-1-概述-前言"><a href="#1-1-概述-前言" class="headerlink" title="1.1 概述/前言"></a>1.1 概述/前言</h5><h5 id="1-2-实现线段树"><a href="#1-2-实现线段树" class="headerlink" title="1.2 实现线段树"></a>1.2 实现线段树</h5><h5 id="1-3-模板"><a href="#1-3-模板" class="headerlink" title="1.3 模板"></a>1.3 模板</h5><h2 id="1-1-概述-前言-1"><a href="#1-1-概述-前言-1" class="headerlink" title="1.1 概述/前言"></a>1.1 概述/前言</h2><p>现在有3道题。</p>
-<p><strong>1.题目描述：有$n$个数和一个序列$a$（范围$1$~$n$）。求在$a[i]$中某些区间在范围数的和。($n \leq 10^{6}$)</strong><br>A.pro：这他喵的还不简单，前缀和，搞定。<br><strong>2.题目描述：有$n$个数，一个序列$a$（范围$1$~$n$），以及$k$个操作。在区间$[l,r]$全部内加一个数，并且求区间$[l,r]$的和。($n \leq 10^{4}$)</strong><br>A.pro：emm好吧，前缀和肯定不行了。<br>前缀和：求和操作时间复杂度：$O(1)$；区间修改时间复杂度：$O(n)$。这复杂度显然是我们不希望看到的。<br><strong>3.题目描述：有$n$个数，一个序列$a$（范围$1$~$n$），以及$k$个操作。在区间$[l,r]$全部内加一个数，并且求区间$[l,r]$的和。($n \leq 10^{6}$)</strong><br>A.pro：艹。</p>
-<hr>
-<p>所以，我们需要一种强大的数据结构，使得完美潇洒地完成题目3的问题。<br>其实可以引入分块的做法，即把数组分成若干个块求解问题。</p>
-<h1 id="线段树！！！"><a href="#线段树！！！" class="headerlink" title="线段树！！！"></a>线段树！！！</h1><p>线段树，之所以称之为树，是因为它本身是二叉树。它本质上是把分块数组树形化。线段树，在各个节点保存一个区间，可以高效地解决区间修改问题。由于二叉结构的特性，它的每次操作都使得时间复杂度近似于$O(logN)$。由于是一棵二叉树，每个节点的信息都会被$logN$左右的节点记录。空间消耗较大，一般是$4n$。所以线段树是一个典型的空间换时间的数据结构。</p>
-<p>下图是一个区间$[1,10]$的线段树。<br><img src="https://img-blog.csdnimg.cn/20190716191956637.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0Fwcm8xMDY2,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<p>当我们需要对一个区间进行操作时，同样要将其化成若干个小区间，这个就是分块思想。正如前面所说，线段树就是把分块思想树形化，对任何一个信息都可以达到$logN$的速度。<del>（但其实常数较大）</del> </p>
-<p>对于每一个子节点而言，都表示整个序列中的一段子区间；对于每个叶子节点而言，都表示序列中的单个元素信息；子节点不断向自己的父亲节点传递信息，而父节点存储的信息则是他的每一个子节点信息的整合。</p>
-<h2 id="1-2-实现线段树-1"><a href="#1-2-实现线段树-1" class="headerlink" title="1.2 实现线段树"></a>1.2 实现线段树</h2><h5 id="1-2-1-存储"><a href="#1-2-1-存储" class="headerlink" title="1.2.1 存储"></a>1.2.1 存储</h5><p>由于线段树是一棵二叉树，所以存储结构完全可以借鉴<strong>堆</strong>那样存。</p>
-<p>由于二叉树的自身特性，对于每个父亲节点的编号$i$,他的两个儿子的编号分别是$2i$和$2i+1$，所以我们考虑写两个$O(1)$的取儿子函数：（这里用的位运算）<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">inline</span> ll <span class="keyword">int</span> <span class="title">leftnode</span><span class="params">(ll <span class="keyword">int</span> p)</span> </span>&#123;<span class="keyword">return</span> p&lt;&lt;<span class="number">1</span>;&#125;<span class="comment">//左节点（左儿子） </span></span><br><span class="line"><span class="function"><span class="keyword">inline</span> ll <span class="keyword">int</span> <span class="title">rightnode</span><span class="params">(ll <span class="keyword">int</span> p)</span> </span>&#123;<span class="keyword">return</span> p&lt;&lt;<span class="number">1</span>|<span class="number">1</span>;&#125;<span class="comment">//右节点（右儿子）</span></span><br></pre></td></tr></table></figure></p>
-<p>相反，如果我们要找父亲节点，就可以把左儿子除以2就能得到。</p>
-<h5 id="1-2-2-建树"><a href="#1-2-2-建树" class="headerlink" title="1.2.2 建树"></a>1.2.2 建树</h5><p>接下来我们考虑建立一棵线段树。<br>建树的操作就是不断二分，直到遍历到叶子节点。到了叶子节点后，可以干我们想维护的事情。比如求区间和，RMQ，RSQ等。之后我们再回溯上去，其他节点都得跟着更新。<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">push_up</span><span class="params">(ll <span class="keyword">int</span> node)</span><span class="comment">//维护父子节点之间的逻辑关系（合并2个儿子节点） </span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	tree[node]=tree[leftnode(node)]+tree[rightnode(node)];<span class="comment">//区间和 </span></span><br><span class="line">	<span class="comment">//tree[node]=min(tree[leftnode(node)],tree[rightnode(node)]);//最小值</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">build</span><span class="params">(ll <span class="keyword">int</span> node,ll <span class="keyword">int</span> start,ll <span class="keyword">int</span> end)</span><span class="comment">//建树，node是当前节点，start和end是范围（是指a数组的范围）</span></span></span><br><span class="line"><span class="function"></span>&#123;<span class="comment">//线段树自底向上回溯，所以线段树的叶子节点在会被赋值，如果左右区间相同（start==end），说明这是叶子节点 </span></span><br><span class="line">	<span class="keyword">if</span>(start==end)</span><br><span class="line">	&#123;</span><br><span class="line">		tree[node]=a[start];<span class="comment">//区间和</span></span><br><span class="line">		minx[node]=a[start];<span class="comment">//区间最小值 </span></span><br><span class="line">		maxx[node]=a[start];<span class="comment">//区间最大值 </span></span><br><span class="line">		<span class="keyword">return</span>; </span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">register</span> ll <span class="keyword">int</span> mid=(start+end)&gt;&gt;<span class="number">1</span>;</span><br><span class="line">		build(leftnode(node),start,mid);<span class="comment">//左子树</span></span><br><span class="line">		build(rightnode(node),mid+<span class="number">1</span>,end);<span class="comment">//右子树，把当前根节点的儿子分别当成新节点，继续建立线段树</span></span><br><span class="line">		push_up(node);<span class="comment">//维护线段树（区间和） </span></span><br><span class="line">		<span class="comment">//区间最小值与最大值代码类似 </span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>根据线段树的服务对象，就写出了push_up这一函数。push_up操作的目的是为了<strong>维护父子间的逻辑关系</strong>。当我们递归建树时，对于每一个节点我们都需要遍历一遍，并且电脑中的<strong>递归实际意义是先向底层递归，然后从底层向上回溯</strong>，所以开始递归之后必然是<strong>先去整合子节点的信息</strong>，再向它们的祖先回溯整合之后的信息。<br><strong>所以push_up是在整合2个子节点的信息。</strong></p>
-<p>所以这也就说明建树时应该递归建树，这样才能保存父亲节点和子节点之间的信息。在建树的时候我们就应该维护父子节点的逻辑关系。</p>
-<h5 id="1-2-3-区间修改"><a href="#1-2-3-区间修改" class="headerlink" title="1.2.3 区间修改"></a>1.2.3 区间修改</h5><p>在这个模版中，是要求我们累加。所以我们可以仿照建树的思路，不断二分，如果修改的区间包括了当前区间，就回溯，否则继续二分。<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">lazy_ad</span><span class="params">(ll <span class="keyword">int</span> node,ll <span class="keyword">int</span> start,ll <span class="keyword">int</span> end,ll <span class="keyword">int</span> value)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	tag[node]+=value;<span class="comment">//懒标记，后面会讲</span></span><br><span class="line">	tree[node]+=value*(end-start+<span class="number">1</span>);<span class="comment">//由于是这个区间统一改变，所以要加上元素个数次 </span></span><br><span class="line">&#125;<span class="comment">//被包括的区间进行操作</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">update</span><span class="params">(ll <span class="keyword">int</span> node,ll <span class="keyword">int</span> start,ll <span class="keyword">int</span> end,ll <span class="keyword">int</span> cl,ll <span class="keyword">int</span> cr,ll <span class="keyword">int</span> value)</span><span class="comment">//区间修改，node是当前节点，start和end是范围（是指a数组的范围），cl和cr是要修改的区间，value是改成哪个数值</span></span></span><br><span class="line"><span class="function"></span>&#123;<span class="comment">//其实与建树类似，我们这题维护的修改操作是区间累计，二分+回溯，如果修改的区间包含了目前遍历的区间就回溯，否则二分 </span></span><br><span class="line">	<span class="keyword">if</span>(cl&lt;=start &amp;&amp; end&lt;=cr)<span class="comment">//如果修改区间包含当前区间 </span></span><br><span class="line">	&#123;</span><br><span class="line">		lazy_ad(node,start,end,value);<span class="comment">//直接加</span></span><br><span class="line">		<span class="keyword">return</span>; </span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span><span class="comment">//如果不包含当前区间 </span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">register</span> ll <span class="keyword">int</span> mid=(start+end)&gt;&gt;<span class="number">1</span>; </span><br><span class="line">		push_down(node,start,end,mid);<span class="comment">//标记下传，后面会讲</span></span><br><span class="line">		<span class="keyword">if</span>(cl&lt;=mid)</span><br><span class="line">		&#123;</span><br><span class="line">			update(leftnode(node),start,mid,cl,cr,value);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span>(mid&lt;cr)</span><br><span class="line">		&#123;</span><br><span class="line">			update(rightnode(node),mid+<span class="number">1</span>,end,cl,cr,value);</span><br><span class="line">		&#125;</span><br><span class="line">		push_up(node);<span class="comment">//维护线段树</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h5 id="1-2-4-区间查询"><a href="#1-2-4-区间查询" class="headerlink" title="1.2.4 区间查询"></a>1.2.4 区间查询</h5><p>模板是让我们求区间和，那么就和区间修改的思路一样，不断二分，如果修改区间包括目前遍历的区间，那就返回这一区间的区间和，然后回溯。把询问到的叶子节点或被包含的区间相加就是答案。<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">ll <span class="keyword">int</span> <span class="title">query</span><span class="params">(ll <span class="keyword">int</span> node,ll <span class="keyword">int</span> start,ll <span class="keyword">int</span> end,ll <span class="keyword">int</span> cl,ll <span class="keyword">int</span> cr)</span><span class="comment">//node是当前节点，start和end是范围（是指a数组的范围），L和R是在区间[L,R]里计算和</span></span></span><br><span class="line"><span class="function"></span>&#123;<span class="comment">//和区间修改一样，不断二分，如果修改区间包括当前区间，就返回这一区间的区间和，然后回溯。把访问到的叶子节点或被包含的区间相加就是答案 </span></span><br><span class="line">	<span class="comment">//cout&lt;&lt;"start="&lt;&lt;start&lt;&lt;endl;</span></span><br><span class="line">	<span class="comment">//cout&lt;&lt;"end="&lt;&lt;end&lt;&lt;endl;</span></span><br><span class="line">	<span class="comment">//cout&lt;&lt;endl;</span></span><br><span class="line">	<span class="keyword">if</span>(start&gt;=cl &amp;&amp; end&lt;=cr)<span class="comment">//如果修改的区间包括当前遍历的区间 </span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">return</span> tree[node];<span class="comment">//返回这一区间的区间和 </span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">register</span> ll <span class="keyword">int</span> mid=(start+end)&gt;&gt;<span class="number">1</span>,s(<span class="number">0</span>);</span><br><span class="line">	push_down(node,start,end,mid);<span class="comment">//标记下传</span></span><br><span class="line">	<span class="keyword">if</span>(cl&lt;=mid)</span><br><span class="line">	&#123;</span><br><span class="line">		s=s+query(leftnode(node),start,mid,cl,cr);<span class="comment">//把"s+"去掉也是等价的。因为s初值为0，我先遍历的是左子树，然后query是不断递归寻址，最后再给s的 </span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span>(mid&lt;cr)</span><br><span class="line">	&#123;</span><br><span class="line">		s=s+query(rightnode(node),mid+<span class="number">1</span>,end,cl,cr);<span class="comment">//左右子树元素累加 </span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> s;<span class="comment">//返回s总值 </span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h5 id="1-2-5-懒标记下传"><a href="#1-2-5-懒标记下传" class="headerlink" title="1.2.5 懒标记下传"></a>1.2.5 懒标记下传</h5><p>其实还有永久化标记，那样的话就是主席树了（可持久化线段树）。<br>线段树的优点不在于全记录，那样的话就是$O(n)$了，显然不是我们希望的。而在于传递式记录。</p>
-<p>标记下传（push_down）的本质和前面的操作时一样的，<strong>整个区间都被操作，记录在公共祖先节点上；只修改了一部分，那么就记录在这部分的公共祖先上；如果四环以内只修改了自己的话，那就只改变自己。</strong> 我们查询子节点的时候再进行更新，也就是我们不需要查询的时候就下传标记。再将使用的标记清0。<br>注意访问任何一个节点的时候，都需要保证该节点的祖先标记都被清空。<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">push_down</span><span class="params">(ll <span class="keyword">int</span> node,ll <span class="keyword">int</span> start,ll <span class="keyword">int</span> end,ll <span class="keyword">int</span> mid)</span><span class="comment">//标记下传，node是当前节点 </span></span></span><br><span class="line"><span class="function"></span>&#123;<span class="comment">//线段树的优点不在于全记录，那样的话复杂度达到O(n)；而是在与传递式记录</span></span><br><span class="line"><span class="comment">//本质和build，update之类的一样，如果操作一段区间，那只要记录在这段区间的公共祖先上（单点也是区间，长度为1）</span></span><br><span class="line"><span class="comment">//当我们需要查询子节点的信息时我们再更新，不需要查询的时候就打下传标记，要用的时候使用标记，再将使用的标记清0</span></span><br><span class="line"><span class="comment">//但是访问任何一个节点的时候，都要保证该节点的祖先节点已经被清空</span></span><br><span class="line"><span class="comment">//这，就是懒标记（lazy tag） ，简单粗暴省时间。 </span></span><br><span class="line">	<span class="keyword">if</span>(tag[node]==<span class="number">0</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">return</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	lazy_ad(leftnode(node),start,mid,tag[node]);</span><br><span class="line">	lazy_ad(rightnode(node),mid+<span class="number">1</span>,end,tag[node]);</span><br><span class="line">	tag[node]=<span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h2 id="1-3-模板-1"><a href="#1-3-模板-1" class="headerlink" title="1.3 模板"></a>1.3 模板</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ll long long </span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> maxn 100005</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line">ll <span class="keyword">int</span> a[maxn],tree[maxn&lt;&lt;<span class="number">2</span>],tag[maxn&lt;&lt;<span class="number">2</span>],n,s,m;<span class="comment">//a是序列，tree是区间和，tag是标记数组 </span></span><br><span class="line">ll <span class="keyword">int</span> minx[maxn&lt;&lt;<span class="number">2</span>],maxx[maxn&lt;&lt;<span class="number">2</span>];<span class="comment">//区间最小值和最大值，需要时会用到 </span></span><br><span class="line"><span class="function"><span class="keyword">inline</span> ll <span class="keyword">int</span> <span class="title">leftnode</span><span class="params">(ll <span class="keyword">int</span> p)</span> </span>&#123;<span class="keyword">return</span> p&lt;&lt;<span class="number">1</span>;&#125;<span class="comment">//左节点（左儿子） </span></span><br><span class="line"><span class="function"><span class="keyword">inline</span> ll <span class="keyword">int</span> <span class="title">rightnode</span><span class="params">(ll <span class="keyword">int</span> p)</span> </span>&#123;<span class="keyword">return</span> p&lt;&lt;<span class="number">1</span>|<span class="number">1</span>;&#125;<span class="comment">//右节点（右儿子） </span></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">push_up</span><span class="params">(ll <span class="keyword">int</span> node)</span><span class="comment">//维护父子节点之间的逻辑关系（合并2个儿子节点） </span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	tree[node]=tree[leftnode(node)]+tree[rightnode(node)];<span class="comment">//区间和 </span></span><br><span class="line">	<span class="comment">//tree[node]=min(tree[leftnode(node)],tree[rightnode(node)]);//最小值 </span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">lazy_ad</span><span class="params">(ll <span class="keyword">int</span> node,ll <span class="keyword">int</span> start,ll <span class="keyword">int</span> end,ll <span class="keyword">int</span> value)</span><span class="comment">//区间累加 </span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	tag[node]+=value;<span class="comment">//懒标记 </span></span><br><span class="line">	tree[node]+=value*(end-start+<span class="number">1</span>);<span class="comment">//由于是这个区间统一改变，所以要加上元素个数次 </span></span><br><span class="line">&#125;<span class="comment">//被包括的区间进行操作 </span></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">push_down</span><span class="params">(ll <span class="keyword">int</span> node,ll <span class="keyword">int</span> start,ll <span class="keyword">int</span> end,ll <span class="keyword">int</span> mid)</span><span class="comment">//标记下传，node是当前节点 </span></span></span><br><span class="line"><span class="function"></span>&#123;<span class="comment">//线段树的优点不在于全记录，那样的话复杂度达到O(n)；而是在与传递式记录</span></span><br><span class="line"><span class="comment">//本质和build，update之类的一样，如果操作一段区间，那只要记录在这段区间的公共祖先上（单点也是区间，长度为1）</span></span><br><span class="line"><span class="comment">//当我们需要查询子节点的信息时我们再更新，不需要查询的时候就打下传标记，要用的时候使用标记，再将使用的标记清0</span></span><br><span class="line"><span class="comment">//但是访问任何一个节点的时候，都要保证该节点的祖先节点已经被清空</span></span><br><span class="line"><span class="comment">//这，就是懒标记（lazy tag） ，简单粗暴省时间。 </span></span><br><span class="line">	<span class="keyword">if</span>(tag[node]==<span class="number">0</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">return</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	lazy_ad(leftnode(node),start,mid,tag[node]);</span><br><span class="line">	lazy_ad(rightnode(node),mid+<span class="number">1</span>,end,tag[node]);</span><br><span class="line">	tag[node]=<span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">build</span><span class="params">(ll <span class="keyword">int</span> node,ll <span class="keyword">int</span> start,ll <span class="keyword">int</span> end)</span><span class="comment">//建树，node是当前节点，start和end是范围（是指a数组的范围）</span></span></span><br><span class="line"><span class="function"></span>&#123;<span class="comment">//线段树自底向上回溯，所以线段树的叶子节点在会被赋值，如果左右区间相同（start==end），说明这是叶子节点 </span></span><br><span class="line">	<span class="keyword">if</span>(start==end)</span><br><span class="line">	&#123;</span><br><span class="line">		tree[node]=a[start];<span class="comment">//区间和</span></span><br><span class="line">		minx[node]=a[start];<span class="comment">//区间最小值 </span></span><br><span class="line">		maxx[node]=a[start];<span class="comment">//区间最大值 </span></span><br><span class="line">		<span class="keyword">return</span>; </span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">register</span> ll <span class="keyword">int</span> mid=(start+end)&gt;&gt;<span class="number">1</span>;</span><br><span class="line">		build(leftnode(node),start,mid);</span><br><span class="line">		build(rightnode(node),mid+<span class="number">1</span>,end);<span class="comment">//把当前根节点的儿子分别当成新节点，继续建立线段树</span></span><br><span class="line">		push_up(node);<span class="comment">//维护线段树（区间和） </span></span><br><span class="line">		<span class="comment">//区间最小值与最大值代码类似 </span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">update</span><span class="params">(ll <span class="keyword">int</span> node,ll <span class="keyword">int</span> start,ll <span class="keyword">int</span> end,ll <span class="keyword">int</span> cl,ll <span class="keyword">int</span> cr,ll <span class="keyword">int</span> value)</span><span class="comment">//区间修改，node是当前节点，start和end是范围（是指a数组的范围），cl和cr是要修改的区间，value是改成哪个数值</span></span></span><br><span class="line"><span class="function"></span>&#123;<span class="comment">//其实与建树类似，我们这题维护的修改操作是区间累计，二分+回溯，如果修改的区间包含了目前遍历的区间就回溯，否则二分 </span></span><br><span class="line">	<span class="keyword">if</span>(cl&lt;=start &amp;&amp; end&lt;=cr)<span class="comment">//如果修改区间包含当前区间 </span></span><br><span class="line">	&#123;</span><br><span class="line">		lazy_ad(node,start,end,value);<span class="comment">//直接加 </span></span><br><span class="line">		<span class="keyword">return</span>; </span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span><span class="comment">//如果不包含当前区间 </span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">register</span> ll <span class="keyword">int</span> mid=(start+end)&gt;&gt;<span class="number">1</span>; </span><br><span class="line">		push_down(node,start,end,mid);<span class="comment">//标记下传</span></span><br><span class="line">		<span class="keyword">if</span>(cl&lt;=mid)</span><br><span class="line">		&#123;</span><br><span class="line">			update(leftnode(node),start,mid,cl,cr,value);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span>(mid&lt;cr)</span><br><span class="line">		&#123;</span><br><span class="line">			update(rightnode(node),mid+<span class="number">1</span>,end,cl,cr,value);</span><br><span class="line">		&#125;</span><br><span class="line">		push_up(node);<span class="comment">//维护线段树</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function">ll <span class="keyword">int</span> <span class="title">query</span><span class="params">(ll <span class="keyword">int</span> node,ll <span class="keyword">int</span> start,ll <span class="keyword">int</span> end,ll <span class="keyword">int</span> cl,ll <span class="keyword">int</span> cr)</span><span class="comment">//node是当前节点，start和end是范围（是指a数组的范围），L和R是在区间[L,R]里计算和</span></span></span><br><span class="line"><span class="function"></span>&#123;<span class="comment">//和区间修改一样，不断二分，如果修改区间包括当前区间，就返回这一区间的区间和，然后回溯。把访问到的叶子节点或被包含的区间相加就是答案 </span></span><br><span class="line">	<span class="comment">//cout&lt;&lt;"start="&lt;&lt;start&lt;&lt;endl;</span></span><br><span class="line">	<span class="comment">//cout&lt;&lt;"end="&lt;&lt;end&lt;&lt;endl;</span></span><br><span class="line">	<span class="comment">//cout&lt;&lt;endl;</span></span><br><span class="line">	<span class="keyword">if</span>(start&gt;=cl &amp;&amp; end&lt;=cr)<span class="comment">//如果修改的区间包括当前遍历的区间 </span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">return</span> tree[node];<span class="comment">//返回这一区间的区间和 </span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">register</span> ll <span class="keyword">int</span> mid=(start+end)&gt;&gt;<span class="number">1</span>,s(<span class="number">0</span>);</span><br><span class="line">	push_down(node,start,end,mid);<span class="comment">//标记下传</span></span><br><span class="line">	<span class="keyword">if</span>(cl&lt;=mid)</span><br><span class="line">	&#123;</span><br><span class="line">		s=s+query(leftnode(node),start,mid,cl,cr);<span class="comment">//把"s+"去掉也是等价的。因为s初值为0，我先遍历的是左子树，然后query是不断递归寻址，最后再给s的 </span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span>(mid&lt;cr)</span><br><span class="line">	&#123;</span><br><span class="line">		s=s+query(rightnode(node),mid+<span class="number">1</span>,end,cl,cr);<span class="comment">//左右子树元素累加 </span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> s;<span class="comment">//返回s总值 </span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">signed</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	ios::sync_with_stdio(<span class="literal">false</span>);</span><br><span class="line">	<span class="built_in">cin</span>.tie(<span class="number">0</span>);</span><br><span class="line">	<span class="built_in">cout</span>.tie(<span class="number">0</span>);</span><br><span class="line">	<span class="keyword">register</span> ll <span class="keyword">int</span> i;</span><br><span class="line">	<span class="built_in">cin</span>&gt;&gt;n&gt;&gt;m;<span class="comment">//有n个数，m个操作 </span></span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">cin</span>&gt;&gt;a[i];</span><br><span class="line">	&#125;</span><br><span class="line">	build(<span class="number">1</span>,<span class="number">1</span>,n);<span class="comment">//我要建立一棵树，从1号节点出发，范围是a数组的1~n</span></span><br><span class="line">	<span class="comment">//for(i=1;i&lt;=15;i++)//查看有没有建树成功，父亲节点与两个儿子节点的关系是2n和2n+1（当从1开始计数时）。</span></span><br><span class="line">	<span class="comment">//&#123;</span></span><br><span class="line">	<span class="comment">//	cout&lt;&lt;"tree["&lt;&lt;i&lt;&lt;"]="&lt;&lt;tree[i]&lt;&lt;endl;</span></span><br><span class="line">	<span class="comment">//&#125;</span></span><br><span class="line">	<span class="comment">//cout&lt;&lt;endl;</span></span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=m;i++)<span class="comment">//处理m条操作 </span></span><br><span class="line">	&#123;</span><br><span class="line">		ll <span class="keyword">int</span> f,start,end,k;</span><br><span class="line">		<span class="built_in">cin</span>&gt;&gt;f&gt;&gt;start&gt;&gt;end;</span><br><span class="line">		<span class="keyword">if</span>(f==<span class="number">1</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="built_in">cin</span>&gt;&gt;k;</span><br><span class="line">			update(<span class="number">1</span>,<span class="number">1</span>,n,start,end,k);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span>(f==<span class="number">2</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="built_in">cout</span>&lt;&lt;query(<span class="number">1</span>,<span class="number">1</span>,n,start,end)&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">普及+/提高</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据结构</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">数据结构-线段树</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/洛谷OJ题解//" class="article-tag-list-link color2">洛谷OJ题解</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/洛谷OJ题解/OI模板//" class="article-tag-list-link color5">OI模板</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/07/16/洛谷-P3372 [模板]线段树1 — 线段树入门/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/2/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/4/">Next &raquo;</a>
@@ -1243,6 +1221,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">模拟</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">提高+/省选-</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">数学/数论</a>
               </li>
              
@@ -1259,27 +1245,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">普及+/提高</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">模拟</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">提高+/省选-</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">数据结构</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">数据结构-树状数组</a>
+                <a href="javascript:void(0)" class="js-tag color5">数据结构-优先队列</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">数据结构-优先队列</a>
+                <a href="javascript:void(0)" class="js-tag color2">普及+/提高</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">数据结构-树状数组</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1303,6 +1281,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">Noip提高组</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">动态规划-树形dp</a>
               </li>
              
@@ -1311,15 +1293,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Noip提高组</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">数据结构-线段树</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">Noip普及组</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">普及-</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1343,19 +1325,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">普及-</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">搜索-bfs</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">数据结构-单调队列</a>
+                <a href="javascript:void(0)" class="js-tag color5">二分答案</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">二分答案</a>
+                <a href="javascript:void(0)" class="js-tag color5">数据结构-单调队列</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1367,6 +1345,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">NOI</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">归并排序</a>
               </li>
              
@@ -1375,15 +1357,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">各省省选</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">数学-素数</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">NOI</a>
+                <a href="javascript:void(0)" class="js-tag color5">各省省选</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">提高/省选-</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">图论-图的遍历</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1392,10 +1378,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">洛谷月赛</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">图论-图的遍历</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1412,10 +1394,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">动态规划-期望dp</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">提高/省选-</a>
               </li>
             
             <div class="clearfix"></div>
