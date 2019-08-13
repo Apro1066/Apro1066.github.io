@@ -168,6 +168,99 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-洛谷-P4392 [BOI2007]Sound 静音问题" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/07/17/洛谷-P4392 [BOI2007]Sound 静音问题/">洛谷-P4392 [BOI2007]Sound 静音问题</a>
+    </h1>
+  
+
+        
+        <a href="/2019/07/17/洛谷-P4392 [BOI2007]Sound 静音问题/" class="archive-article-date">
+  	<time datetime="2019-07-17T12:02:13.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-17</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>给出$n$个整数，求长度为$m$且该区间的最大值与最小值之差$\leq c$的区间数。<br>看到这种静态区间求最值问题，一般用st表是最快的，<del>所以果断用线段树</del> 。<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ll long long </span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> maxn 1000001</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line">ll <span class="keyword">int</span> a[maxn],n,s,m,cnt,c,ans;<span class="comment">//a是序列</span></span><br><span class="line">ll <span class="keyword">int</span> minx[maxn&lt;&lt;<span class="number">2</span>],maxx[maxn&lt;&lt;<span class="number">2</span>];<span class="comment">//区间最小值和最大值</span></span><br><span class="line"><span class="function"><span class="keyword">inline</span> ll <span class="keyword">int</span> <span class="title">leftnode</span><span class="params">(ll <span class="keyword">int</span> p)</span> </span>&#123;<span class="keyword">return</span> p&lt;&lt;<span class="number">1</span>;&#125;<span class="comment">//左节点（左儿子） </span></span><br><span class="line"><span class="function"><span class="keyword">inline</span> ll <span class="keyword">int</span> <span class="title">rightnode</span><span class="params">(ll <span class="keyword">int</span> p)</span> </span>&#123;<span class="keyword">return</span> p&lt;&lt;<span class="number">1</span>|<span class="number">1</span>;&#125;<span class="comment">//右节点（右儿子） </span></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">push_up</span><span class="params">(ll <span class="keyword">int</span> node)</span><span class="comment">//维护父子节点之间的逻辑关系（合并2个儿子节点） </span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	minx[node]=min(minx[leftnode(node)],minx[rightnode(node)]);<span class="comment">//最小值</span></span><br><span class="line">	maxx[node]=max(maxx[leftnode(node)],maxx[rightnode(node)]);<span class="comment">//最大值</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">build</span><span class="params">(ll <span class="keyword">int</span> node,ll <span class="keyword">int</span> start,ll <span class="keyword">int</span> end)</span><span class="comment">//建树，node是当前节点，start和end是范围（是指a数组的范围）</span></span></span><br><span class="line"><span class="function"></span>&#123;<span class="comment">//线段树自底向上回溯，所以线段树的叶子节点在会被赋值，如果左右区间相同（start==end），说明这是叶子节点 </span></span><br><span class="line">	<span class="keyword">if</span>(start==end)</span><br><span class="line">	&#123;</span><br><span class="line">		minx[node]=a[++cnt];<span class="comment">//区间最小值</span></span><br><span class="line">		maxx[node]=a[cnt];<span class="comment">//区间最大值</span></span><br><span class="line">		<span class="keyword">return</span>; </span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">register</span> ll <span class="keyword">int</span> mid=(start+end)&gt;&gt;<span class="number">1</span>;</span><br><span class="line">		build(leftnode(node),start,mid);</span><br><span class="line">		build(rightnode(node),mid+<span class="number">1</span>,end);<span class="comment">//把当前根节点的儿子分别当成新节点，继续建立线段树</span></span><br><span class="line">		push_up(node);<span class="comment">//维护线段树（区间和） </span></span><br><span class="line">		<span class="comment">//区间最小值与最大值代码类似 </span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function">ll <span class="keyword">int</span> <span class="title">min_query</span><span class="params">(ll <span class="keyword">int</span> node,ll <span class="keyword">int</span> start,ll <span class="keyword">int</span> end,ll <span class="keyword">int</span> cl,ll <span class="keyword">int</span> cr)</span><span class="comment">//node是当前节点，start和end是范围（是指a数组的范围），L和R是在区间[L,R]里计算和</span></span></span><br><span class="line"><span class="function"></span>&#123;<span class="comment">//最小值区间查询</span></span><br><span class="line">	<span class="keyword">if</span>(start&gt;=cl &amp;&amp; end&lt;=cr)<span class="comment">//如果修改的区间包括当前遍历的区间 </span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">return</span> minx[node];<span class="comment">//返回这一区间的区间和 </span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">register</span> ll <span class="keyword">int</span> mid=(start+end)&gt;&gt;<span class="number">1</span>,s(<span class="number">99999999</span>);</span><br><span class="line">	<span class="keyword">if</span>(cl&lt;=mid)</span><br><span class="line">	&#123;</span><br><span class="line">		s=min(s,min_query(leftnode(node),start,mid,cl,cr));</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span>(mid&lt;cr)</span><br><span class="line">	&#123;</span><br><span class="line">		s=min(s,min_query(rightnode(node),mid+<span class="number">1</span>,end,cl,cr));</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> s;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function">ll <span class="keyword">int</span> <span class="title">max_query</span><span class="params">(ll <span class="keyword">int</span> node,ll <span class="keyword">int</span> start,ll <span class="keyword">int</span> end,ll <span class="keyword">int</span> cl,ll <span class="keyword">int</span> cr)</span><span class="comment">//node是当前节点，start和end是范围（是指a数组的范围），L和R是在区间[L,R]里计算和</span></span></span><br><span class="line"><span class="function"></span>&#123;<span class="comment">//最大值区间查询 </span></span><br><span class="line">	<span class="keyword">if</span>(start&gt;=cl &amp;&amp; end&lt;=cr)<span class="comment">//如果修改的区间包括当前遍历的区间 </span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">return</span> maxx[node];<span class="comment">//返回这一区间的区间和 </span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">register</span> ll <span class="keyword">int</span> mid=(start+end)&gt;&gt;<span class="number">1</span>,s(<span class="number">-99999999</span>);</span><br><span class="line">	<span class="keyword">if</span>(cl&lt;=mid)</span><br><span class="line">	&#123;</span><br><span class="line">		s=max(s,max_query(leftnode(node),start,mid,cl,cr));</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span>(mid&lt;cr)</span><br><span class="line">	&#123;</span><br><span class="line">		s=max(s,max_query(rightnode(node),mid+<span class="number">1</span>,end,cl,cr));</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> s;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">signed</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	ios::sync_with_stdio(<span class="literal">false</span>);</span><br><span class="line">	<span class="built_in">cin</span>.tie(<span class="number">0</span>);</span><br><span class="line">	<span class="built_in">cout</span>.tie(<span class="number">0</span>);</span><br><span class="line">	<span class="keyword">register</span> ll <span class="keyword">int</span> i;</span><br><span class="line">	<span class="built_in">cin</span>&gt;&gt;n&gt;&gt;m&gt;&gt;c;</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">cin</span>&gt;&gt;a[i];</span><br><span class="line">	&#125;</span><br><span class="line">	build(<span class="number">1</span>,<span class="number">1</span>,n);</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=n-m+<span class="number">1</span>;i++)<span class="comment">//枚举区间起点 </span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span>(max_query(<span class="number">1</span>,<span class="number">1</span>,n,i,i+m<span class="number">-1</span>)-min_query(<span class="number">1</span>,<span class="number">1</span>,n,i,i+m<span class="number">-1</span>)&lt;=c)<span class="comment">//到这一步，真的就可以按题意模拟了 </span></span><br><span class="line">		&#123;</span><br><span class="line">			ans++;</span><br><span class="line">			<span class="built_in">cout</span>&lt;&lt;i&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span>(ans==<span class="number">0</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">cout</span>&lt;&lt;<span class="string">"NONE"</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">普及+/提高</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据结构</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">数据结构-线段树</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/洛谷OJ题解//" class="article-tag-list-link color2">洛谷OJ题解</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/07/17/洛谷-P4392 [BOI2007]Sound 静音问题/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-洛谷-P2434 [SDOI2005]区间" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1020,99 +1113,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2019/07/14/洛谷-P5461 赦免战俘/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-洛谷-P5414 [YNOI2019]排序" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/07/08/洛谷-P5414 [YNOI2019]排序/">洛谷-P5414 [YNOI2019]排序</a>
-    </h1>
-  
-
-        
-        <a href="/2019/07/08/洛谷-P5414 [YNOI2019]排序/" class="archive-article-date">
-  	<time datetime="2019-07-08T14:35:01.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-08</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>排序过后的数，一定递增或递减。每次移动某些数字，使得数组递增或递减，而花费是移动数字的和。<br>排序的是最小成本，那么没有被排序的数，就是排过序的数以外的，就是最大成本了。不妨我们求出每次需要进行排序的2个数中最大的值加上每一次排序用的成本。<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> a[<span class="number">101</span>],n,t,s,cnt,b[<span class="number">101</span>];</span><br><span class="line"><span class="function"><span class="keyword">signed</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	ios::sync_with_stdio(<span class="literal">false</span>);</span><br><span class="line">	<span class="built_in">cin</span>.tie(<span class="number">0</span>);</span><br><span class="line">	<span class="built_in">cout</span>.tie(<span class="number">0</span>);</span><br><span class="line">	<span class="keyword">register</span> <span class="keyword">int</span> i,j,k;</span><br><span class="line">	<span class="built_in">cin</span>&gt;&gt;t;</span><br><span class="line">	<span class="keyword">while</span>(t--)</span><br><span class="line">	&#123;</span><br><span class="line">		s=cnt=<span class="number">0</span>;</span><br><span class="line">		<span class="built_in">memset</span>(b,<span class="number">0</span>,<span class="keyword">sizeof</span>(b));</span><br><span class="line">		<span class="built_in">cin</span>&gt;&gt;n;</span><br><span class="line">		<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="built_in">cin</span>&gt;&gt;a[i];</span><br><span class="line">			s=s+a[i];<span class="comment">//求数字之和 </span></span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">for</span>(j=<span class="number">1</span>;j&lt;=i<span class="number">-1</span>;j++)</span><br><span class="line">			&#123;</span><br><span class="line">				<span class="keyword">if</span>(a[i]&gt;=a[j]) </span><br><span class="line">				&#123;</span><br><span class="line">					b[i]=max(b[i],b[j]);</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">			b[i]=b[i]+a[i];</span><br><span class="line">			<span class="keyword">if</span>(b[i]&gt;cnt)</span><br><span class="line">			&#123;</span><br><span class="line">				cnt=b[j];</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="built_in">cout</span>&lt;&lt;s-cnt&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">模拟</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">提高+/省选-</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">各省省选</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/洛谷OJ题解//" class="article-tag-list-link color2">洛谷OJ题解</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/07/08/洛谷-P5414 [YNOI2019]排序/">展开全文 >></a>
         </p>
       
 
