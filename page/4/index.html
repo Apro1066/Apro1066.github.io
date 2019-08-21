@@ -168,6 +168,192 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-洛谷-P1167 刷题" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/07/25/洛谷-P1167 刷题/">洛谷-P1167 刷题</a>
+    </h1>
+  
+
+        
+        <a href="/2019/07/25/洛谷-P1167 刷题/" class="archive-article-date">
+  	<time datetime="2019-07-25T15:20:52.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-25</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>这一题还是很考验码力的，主要对时间的处理很麻烦，把时间全部转换成分钟，然后贪心，先让小A刷耗时少的即可。<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> n,s,a[<span class="number">5001</span>],y[<span class="number">13</span>]=&#123;<span class="number">0</span>,<span class="number">31</span>,<span class="number">28</span>,<span class="number">31</span>,<span class="number">30</span>,<span class="number">31</span>,<span class="number">30</span>,<span class="number">31</span>,<span class="number">31</span>,<span class="number">30</span>,<span class="number">31</span>,<span class="number">30</span>,<span class="number">31</span>&#125;;<span class="comment">/*12月份对应的星期*/</span></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">bool</span> <span class="title">judge</span><span class="params">(<span class="keyword">int</span> x)</span><span class="comment">//判断是否为闰年 </span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(x%<span class="number">100</span>==<span class="number">0</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span>(x%<span class="number">400</span>==<span class="number">0</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">if</span>(x%<span class="number">4</span>==<span class="number">0</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125; </span><br><span class="line"><span class="function"><span class="keyword">signed</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="comment">//ios::sync_with_stdio(false);</span></span><br><span class="line">	<span class="comment">//cin.tie(0);</span></span><br><span class="line">	<span class="comment">//cout.tie(0);</span></span><br><span class="line">	<span class="keyword">register</span> <span class="keyword">int</span> i,j,k;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;n);</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">cin</span>&gt;&gt;a[i];</span><br><span class="line">	&#125;</span><br><span class="line">	sort(a+<span class="number">1</span>,a+n+<span class="number">1</span>);<span class="comment">//尽量先刷耗时少的的题 </span></span><br><span class="line">	<span class="keyword">int</span> syear,smonth,sday,shour,sminute;<span class="comment">//开始时间 </span></span><br><span class="line">	<span class="keyword">int</span> eyear,emonth,eday,ehour,eminute;<span class="comment">//结束时间 </span></span><br><span class="line">	<span class="keyword">int</span> year,month,day,hour,minute;<span class="comment">//时间差 </span></span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">"%d-%d-%d-%d:%d"</span>,&amp;syear,&amp;smonth,&amp;sday,&amp;shour,&amp;sminute);<span class="comment">//避开恶意字符的骚扰 </span></span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d-%d-%d-%d:%d"</span>,&amp;eyear,&amp;emonth,&amp;eday,&amp;ehour,&amp;eminute);</span><br><span class="line">	year=eyear-syear;<span class="comment">//计算各个时间差 </span></span><br><span class="line">	month=emonth-smonth;</span><br><span class="line">	day=eday-sday;</span><br><span class="line">	hour=ehour-shour;</span><br><span class="line">	minute=eminute-sminute;</span><br><span class="line">	<span class="keyword">if</span>(year&gt;<span class="number">0</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		month+=year*<span class="number">12</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span>(month&gt;<span class="number">0</span>)<span class="comment">//月份转日期 </span></span><br><span class="line">	&#123;</span><br><span class="line">		i=smonth,j=syear;</span><br><span class="line">		<span class="keyword">for</span>(k=<span class="number">1</span>;k&lt;=month;k++)<span class="comment">//开始月份-结束月份次迭代 </span></span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span>(i&gt;<span class="number">12</span>) </span><br><span class="line">			&#123;</span><br><span class="line">				i-=<span class="number">12</span>;</span><br><span class="line">				j++;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">if</span>(i==<span class="number">2</span> &amp;&amp; judge(j))<span class="comment">//如果当前是2月并且是闰年 </span></span><br><span class="line">			&#123;</span><br><span class="line">				day+=y[i]+<span class="number">1</span>;<span class="comment">//多加1天 </span></span><br><span class="line">				i++;<span class="comment">//继续 </span></span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">else</span></span><br><span class="line">			&#123;</span><br><span class="line">				day+=y[i];</span><br><span class="line">				i++;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span>(day&gt;<span class="number">0</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		hour+=day*<span class="number">24</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span>(hour&gt;<span class="number">0</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		minute+=hour*<span class="number">60</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span>(a[i]&lt;=minute)</span><br><span class="line">		&#123;</span><br><span class="line">			minute-=a[i];</span><br><span class="line">			s++;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">cout</span>&lt;&lt;s&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">普及/提高-</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">贪心</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">模拟</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/洛谷OJ题解//" class="article-tag-list-link color2">洛谷OJ题解</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/07/25/洛谷-P1167 刷题/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-洛谷-P1172 安全逃离" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/07/25/洛谷-P1172 安全逃离/">洛谷-P1172 安全逃离</a>
+    </h1>
+  
+
+        
+        <a href="/2019/07/25/洛谷-P1172 安全逃离/" class="archive-article-date">
+  	<time datetime="2019-07-25T14:41:14.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-25</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>今天想练码力来着，结果tm要被气死了，本题是错题艹，具体看思路。提交的时候傻逼cin优化害得我提交6次，还不知道怎么错的，一顿魔改一直70。mmp的。<br>思路自己不说了，反正还是看了题解，洛谷题解摘抄一段。</p>
+<blockquote>
+<p>模拟，首先遍历所有的奶牛，若全部安全，则输出0，结束。如果不是全部安全的，则每次将一只奶牛删除，再遍历全部，看看是否全是安全的，如果是，则输出该奶牛编号，不停止程序，也不输出1（这就是题目错误的另一个地方）直到所有情况都遍历完了，在讨论-1的情况。</p>
+</blockquote>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;memory.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> r,c,n,s,flag,m[<span class="number">101</span>][<span class="number">101</span>];</span><br><span class="line"><span class="keyword">char</span> ch[<span class="number">101</span>];</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">cow</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="keyword">int</span> x,y;</span><br><span class="line">&#125;a[<span class="number">101</span>];</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">bool</span> <span class="title">check</span><span class="params">(<span class="keyword">int</span> x,<span class="keyword">int</span> y)</span><span class="comment">//检查奶牛是否安全 </span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">register</span> <span class="keyword">int</span> i,f1(<span class="number">1</span>),f2(<span class="number">1</span>);</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;x;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span>(m[i][y])<span class="comment">//如果北面有奶牛 </span></span><br><span class="line">		&#123;</span><br><span class="line">			f1=<span class="number">0</span>;</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(i=y+<span class="number">1</span>;i&lt;=c;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span>(m[x][i])<span class="comment">//如果东面有奶牛 </span></span><br><span class="line">		&#123;</span><br><span class="line">			f2=<span class="number">0</span>;</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span>(f1==<span class="number">0</span> &amp;&amp; f2==<span class="number">0</span>) <span class="keyword">return</span> <span class="number">0</span>;<span class="comment">//两边都有奶牛才不安全 </span></span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">bool</span> <span class="title">posgoto</span><span class="params">()</span><span class="comment">//用来遍历这个农场，有奶牛不安全返回0 </span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">register</span> <span class="keyword">int</span> i,j;</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=r;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">for</span>(j=<span class="number">1</span>;j&lt;=c;j++)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span>(m[i][j])</span><br><span class="line">			&#123;</span><br><span class="line">				<span class="keyword">if</span>(check(i,j)==<span class="number">0</span>)</span><br><span class="line">					<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">bool</span> <span class="title">Delete</span><span class="params">(<span class="keyword">int</span> x,<span class="keyword">int</span> y)</span><span class="comment">//删掉一个奶牛后是否安全 </span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	m[x][y]=<span class="number">0</span>;</span><br><span class="line">	<span class="keyword">return</span> posgoto();</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">signed</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="comment">//ios::sync_with_stdio(false);//这傻逼玩意害死我了，WA了6次 </span></span><br><span class="line">	<span class="built_in">cin</span>.tie(<span class="number">0</span>);</span><br><span class="line">	<span class="built_in">cout</span>.tie(<span class="number">0</span>);</span><br><span class="line">	<span class="keyword">register</span> <span class="keyword">int</span> i,j;</span><br><span class="line">	<span class="built_in">cin</span>&gt;&gt;r&gt;&gt;c&gt;&gt;n;</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">cin</span>&gt;&gt;a[i].x&gt;&gt;a[i].y;<span class="comment">//输入 </span></span><br><span class="line">		m[a[i].x][a[i].y]=<span class="number">1</span>;<span class="comment">//存储奶牛左边 </span></span><br><span class="line">		gets(ch);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span>(posgoto())<span class="comment">//如果全部安全 </span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">cout</span>&lt;&lt;<span class="number">0</span>&lt;&lt;<span class="built_in">endl</span>;<span class="comment">//输出0 </span></span><br><span class="line">		<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span>(Delete(a[i].x,a[i].y))<span class="comment">//如果去掉后安全 </span></span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span>(flag==<span class="number">0</span>)</span><br><span class="line">			&#123;</span><br><span class="line">				<span class="built_in">cout</span>&lt;&lt;i&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">				flag=<span class="number">1</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">else</span></span><br><span class="line">			&#123;</span><br><span class="line">				<span class="built_in">cout</span>&lt;&lt;i&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		m[a[i].x][a[i].y]=<span class="number">1</span>;<span class="comment">//把这只奶牛请回来 </span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span>(flag==<span class="number">0</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">cout</span>&lt;&lt;<span class="number">-1</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">普及/提高-</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">模拟</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/洛谷OJ题解//" class="article-tag-list-link color2">洛谷OJ题解</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/07/25/洛谷-P1172 安全逃离/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-洛谷-P2278 [HNOI2003]操作系统" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -548,100 +734,6 @@
 
 
   
-    <article id="post-洛谷-P2858 [USACO06FEB]奶牛零食Treats for the Cows" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/07/20/洛谷-P2858 [USACO06FEB]奶牛零食Treats for the Cows/">洛谷-P2858 [USACO06FEB]奶牛零食Treats for the Cows</a>
-    </h1>
-  
-
-        
-        <a href="/2019/07/20/洛谷-P2858 [USACO06FEB]奶牛零食Treats for the Cows/" class="archive-article-date">
-  	<time datetime="2019-07-20T12:14:36.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-20</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>区间dp入门题。<br>令$dp[i][j]$为在区间$[i,j]$里卖掉的零食能获得的最大收益，而$dp[i][j]$可以从区间$[i+1,j]$转移，也可以从$[i,j-1]$转移，因为每次拿零食都是从盒子两端最外面拿。则：</p>
-<script type="math/tex; mode=display">dp[i][j]=max(dp[i+1][j]+a[i]*(n-l+1),dp[i][j-1]+a[i]*(n-l+1))</script><p>答案为一整个区间$[1,n]$。<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> dp[<span class="number">2001</span>][<span class="number">2001</span>],a[<span class="number">2001</span>],n,s;</span><br><span class="line"><span class="function"><span class="keyword">signed</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	ios::sync_with_stdio(<span class="literal">false</span>);</span><br><span class="line">	<span class="built_in">cin</span>.tie(<span class="number">0</span>);</span><br><span class="line">	<span class="built_in">cout</span>.tie(<span class="number">0</span>);</span><br><span class="line">	<span class="keyword">register</span> <span class="keyword">int</span> i,j,l;</span><br><span class="line">	<span class="built_in">cin</span>&gt;&gt;n;</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">cin</span>&gt;&gt;a[i];</span><br><span class="line">		dp[i][i]=a[i]*n;<span class="comment">//临界点 </span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(l=<span class="number">2</span>;l&lt;=n;l++)<span class="comment">//枚举区间长度 </span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">for</span>(i=<span class="number">1</span>;i+l<span class="number">-1</span>&lt;=n;i++)</span><br><span class="line">		&#123;</span><br><span class="line">			j=i+l<span class="number">-1</span>;</span><br><span class="line">			dp[i][j]=max(dp[i+<span class="number">1</span>][j]+a[i]*(n-l+<span class="number">1</span>),dp[i][j<span class="number">-1</span>]+a[j]*(n-l+<span class="number">1</span>));</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">cout</span>&lt;&lt;dp[<span class="number">1</span>][n]&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">普及/提高-</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">动态规划</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">动态规划-区间dp</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/洛谷OJ题解//" class="article-tag-list-link color2">洛谷OJ题解</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/07/20/洛谷-P2858 [USACO06FEB]奶牛零食Treats for the Cows/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
     <article id="post-洛谷-P3205 [HNOI2010]合唱队" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -723,6 +815,100 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2019/07/20/洛谷-P3205 [HNOI2010]合唱队/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-洛谷-P2858 [USACO06FEB]奶牛零食Treats for the Cows" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/07/20/洛谷-P2858 [USACO06FEB]奶牛零食Treats for the Cows/">洛谷-P2858 [USACO06FEB]奶牛零食Treats for the Cows</a>
+    </h1>
+  
+
+        
+        <a href="/2019/07/20/洛谷-P2858 [USACO06FEB]奶牛零食Treats for the Cows/" class="archive-article-date">
+  	<time datetime="2019-07-20T12:14:36.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-20</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>区间dp入门题。<br>令$dp[i][j]$为在区间$[i,j]$里卖掉的零食能获得的最大收益，而$dp[i][j]$可以从区间$[i+1,j]$转移，也可以从$[i,j-1]$转移，因为每次拿零食都是从盒子两端最外面拿。则：</p>
+<script type="math/tex; mode=display">dp[i][j]=max(dp[i+1][j]+a[i]*(n-l+1),dp[i][j-1]+a[i]*(n-l+1))</script><p>答案为一整个区间$[1,n]$。<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> dp[<span class="number">2001</span>][<span class="number">2001</span>],a[<span class="number">2001</span>],n,s;</span><br><span class="line"><span class="function"><span class="keyword">signed</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	ios::sync_with_stdio(<span class="literal">false</span>);</span><br><span class="line">	<span class="built_in">cin</span>.tie(<span class="number">0</span>);</span><br><span class="line">	<span class="built_in">cout</span>.tie(<span class="number">0</span>);</span><br><span class="line">	<span class="keyword">register</span> <span class="keyword">int</span> i,j,l;</span><br><span class="line">	<span class="built_in">cin</span>&gt;&gt;n;</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">cin</span>&gt;&gt;a[i];</span><br><span class="line">		dp[i][i]=a[i]*n;<span class="comment">//临界点 </span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(l=<span class="number">2</span>;l&lt;=n;l++)<span class="comment">//枚举区间长度 </span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">for</span>(i=<span class="number">1</span>;i+l<span class="number">-1</span>&lt;=n;i++)</span><br><span class="line">		&#123;</span><br><span class="line">			j=i+l<span class="number">-1</span>;</span><br><span class="line">			dp[i][j]=max(dp[i+<span class="number">1</span>][j]+a[i]*(n-l+<span class="number">1</span>),dp[i][j<span class="number">-1</span>]+a[j]*(n-l+<span class="number">1</span>));</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">cout</span>&lt;&lt;dp[<span class="number">1</span>][n]&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">普及/提高-</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">动态规划</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">动态规划-区间dp</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/洛谷OJ题解//" class="article-tag-list-link color2">洛谷OJ题解</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/07/20/洛谷-P2858 [USACO06FEB]奶牛零食Treats for the Cows/">展开全文 >></a>
         </p>
       
 
@@ -943,198 +1129,9 @@
 
 
   
-    <article id="post-洛谷-P1352 没有上司的舞会" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/07/19/洛谷-P1352 没有上司的舞会/">洛谷-P1352 没有上司的舞会</a>
-    </h1>
-  
-
-        
-        <a href="/2019/07/19/洛谷-P1352 没有上司的舞会/" class="archive-article-date">
-  	<time datetime="2019-07-19T15:15:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-19</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>超级棒的树形dp题目。<br>令$dp[i][0]$为以$i$为根的子树，且如果$i$不参加的最大快乐值；$dp[i][1]$为以$i$为根的子树，且如果$i$参加的最大快乐值。<br>显然，如果你不去，那你的下属想去就去。</p>
-<p><script type="math/tex">dp[i][0]=sum(max(dp[son][0],dp[son][1]))</script>其中son是i的儿子</p>
-<p>显然，如果你去了，那你的下属肯定不能去。</p>
-<p><script type="math/tex">dp[i][1]=sum(dp[son][0])+happy[i]</script> 其中son是i的儿子<br>答案为$max(dp[root][0],dp[root][1])$。<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> happy[<span class="number">6001</span>],a[<span class="number">6001</span>],dp[<span class="number">6001</span>][<span class="number">2</span>],n,m,s;</span><br><span class="line"><span class="keyword">bool</span> vis[<span class="number">6001</span>];</span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; son[<span class="number">6001</span>];</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> i)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">register</span> <span class="keyword">int</span> j;</span><br><span class="line">	dp[i][<span class="number">0</span>]=<span class="number">0</span>;</span><br><span class="line">	dp[i][<span class="number">1</span>]=happy[i];</span><br><span class="line">	<span class="keyword">for</span>(j=<span class="number">0</span>;j&lt;son[i].size();j++)<span class="comment">//遍历所有儿子节点 </span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">int</span> Son=son[i][j];</span><br><span class="line">		dfs(Son);</span><br><span class="line">		dp[i][<span class="number">0</span>]+=max(dp[Son][<span class="number">0</span>],dp[Son][<span class="number">1</span>]);</span><br><span class="line">		dp[i][<span class="number">1</span>]+=dp[Son][<span class="number">0</span>];</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">signed</span> <span class="title">main</span><span class="params">()</span> </span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	ios::sync_with_stdio(<span class="literal">false</span>);</span><br><span class="line">	<span class="built_in">cin</span>.tie(<span class="number">0</span>);</span><br><span class="line">	<span class="built_in">cout</span>.tie(<span class="number">0</span>);</span><br><span class="line">	<span class="keyword">register</span> <span class="keyword">int</span> i,j;</span><br><span class="line">	<span class="built_in">cin</span>&gt;&gt;n;</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">cin</span>&gt;&gt;happy[i];</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=n<span class="number">-1</span>;i++)<span class="comment">//叶子节点没有儿子 </span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">int</span> fa,Son;</span><br><span class="line">		<span class="built_in">cin</span>&gt;&gt;Son&gt;&gt;fa;</span><br><span class="line">		son[fa].push_back(Son);</span><br><span class="line">		vis[Son]=<span class="number">1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">int</span> root;</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=n;i++)<span class="comment">//找根 </span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span>(vis[i]==<span class="number">0</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			root=i;</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	dfs(root);</span><br><span class="line">	<span class="built_in">cout</span>&lt;&lt;max(dp[root][<span class="number">0</span>],dp[root][<span class="number">1</span>])&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">普及+/提高</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">动态规划</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">动态规划-树形dp</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/洛谷OJ题解//" class="article-tag-list-link color2">洛谷OJ题解</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/07/19/洛谷-P1352 没有上司的舞会/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-洛谷-P3609 [USACO17JAN]Hoof, Paper, Scissor" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/07/19/洛谷-P3609 [USACO17JAN]Hoof, Paper, Scissor/">洛谷-P3609 [USACO17JAN]Hoof, Paper, Scissor</a>
-    </h1>
-  
-
-        
-        <a href="/2019/07/19/洛谷-P3609 [USACO17JAN]Hoof, Paper, Scissor/" class="archive-article-date">
-  	<time datetime="2019-07-19T13:05:06.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-19</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>硬核记搜。<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> n,k,a[<span class="number">100011</span>],dp[<span class="number">100011</span>][<span class="number">22</span>][<span class="number">4</span>],s;</span><br><span class="line"><span class="keyword">char</span> c;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> i,<span class="keyword">int</span> chance,<span class="keyword">int</span> times)</span><span class="comment">//i是FJ出的第i个手势，也可以转换为第i轮；chance是机会，times是FJ当前的手势种类 </span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(i&gt;n || chance&gt;k) <span class="keyword">return</span> <span class="number">0</span>;<span class="comment">//结束/机会用完都要返回 </span></span><br><span class="line">	<span class="keyword">if</span>(dp[i][chance][times]!=<span class="number">0</span>)<span class="comment">//记忆化 </span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">return</span> dp[i][chance][times];</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span>(chance==k)<span class="comment">//如果还有机会，也就是最后一次机会，奶牛就不能变换手势了 </span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span>(times==<span class="number">1</span> &amp;&amp; a[i]==<span class="number">2</span>)<span class="comment">//剪刀赢布,可以变换当前的手势也可以不变换</span></span><br><span class="line">		&#123;</span><br><span class="line">			dp[i][chance][times]=dfs(i+<span class="number">1</span>,chance,<span class="number">1</span>)+<span class="number">1</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">if</span>(times==<span class="number">2</span> &amp;&amp; a[i]==<span class="number">3</span>)<span class="comment">//布赢石头,可以变换当前的手势也可以不变换 </span></span><br><span class="line">		&#123;</span><br><span class="line">			dp[i][chance][times]=dfs(i+<span class="number">1</span>,chance,<span class="number">2</span>)+<span class="number">1</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">if</span>(times==<span class="number">3</span> &amp;&amp; a[i]==<span class="number">1</span>)<span class="comment">//石头赢剪刀,可以变换当前的手势也可以不变换 </span></span><br><span class="line">		&#123;</span><br><span class="line">			dp[i][chance][times]=dfs(i+<span class="number">1</span>,chance,<span class="number">3</span>)+<span class="number">1</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span>(times==<span class="number">1</span> &amp;&amp; a[i]!=<span class="number">2</span>)<span class="comment">//剪刀没有赢布,可以变换当前的手势也可以不变换</span></span><br><span class="line">		&#123;</span><br><span class="line">			dp[i][chance][times]=dfs(i+<span class="number">1</span>,chance,<span class="number">1</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">if</span>(times==<span class="number">2</span> &amp;&amp; a[i]!=<span class="number">3</span>)<span class="comment">//布没有石头,可以变换当前的手势也可以不变换</span></span><br><span class="line">		&#123;</span><br><span class="line">			dp[i][chance][times]=dfs(i+<span class="number">1</span>,chance,<span class="number">2</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">if</span>(times==<span class="number">3</span> &amp;&amp; a[i]!=<span class="number">1</span>)<span class="comment">//石头没有赢剪刀,可以变换当前的手势也可以不变换</span></span><br><span class="line">		&#123;</span><br><span class="line">			dp[i][chance][times]=dfs(i+<span class="number">1</span>,chance,<span class="number">3</span>);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span>(times==<span class="number">1</span> &amp;&amp; a[i]==<span class="number">2</span>)<span class="comment">//剪刀赢布,可以变换当前的手势也可以不变换</span></span><br><span class="line">		&#123;</span><br><span class="line">			dp[i][chance][times]=max(max(dfs(i+<span class="number">1</span>,chance,<span class="number">1</span>)+<span class="number">1</span>,dfs(i+<span class="number">1</span>,chance+<span class="number">1</span>,<span class="number">2</span>)+<span class="number">1</span>),dfs(i+<span class="number">1</span>,chance+<span class="number">1</span>,<span class="number">3</span>)+<span class="number">1</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">if</span>(times==<span class="number">2</span> &amp;&amp; a[i]==<span class="number">3</span>)<span class="comment">//布赢石头,可以变换当前的手势也可以不变换 </span></span><br><span class="line">		&#123;</span><br><span class="line">			dp[i][chance][times]=max(max(dfs(i+<span class="number">1</span>,chance+<span class="number">1</span>,<span class="number">1</span>)+<span class="number">1</span>,dfs(i+<span class="number">1</span>,chance,<span class="number">2</span>)+<span class="number">1</span>),dfs(i+<span class="number">1</span>,chance+<span class="number">1</span>,<span class="number">3</span>)+<span class="number">1</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">if</span>(times==<span class="number">3</span> &amp;&amp; a[i]==<span class="number">1</span>)<span class="comment">//石头赢剪刀,可以变换当前的手势也可以不变换 </span></span><br><span class="line">		&#123;</span><br><span class="line">			dp[i][chance][times]=max(max(dfs(i+<span class="number">1</span>,chance+<span class="number">1</span>,<span class="number">1</span>)+<span class="number">1</span>,dfs(i+<span class="number">1</span>,chance+<span class="number">1</span>,<span class="number">2</span>)+<span class="number">1</span>),dfs(i+<span class="number">1</span>,chance,<span class="number">3</span>)+<span class="number">1</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span>(times==<span class="number">1</span> &amp;&amp; a[i]!=<span class="number">2</span>)<span class="comment">//剪刀没有赢布,可以变换当前的手势也可以不变换</span></span><br><span class="line">		&#123;</span><br><span class="line">			dp[i][chance][times]=max(max(dfs(i+<span class="number">1</span>,chance,<span class="number">1</span>),dfs(i+<span class="number">1</span>,chance+<span class="number">1</span>,<span class="number">2</span>)),dfs(i+<span class="number">1</span>,chance+<span class="number">1</span>,<span class="number">3</span>));</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">if</span>(times==<span class="number">2</span> &amp;&amp; a[i]!=<span class="number">3</span>)<span class="comment">//布没有石头,可以变换当前的手势也可以不变换</span></span><br><span class="line">		&#123;</span><br><span class="line">			dp[i][chance][times]=max(max(dfs(i+<span class="number">1</span>,chance+<span class="number">1</span>,<span class="number">1</span>),dfs(i+<span class="number">1</span>,chance,<span class="number">2</span>)),dfs(i+<span class="number">1</span>,chance+<span class="number">1</span>,<span class="number">3</span>));</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">if</span>(times==<span class="number">3</span> &amp;&amp; a[i]!=<span class="number">1</span>)<span class="comment">//石头没有赢剪刀,可以变换当前的手势也可以不变换</span></span><br><span class="line">		&#123;</span><br><span class="line">			dp[i][chance][times]=max(max(dfs(i+<span class="number">1</span>,chance+<span class="number">1</span>,<span class="number">1</span>),dfs(i+<span class="number">1</span>,chance+<span class="number">1</span>,<span class="number">2</span>)),dfs(i+<span class="number">1</span>,chance,<span class="number">3</span>));</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> dp[i][chance][times];</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">signed</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	ios::sync_with_stdio(<span class="literal">false</span>);</span><br><span class="line">	<span class="built_in">cin</span>.tie(<span class="number">0</span>);</span><br><span class="line">	<span class="built_in">cout</span>.tie(<span class="number">0</span>);</span><br><span class="line">	<span class="keyword">register</span> <span class="keyword">int</span> i,j;</span><br><span class="line">	<span class="built_in">cin</span>&gt;&gt;n&gt;&gt;k;</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">cin</span>&gt;&gt;c;</span><br><span class="line">		<span class="keyword">if</span>(c==<span class="string">'P'</span>) a[i]=<span class="number">1</span>;<span class="comment">//令1是剪刀 </span></span><br><span class="line">		<span class="keyword">if</span>(c==<span class="string">'H'</span>) a[i]=<span class="number">2</span>;<span class="comment">//2是布 </span></span><br><span class="line">		<span class="keyword">if</span>(c==<span class="string">'S'</span>) a[i]=<span class="number">3</span>;<span class="comment">//3是石头 </span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">cout</span>&lt;&lt;max(max(dfs(<span class="number">1</span>,<span class="number">0</span>,<span class="number">1</span>),dfs(<span class="number">1</span>,<span class="number">0</span>,<span class="number">2</span>)),dfs(<span class="number">1</span>,<span class="number">0</span>,<span class="number">3</span>))&lt;&lt;<span class="built_in">endl</span>;<span class="comment">//罗列3种情况 </span></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">提高+/省选-</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">搜索</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">搜索-记忆化搜索</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/洛谷OJ题解//" class="article-tag-list-link color2">洛谷OJ题解</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/07/19/洛谷-P3609 [USACO17JAN]Hoof, Paper, Scissor/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/3/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/12/">12</a><a class="extend next" rel="next" href="/page/5/">Next &raquo;</a>
+      <a class="extend prev" rel="prev" href="/page/3/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/">13</a><a class="extend next" rel="next" href="/page/5/">Next &raquo;</a>
     </nav>
   
 

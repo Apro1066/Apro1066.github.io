@@ -168,6 +168,204 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-洛谷-P4084 [USACO17DEC]Barn Painting" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/08/21/洛谷-P4084 [USACO17DEC]Barn Painting/">洛谷-P4084 [USACO17DEC]Barn Painting</a>
+    </h1>
+  
+
+        
+        <a href="/2019/08/21/洛谷-P4084 [USACO17DEC]Barn Painting/" class="archive-article-date">
+  	<time datetime="2019-08-21T15:46:37.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-21</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>树形dp好题。和没有丧尸的舞会那题有点像。<br>令$dp[i][j]$为在节点$i$染第$j$种颜色的方案数，把$1$号节点看成根。<br>由于相邻的点颜色不能相同，所以转移的时候只能由颜色不同的转移过来。由乘法原理，当前节点i的方案数应为其子树方案数的乘积。</p>
+<script type="math/tex; mode=display">dp[i][1]= \prod (dp[son][2]+dp[son][3])</script><script type="math/tex; mode=display">dp[i][2]= \prod (dp[son][1]+dp[son][3])</script><script type="math/tex; mode=display">dp[i][3]= \prod (dp[son][1]+dp[son][2])</script><p>对于一个最初没有涂色的点i，刚遍历到的时候设置点i的初始值$dp[i][1]=dp[i][2]=dp[i][3]=1$。如果点$i$已经被上色了，那么只有被上的颜色的数组才能为$1$。<br>最后答案就是$dp[root][1]+dp[root][2]+dp[root][3]$了。<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> mod 1000000007</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> maxn 100001</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> n,m,s,cnt,head[maxn],color[maxn];</span><br><span class="line"><span class="keyword">int</span> dp[maxn][<span class="number">4</span>];</span><br><span class="line"><span class="keyword">bool</span> vis[maxn];</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">node</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="keyword">int</span> nxt,to;</span><br><span class="line">&#125;e[maxn&lt;&lt;<span class="number">1</span>];</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> u,<span class="keyword">int</span> v)</span><span class="comment">//前向星存图 </span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	e[++cnt].to=v;</span><br><span class="line">	e[cnt].nxt=head[u];</span><br><span class="line">	head[u]=cnt;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> i)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	vis[i]=<span class="number">1</span>;</span><br><span class="line">	<span class="keyword">if</span>(color[i])<span class="comment">//如果该节点i已经上过色 </span></span><br><span class="line">	&#123;</span><br><span class="line">		dp[i][color[i]]=<span class="number">1</span>;<span class="comment">//该种颜色都有，其他2种方案数为0 </span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span><span class="comment">//如果没上过色 </span></span><br><span class="line">	&#123;</span><br><span class="line">		dp[i][<span class="number">1</span>]=<span class="number">1</span>;<span class="comment">//其他颜色都有可能被上 </span></span><br><span class="line">		dp[i][<span class="number">2</span>]=<span class="number">1</span>;</span><br><span class="line">		dp[i][<span class="number">3</span>]=<span class="number">1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">register</span> <span class="keyword">int</span> j=head[i];j;j=e[j].nxt)<span class="comment">//找节点i的子节点 </span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="function"><span class="keyword">int</span> <span class="title">v</span><span class="params">(e[j].to)</span></span>;</span><br><span class="line">		<span class="keyword">if</span>(vis[v]==<span class="number">0</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			dfs(v);</span><br><span class="line">			dp[i][<span class="number">1</span>]=dp[i][<span class="number">1</span>]*((dp[v][<span class="number">2</span>]+dp[v][<span class="number">3</span>])%mod)%mod;</span><br><span class="line">			dp[i][<span class="number">2</span>]=dp[i][<span class="number">2</span>]*((dp[v][<span class="number">1</span>]+dp[v][<span class="number">3</span>])%mod)%mod;</span><br><span class="line">			dp[i][<span class="number">3</span>]=dp[i][<span class="number">3</span>]*((dp[v][<span class="number">1</span>]+dp[v][<span class="number">2</span>])%mod)%mod;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">signed</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	ios::sync_with_stdio(<span class="literal">false</span>);</span><br><span class="line">	<span class="built_in">cin</span>.tie(<span class="number">0</span>);</span><br><span class="line">	<span class="built_in">cout</span>.tie(<span class="number">0</span>);</span><br><span class="line">	<span class="keyword">register</span> <span class="keyword">int</span> i,j,u,v;</span><br><span class="line">	<span class="built_in">cin</span>&gt;&gt;n&gt;&gt;m;</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=n<span class="number">-1</span>;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">cin</span>&gt;&gt;u&gt;&gt;v;</span><br><span class="line">		add(u,v);<span class="comment">//无向 </span></span><br><span class="line">		add(v,u);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=m;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">cin</span>&gt;&gt;u&gt;&gt;v;</span><br><span class="line">		color[u]=v;<span class="comment">//u为节点，v为颜色种类 </span></span><br><span class="line">	&#125;</span><br><span class="line">	dfs(<span class="number">1</span>);<span class="comment">//令节点1为根节点 </span></span><br><span class="line">	<span class="built_in">cout</span>&lt;&lt;(dp[<span class="number">1</span>][<span class="number">1</span>]+dp[<span class="number">1</span>][<span class="number">2</span>]+dp[<span class="number">1</span>][<span class="number">3</span>])%mod&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">提高+/省选-</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">动态规划</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">动态规划-树形dp</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/洛谷OJ题解//" class="article-tag-list-link color2">洛谷OJ题解</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/08/21/洛谷-P4084 [USACO17DEC]Barn Painting/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-洛谷-P1681 最大正方形II" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/08/21/洛谷-P1681 最大正方形II/">洛谷-P1681 最大正方形II</a>
+    </h1>
+  
+
+        
+        <a href="/2019/08/21/洛谷-P1681 最大正方形II/" class="archive-article-date">
+  	<time datetime="2019-08-21T14:31:07.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-21</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>其实是最大正方形的变形。<br>正方形那题是令$dp[i][j]$是以$(i,j)$为右下角能得到的最大正方形边长，而这次只要加一个维度判断黑白格就行了。。<br>令$dp[i][j][0/1]$是以$(i,j)$为右下角，且该点上为$0/1$时能得到的最大正方形边长，则：<br><strong>1.当$a[i][j]=0$时</strong></p>
+<script type="math/tex; mode=display">dp[i][j][0]=min(dp[i-1][j][1],dp[i][j-1][1],dp[i-1][j-1][0])+1</script><p><strong>2.当a[i][j]=1时</strong></p>
+<script type="math/tex; mode=display">dp[i][j][1]=min(dp[i-1][j][0],dp[i][j-1][0],dp[i-1][j-1][1])+1</script><p>这里来着重讲一下为什么状态转移方程中为什么要取$min$而不是取$max$。<br>你想啊，点$(i,j)$可以从$(i-1,j)$转移过来，也可以从$(i,j-1)$转移过来，也可以从$(i-1,j-1)$转移过来。这$3$个点要同时兼顾，而$(i,j)$是决定存在性问题的，如果我取$max$，我这边可能满足条件，但就不保证其他两边满足条件了。如果你不能理解，我们举个例子就明白了：<br>假如有一个a数组$a[4][4]$：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1 0 1 0</span><br><span class="line">0 1 0 1</span><br><span class="line">1 0 1 0</span><br><span class="line">0 1 0 0</span><br></pre></td></tr></table></figure></p>
+<p>则$dp$数组：（这里$dp$数组用$2$维表示，为了举例方便）<br>1<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1 0 0 0</span><br><span class="line">0 0 0 0</span><br><span class="line">0 0 0 0</span><br><span class="line">0 0 0 0</span><br></pre></td></tr></table></figure></p>
+<p>2<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1 1 1 1</span><br><span class="line">1 0 0 0</span><br><span class="line">0 0 0 0</span><br><span class="line">0 0 0 0</span><br></pre></td></tr></table></figure></p>
+<p>在$dp[2][2]$中，显然可以从$dp[1][2]$，$dp[2][1]$，$dp[1][1]$这$3$个点转移，看一下a数组：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">1 0</span><br><span class="line">0 1</span><br></pre></td></tr></table></figure></p>
+<p>是可以转移的，于是dp数组<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">1 1</span><br><span class="line">1 2</span><br></pre></td></tr></table></figure></p>
+<p>dp数组<br>3<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1 1 1 1</span><br><span class="line">1 2 2 2</span><br><span class="line">1 2 2 2</span><br><span class="line">1 2 2 0</span><br></pre></td></tr></table></figure></p>
+<p>等等，$dp[3][3]$应该为$3$啊！<br>好。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1 1 1 1</span><br><span class="line">1 2 2 2</span><br><span class="line">1 2 3 2</span><br><span class="line">1 2 2 0</span><br></pre></td></tr></table></figure></p>
+<p>那么我们接着看$dp[4][3]$，发现$dp[4][2]=2$，$dp[3][3]=3$，$dp[3][2]=2$，周围有2个2，1个3，选哪个呢？<br>好，按照我们之前的惯性思维，如果取$max$的话，也就是选$dp[3][3]$的话，则dp数组：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1 1 1 1</span><br><span class="line">1 2 2 2</span><br><span class="line">1 2 3 2</span><br><span class="line">1 2 4 0</span><br></pre></td></tr></table></figure></p>
+<p>发现它并不能构成边长为$4$的正方形！所以要选边长为$2$的。<br>最后dp数组：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1 1 1 1</span><br><span class="line">1 2 2 2</span><br><span class="line">1 2 3 3</span><br><span class="line">1 2 3 0</span><br></pre></td></tr></table></figure></p>
+<p>也就是说，$dp[i][j]$的选择，是要兼顾$dp[i-1][j]$，$dp[i][j-1]$，$dp[i-1][j-1]$的最小值的。如果取最大值的话，显然不能保证$dp[i][j]$是否还能正确。取最小值是为了能保证$dp[i][j]$也能满足条件，随着$i$和$j$的增大，$dp[i][j]$一定能保证单调递增的。<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> inf 2e9+7</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> dp[<span class="number">1501</span>][<span class="number">1501</span>][<span class="number">2</span>],a[<span class="number">1501</span>][<span class="number">1501</span>],n,m,s;</span><br><span class="line"><span class="function"><span class="keyword">signed</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	ios::sync_with_stdio(<span class="literal">false</span>);</span><br><span class="line">	<span class="built_in">cin</span>.tie(<span class="number">0</span>);</span><br><span class="line">	<span class="built_in">cout</span>.tie(<span class="number">0</span>);</span><br><span class="line">	<span class="keyword">register</span> <span class="keyword">int</span> i,j;</span><br><span class="line">	<span class="built_in">cin</span>&gt;&gt;n&gt;&gt;m;</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">for</span>(j=<span class="number">1</span>;j&lt;=m;j++)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="built_in">cin</span>&gt;&gt;a[i][j];</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">for</span>(j=<span class="number">1</span>;j&lt;=m;j++)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span>(a[i][j]==<span class="number">0</span>)</span><br><span class="line">			&#123;</span><br><span class="line">				dp[i][j][<span class="number">0</span>]=min(min(dp[i<span class="number">-1</span>][j][<span class="number">1</span>],dp[i][j<span class="number">-1</span>][<span class="number">1</span>]),dp[i<span class="number">-1</span>][j<span class="number">-1</span>][<span class="number">0</span>])+<span class="number">1</span>;</span><br><span class="line">				s=max(s,dp[i][j][<span class="number">0</span>]);</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">if</span>(a[i][j]==<span class="number">1</span>)</span><br><span class="line">			&#123;</span><br><span class="line">				dp[i][j][<span class="number">1</span>]=min(min(dp[i<span class="number">-1</span>][j][<span class="number">0</span>],dp[i][j<span class="number">-1</span>][<span class="number">0</span>]),dp[i<span class="number">-1</span>][j<span class="number">-1</span>][<span class="number">1</span>])+<span class="number">1</span>;</span><br><span class="line">				s=max(s,dp[i][j][<span class="number">1</span>]);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">cout</span>&lt;&lt;s&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">普及/提高-</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">动态规划</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">动态规划-线性dp</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/洛谷OJ题解//" class="article-tag-list-link color2">洛谷OJ题解</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/08/21/洛谷-P1681 最大正方形II/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-洛谷-P4343 [SHOI2015]自动刷题机" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -939,195 +1137,9 @@
 
 
   
-    <article id="post-洛谷-P4305 [JLOI2011]不重复数字" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/08/12/洛谷-P4305 [JLOI2011]不重复数字/">洛谷-P4305 [JLOI2011]不重复数字</a>
-    </h1>
-  
-
-        
-        <a href="/2019/08/12/洛谷-P4305 [JLOI2011]不重复数字/" class="archive-article-date">
-  	<time datetime="2019-08-12T10:53:24.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-12</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>哈希和$map$的确是个好方法，这里蒟蒻用的$unique+$排序。<br>光$unique$是不行的，这个序列带了权。<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;memory.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> t,n;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">node</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="keyword">int</span> id,v;</span><br><span class="line">	<span class="keyword">bool</span> <span class="keyword">operator</span> &lt; (node a)<span class="keyword">const</span> </span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span>(v==a.v)<span class="comment">//第12行到第14行是要写的，如果权一样要按下标排序。如果实在不想写这个的话，第40行可以写stable_sort（归并排序）。 </span></span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">return</span> id&lt;a.id;<span class="comment">//保证去重后留下排名小的 </span></span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> v&lt;a.v;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">bool</span> <span class="keyword">operator</span> == (node a)<span class="keyword">const</span>&#123;<span class="keyword">return</span> v==a.v;&#125;<span class="comment">//写这个是为了搞unique </span></span><br><span class="line">&#125;a[<span class="number">50001</span>];</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">bool</span> <span class="title">cmp</span><span class="params">(node a,node b)</span><span class="comment">//按下标排序 </span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> a.id&lt;b.id;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">signed</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	ios::sync_with_stdio(<span class="literal">false</span>);</span><br><span class="line">	<span class="built_in">cin</span>.tie(<span class="number">0</span>);</span><br><span class="line">	<span class="built_in">cout</span>.tie(<span class="number">0</span>);</span><br><span class="line">	<span class="keyword">register</span> <span class="keyword">int</span> i,j,k;</span><br><span class="line">	<span class="built_in">cin</span>&gt;&gt;t;</span><br><span class="line">	<span class="keyword">while</span>(t--)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">cin</span>&gt;&gt;n;</span><br><span class="line">		<span class="built_in">memset</span>(a,<span class="number">0</span>,<span class="keyword">sizeof</span>(a));</span><br><span class="line">		<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="built_in">cin</span>&gt;&gt;a[i].v;</span><br><span class="line">			a[i].id=i;</span><br><span class="line">		&#125;</span><br><span class="line">		sort(a+<span class="number">1</span>,a+n+<span class="number">1</span>);<span class="comment">//按边权排序 </span></span><br><span class="line">		<span class="keyword">int</span> cnt=unique(a+<span class="number">1</span>,a+n+<span class="number">1</span>)-a<span class="number">-1</span>;<span class="comment">//去重，去重时必须是个有序序列 </span></span><br><span class="line">		sort(a+<span class="number">1</span>,a+cnt+<span class="number">1</span>,cmp);<span class="comment">//再按下标排序 </span></span><br><span class="line">		<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=cnt;i++)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="built_in">cout</span>&lt;&lt;a[i].v&lt;&lt;<span class="string">' '</span>;</span><br><span class="line">		&#125;<span class="built_in">cout</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">普及+/提高</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">各省省选</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">C++ STL</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/洛谷OJ题解//" class="article-tag-list-link color2">洛谷OJ题解</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/08/12/洛谷-P4305 [JLOI2011]不重复数字/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-洛谷-P2032 扫描" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/08/12/洛谷-P2032 扫描/">洛谷-P2032 扫描</a>
-    </h1>
-  
-
-        
-        <a href="/2019/08/12/洛谷-P2032 扫描/" class="archive-article-date">
-  	<time datetime="2019-08-12T07:22:13.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-12</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>单调队列。<br>单调队列是一种特殊的队列，它的元素不超过$m$个，且元素在其中单调递增或递减。<br>比如这道题求最大值，在插入某个元素之前，先检查队列尾部的元素是否比它小，如果小，那么把队尾删除。然后在队尾插入新元素。再检查队头，是否还在那个区间内。如果在区间外部，删除。<br>按这种算法，就可以维护队列的单调性。<br>之前在<a href="https://blog.csdn.net/Apro1066/article/details/86773668" target="_blank" rel="noopener">P1440</a>用过单调队列，那个是求连续区间最小值。这里是求最大值。<br>还有一道经典的题目：<a href="https://www.luogu.org/problem/P1886" target="_blank" rel="noopener">P1886 滑动窗口</a>，也是单调队列实现的。<br>其实这些算法都可以用树状数组，线段树，ST表啥的去搞。但是那么一大坨代码，肯定没有单调队列实现的快啦！不过单调队列虽然代码少，还是很难理解的。<br>学会了一种新方法实现单调队列：双向队列（$deque$）<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;deque&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> n,m;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">node</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="keyword">int</span> val;<span class="comment">//存储序列中该元素的值</span></span><br><span class="line">	<span class="keyword">int</span> position;<span class="comment">//位置 </span></span><br><span class="line">&#125;a[<span class="number">2000001</span>];</span><br><span class="line"><span class="built_in">deque</span>&lt;node&gt; dq;<span class="comment">//声明双向队列 </span></span><br><span class="line"><span class="keyword">int</span> maxn[<span class="number">2000001</span>];<span class="comment">//最大值序列 </span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="comment">//freopen("testdata.in","r",stdin);</span></span><br><span class="line">	ios::sync_with_stdio(<span class="literal">false</span>);</span><br><span class="line">	<span class="built_in">cin</span>.tie(<span class="number">0</span>);</span><br><span class="line">	<span class="built_in">cout</span>.tie(<span class="number">0</span>);</span><br><span class="line">	<span class="keyword">register</span> <span class="keyword">int</span> i,j;</span><br><span class="line">	<span class="built_in">cin</span>&gt;&gt;n&gt;&gt;m;</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">cin</span>&gt;&gt;a[i].val;</span><br><span class="line">		a[i].position=i;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=n;i++)<span class="comment">//从位置开始检索，从i=2开始也可以过 </span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">while</span>(!dq.empty() &amp;&amp; dq.back().val&lt;a[i].val)<span class="comment">//队列不为空，且如果队尾小于a[i] </span></span><br><span class="line">			dq.pop_back();<span class="comment">//就不要队尾了，pop掉 </span></span><br><span class="line">		dq.push_back(a[i]);<span class="comment">//把a[i]放进去 </span></span><br><span class="line">		<span class="keyword">while</span>(!dq.empty() &amp;&amp; dq.front().position&lt;=i-m)<span class="comment">//检查队头是否在区间外 </span></span><br><span class="line">			dq.pop_front();<span class="comment">//是就pop </span></span><br><span class="line">		maxn[i]=dq.front().val;<span class="comment">//记录max </span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span>(i&gt;=m)<span class="comment">//如果是个完整的区间 </span></span><br><span class="line">		&#123;</span><br><span class="line">			<span class="built_in">cout</span>&lt;&lt;maxn[i]&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">普及/提高-</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据结构</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据结构-单调队列</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/洛谷OJ题解//" class="article-tag-list-link color2">洛谷OJ题解</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/08/12/洛谷-P2032 扫描/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/12/">12</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/">13</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
     </nav>
   
 
