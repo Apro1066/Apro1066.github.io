@@ -168,6 +168,203 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-洛谷-P1078 文化之旅" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/10/22/洛谷-P1078 文化之旅/">洛谷-P1078 文化之旅</a>
+    </h1>
+  
+
+        
+        <a href="/2018/10/22/洛谷-P1078 文化之旅/" class="archive-article-date">
+  	<time datetime="2018-10-22T01:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-10-22</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>(Posted on 2018.10.22)<br>我是被迫干这道绿题的。。网上的毒瘤都说水，<del>水个jb，难的一批</del> 。</p>
+<p>由于看到n&lt;=100 的数据，所以一秒想到Floyd。</p>
+<p>直接不用按题目的思路来做，暴力跑一遍Floyd，不加文化排斥（其实我是忘加了）。72分（好水的数据）。</p>
+<p>在建边的时候处理掉，即从x到y，若y排斥x，则不建边；若x排斥y；则不建反向边。最后，如果起点与终点的文化相同，就输出-1。<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> a[<span class="number">501</span>][<span class="number">501</span>]<span class="comment">/*图*/</span>,b[<span class="number">501</span>],c[<span class="number">501</span>][<span class="number">501</span>],n,m,k,s,t,x,y,z;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	ios::sync_with_stdio(<span class="literal">false</span>);</span><br><span class="line">	<span class="built_in">cin</span>.tie(<span class="number">0</span>);</span><br><span class="line">	<span class="keyword">int</span> i,j;</span><br><span class="line">	<span class="built_in">cin</span>&gt;&gt;n&gt;&gt;k&gt;&gt;m&gt;&gt;s&gt;&gt;t;</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">for</span>(j=<span class="number">1</span>;j&lt;=n;j++)</span><br><span class="line">		&#123;</span><br><span class="line">			a[i][j]=<span class="number">99999</span>;<span class="comment">//图的初始化，不知道为什么1&lt;&lt;30会WA掉 </span></span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">cin</span>&gt;&gt;b[i];</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=k;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">for</span>(j=<span class="number">1</span>;j&lt;=k;j++)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="built_in">cin</span>&gt;&gt;c[i][j];</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=m;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">cin</span>&gt;&gt;x&gt;&gt;y&gt;&gt;z;</span><br><span class="line">		<span class="keyword">if</span>(z&lt;a[x][y])</span><br><span class="line">		&#123;<span class="comment">//从x到y，若y排斥x，则不建边；若x排斥y；则不建反向边</span></span><br><span class="line">			<span class="keyword">if</span>(c[b[x]][b[y]]==<span class="number">0</span> &amp;&amp; b[y]!=b[x])</span><br><span class="line">			&#123;</span><br><span class="line">				a[y][x]=min(a[x][y],z);</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">if</span>(c[b[y]][b[x]]==<span class="number">0</span> &amp;&amp; b[y]!=b[x])</span><br><span class="line">			&#123;</span><br><span class="line">				a[x][y]=min(a[y][x],z);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span>(b[s]==b[t])<span class="comment">//如果起点与终点的文化相同</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">cout</span>&lt;&lt;<span class="number">-1</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">		<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(k=<span class="number">1</span>;k&lt;=n;k++)<span class="comment">//上面的k用过了，所以直接k当循环变量 </span></span><br><span class="line">	&#123;<span class="comment">//Floyd模版 </span></span><br><span class="line">		<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">for</span>(j=<span class="number">1</span>;j&lt;=n;j++)</span><br><span class="line">			&#123;</span><br><span class="line">				<span class="keyword">if</span>(a[i][k]+a[k][j]&lt;a[i][j])</span><br><span class="line">				&#123;</span><br><span class="line">					a[i][j]=a[i][k]+a[k][j];</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span>(a[s][t]==<span class="number">99999</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">cout</span>&lt;&lt;<span class="number">-1</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">cout</span>&lt;&lt;a[s][t]&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">普及+/提高</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">图论</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Noip普及组</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">图论-最短路</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/洛谷OJ题解//" class="article-tag-list-link color2">洛谷OJ题解</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/10/22/洛谷-P1078 文化之旅/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-洛谷-P1049 装箱问题" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/10/19/洛谷-P1049 装箱问题/">洛谷-P1049 装箱问题</a>
+    </h1>
+  
+
+        
+        <a href="/2018/10/19/洛谷-P1049 装箱问题/" class="archive-article-date">
+  	<time datetime="2018-10-19T01:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-10-19</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>(Posted on 2018.10.19)<br>最近在练背包dp。要求n个物品中，任取若干个装入箱内，使总价值最大。对于每一个物体，都有两种状态：装 与不装。<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> dp[<span class="number">1000001</span>],w[<span class="number">50001</span>],v[<span class="number">50001</span>],n,m;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	ios::sync_with_stdio(<span class="literal">false</span>);</span><br><span class="line">	<span class="built_in">cin</span>.tie(<span class="number">0</span>);</span><br><span class="line">	<span class="keyword">int</span> i,j;</span><br><span class="line">	<span class="built_in">cin</span>&gt;&gt;m&gt;&gt;n;<span class="comment">//背包容量m和物品数量n </span></span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">cin</span>&gt;&gt;w[i];</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">for</span>(j=m;j&gt;=w[i];j--)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span>(dp[j-w[i]]+w[i]&gt;dp[j])</span><br><span class="line">			&#123;</span><br><span class="line">				dp[j]=dp[j-w[i]]+w[i];</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">cout</span>&lt;&lt;m-dp[m]&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">动态规划</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">动态规划-线性dp</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Noip普及组</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">普及-</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/洛谷OJ题解//" class="article-tag-list-link color2">洛谷OJ题解</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/10/19/洛谷-P1049 装箱问题/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-洛谷-P1216 [USACO1.5]数字三角形 Number Triangles" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -236,6 +433,99 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2018/10/17/洛谷-P1216 [USACO1.5]数字三角形 Number Triangles/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-洛谷-P1115 最大子段和" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/10/17/洛谷-P1115 最大子段和/">洛谷-P1115 最大子段和</a>
+    </h1>
+  
+
+        
+        <a href="/2018/10/17/洛谷-P1115 最大子段和/" class="archive-article-date">
+  	<time datetime="2018-10-17T01:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-10-17</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>(Posted on 2018.10.17)<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> n,a[<span class="number">200001</span>],dp[<span class="number">200001</span>],s(<span class="number">-1</span>&lt;&lt;<span class="number">30</span>);<span class="comment">//s一定要初始化为负数！！坑 </span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span><span class="comment">//一开始20分，后来发现不能直接套方程式dp[i]=max(dp[i-1]+a[i],dp[i]) ，因为dp[n]不一定是最后的结果。为什么？因为题目样例出现了负数。也就意味着，a[i]为负数，则dp[i]小于dp[i-1]! </span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	ios::sync_with_stdio(<span class="literal">false</span>);</span><br><span class="line">	<span class="built_in">cin</span>.tie(<span class="number">0</span>);</span><br><span class="line">	<span class="keyword">int</span> i,j;</span><br><span class="line">	<span class="built_in">cin</span>&gt;&gt;n;</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">cin</span>&gt;&gt;a[i];</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		dp[i]=max(dp[i<span class="number">-1</span>]+a[i],a[i]);<span class="comment">//最大子段和模版 </span></span><br><span class="line">		s=max(s,dp[i]);<span class="comment">//还要再用一个数从1到n再查找一次，才能找出最大数，为了节省时间，可以同时进行 </span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">cout</span>&lt;&lt;s&lt;&lt;<span class="built_in">endl</span>; </span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">动态规划</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">动态规划-线性dp</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">普及-</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/洛谷OJ题解//" class="article-tag-list-link color2">洛谷OJ题解</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/10/17/洛谷-P1115 最大子段和/">展开全文 >></a>
         </p>
       
 
@@ -342,99 +632,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2018/10/17/洛谷-P1359 租用游艇/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-洛谷-P1115 最大子段和" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/10/17/洛谷-P1115 最大子段和/">洛谷-P1115 最大子段和</a>
-    </h1>
-  
-
-        
-        <a href="/2018/10/17/洛谷-P1115 最大子段和/" class="archive-article-date">
-  	<time datetime="2018-10-17T01:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-10-17</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>(Posted on 2018.10.17)<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> n,a[<span class="number">200001</span>],dp[<span class="number">200001</span>],s(<span class="number">-1</span>&lt;&lt;<span class="number">30</span>);<span class="comment">//s一定要初始化为负数！！坑 </span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span><span class="comment">//一开始20分，后来发现不能直接套方程式dp[i]=max(dp[i-1]+a[i],dp[i]) ，因为dp[n]不一定是最后的结果。为什么？因为题目样例出现了负数。也就意味着，a[i]为负数，则dp[i]小于dp[i-1]! </span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	ios::sync_with_stdio(<span class="literal">false</span>);</span><br><span class="line">	<span class="built_in">cin</span>.tie(<span class="number">0</span>);</span><br><span class="line">	<span class="keyword">int</span> i,j;</span><br><span class="line">	<span class="built_in">cin</span>&gt;&gt;n;</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">cin</span>&gt;&gt;a[i];</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		dp[i]=max(dp[i<span class="number">-1</span>]+a[i],a[i]);<span class="comment">//最大子段和模版 </span></span><br><span class="line">		s=max(s,dp[i]);<span class="comment">//还要再用一个数从1到n再查找一次，才能找出最大数，为了节省时间，可以同时进行 </span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">cout</span>&lt;&lt;s&lt;&lt;<span class="built_in">endl</span>; </span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">动态规划</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">动态规划-线性dp</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">普及-</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/洛谷OJ题解//" class="article-tag-list-link color2">洛谷OJ题解</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/10/17/洛谷-P1115 最大子段和/">展开全文 >></a>
         </p>
       
 
@@ -937,206 +1134,6 @@
 
 
   
-    <article id="post-洛谷-P1056 排座椅" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/08/14/洛谷-P1056 排座椅/">洛谷-P1056 排座椅</a>
-    </h1>
-  
-
-        
-        <a href="/2018/08/14/洛谷-P1056 排座椅/" class="archive-article-date">
-  	<time datetime="2018-08-14T01:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-08-14</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>(Posted on 2018.08.14)<br>题目里提到了最优解，那么肯定贪心做最方便了。然后从题目给的样例解释可以看到：如果相邻的两行有许多组说话的同学，那么在这两行中间加一条过道是非常划算的；同理，列也是如此。<br><img src="https://img-blog.csdn.net/20180814231104226?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0Fwcm8xMDY2/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="例1"><br>只要找出划分哪些相邻的两行和相邻的两列可以隔开的同学最多，这就是最优解了。<br>输入两个同学的坐标，如果横坐标相同，即这两个同学在一行，那么设两个同学纵坐标分别为a,b 如果a<b 那么x[a]++ 否则x[b]++（这里一定要特判一下a和b的大小） 同理 y数组也如此操作即可。这里可以看成价值问题，取价值最高的画法即可。 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iomanip&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;math.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">pragma</span> GCC optimize (3)<span class="comment">//让我们一起来1*1</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">long</span> <span class="keyword">long</span> <span class="keyword">int</span> a1[<span class="number">4001</span>],b1[<span class="number">4001</span>],n,m,l,k,d;<span class="comment">//a1,b1两个数组来存储横排与纵排的各个坐标上的会进行交头接耳的人，剩下的尽量按题目的变量命名</span></span><br><span class="line"><span class="keyword">long</span> <span class="keyword">long</span> <span class="keyword">int</span> a2[<span class="number">4001</span>],b2[<span class="number">4001</span>];<span class="comment">//排序要用的数组</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	ios::sync_with_stdio(<span class="literal">false</span>);<span class="comment">//让我们一起来省时间*2</span></span><br><span class="line">	<span class="comment">//freopen("seat.in","r",stdin);</span></span><br><span class="line">	<span class="comment">//freopen("seat.out","w",stdout);</span></span><br><span class="line">	<span class="keyword">register</span> <span class="keyword">long</span> <span class="keyword">long</span> <span class="keyword">int</span> i,j;<span class="comment">//让我们来一起来省时间*3</span></span><br><span class="line">	<span class="keyword">static</span> <span class="keyword">long</span> <span class="keyword">long</span> <span class="keyword">int</span> s;</span><br><span class="line">	<span class="built_in">cin</span>&gt;&gt;n&gt;&gt;m;</span><br><span class="line">	<span class="built_in">cin</span>&gt;&gt;k&gt;&gt;l&gt;&gt;d;</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>,j=<span class="number">1</span>;i&lt;=d;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">int</span> x1,y1,x,y;</span><br><span class="line">		<span class="built_in">cin</span>&gt;&gt;x&gt;&gt;y&gt;&gt;x1&gt;&gt;y1;</span><br><span class="line">		<span class="keyword">if</span>(x==x1)<span class="comment">//辨别是纵向还是横向，若横向相同则分离线为纵向 </span></span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span>(y&lt;y1)<span class="comment">//这是这两排的价值</span></span><br><span class="line">			&#123;</span><br><span class="line">				a1[y]++;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">else</span><span class="comment">//这就相当取min了</span></span><br><span class="line">			&#123;</span><br><span class="line">				a1[y1]++;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">if</span>(y==y1)<span class="comment">//同理 </span></span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span>(x&lt;x1)</span><br><span class="line">			&#123;</span><br><span class="line">				b1[x]++;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">else</span></span><br><span class="line">			&#123;</span><br><span class="line">				b1[x1]++;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	int x(0),maxn(0);</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=k;i++)<span class="comment">//将人数最多的K个找出来</span></span><br><span class="line">	&#123;</span><br><span class="line">		maxn=<span class="number">0</span>;<span class="comment">//为了求出每次的最大值，需要每次扫一遍</span></span><br><span class="line">		x=<span class="number">0</span>;</span><br><span class="line">		<span class="keyword">for</span>(j=<span class="number">1</span>;j&lt;=m;j++)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span>(b1[j]&gt;maxn)</span><br><span class="line">			&#123;</span><br><span class="line">				maxn=b1[j];</span><br><span class="line">				x=j;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		a2[i]=x;</span><br><span class="line">		b1[x]=<span class="number">0</span>;<span class="comment">//要清理，否则接下来都是一个答案 </span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=l;i++)<span class="comment">//将人数最多L个找出来</span></span><br><span class="line">	&#123;</span><br><span class="line">		maxn=<span class="number">0</span>;</span><br><span class="line">		x=<span class="number">0</span>;</span><br><span class="line">		<span class="keyword">for</span>(j=<span class="number">1</span>;j&lt;=n;j++)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span>(a1[j]&gt;maxn)</span><br><span class="line">			&#123;</span><br><span class="line">				maxn=a1[j];</span><br><span class="line">				x=j;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		b2[i]=x;</span><br><span class="line">		a1[x]=<span class="number">0</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	sort(a2+<span class="number">1</span>,a2+k+<span class="number">1</span>);<span class="comment">//这里是贪心，找到可以隔开人数最多的路，那么说话的人就少了 </span></span><br><span class="line">	sort(b2+<span class="number">1</span>,b2+l+<span class="number">1</span>);</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=k;i++)<span class="comment">//输出行最优解</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">cout</span>&lt;&lt;a2[i]&lt;&lt;<span class="string">' '</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">cout</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=l;i++)<span class="comment">//输出列最优解</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">cout</span>&lt;&lt;b2[i]&lt;&lt;<span class="string">' '</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">cout</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">	<span class="comment">//fclose(stdin);</span></span><br><span class="line">	<span class="comment">//fclose(stdout);</span></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></b></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">普及/提高-</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">贪心</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Noip普及组</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/洛谷OJ题解//" class="article-tag-list-link color2">洛谷OJ题解</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/08/14/洛谷-P1056 排座椅/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-洛谷-P2772 寻找平面上的极大点" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/07/17/洛谷-P2772 寻找平面上的极大点/">洛谷-P2772 寻找平面上的极大点</a>
-    </h1>
-  
-
-        
-        <a href="/2018/07/17/洛谷-P2772 寻找平面上的极大点/" class="archive-article-date">
-  	<time datetime="2018-07-17T01:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-07-17</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>(Posted on 2018.07.17)<br>这道题应该是单调队列的模版题，但是A.pro的水平有限，不用数据结构做，就纯贪心。</p>
-<p>好的，回归题目。题目对于“极大值点”的定义如下：</p>
-<p>对于任意一个点，如果它的y值不小于任何一个点使这个“任何一个点”x值大于给定点的x值，那么该点为极大点。</p>
-<p>什么？没看懂？看样子这段话说了不少废话，那我们参见图片。</p>
-<p><img src="https://img-blog.csdn.net/20180717202331691?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0Fwcm8xMDY2/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="例1"><br>图中有序数对前的星号都表示极大值点。</p>
-<p>由图中不难发现：对于一个坐标点，如果y坐标比它大的点全部都在它的左边，那么该点为极大点。</p>
-<p>比如图中的坐标(2,3)，它的y值为3，比3大的点(1,4)在点(2,3)的左边，所以(2,3)就是极大值点了。</p>
-<p>好，我们先上代码。</p>
-<p>//90分程序 </p>
-<h1 id="include"><a href="#include" class="headerlink" title="include "></a>include <stdio.h></stdio.h></h1><h1 id="include-1"><a href="#include-1" class="headerlink" title="include "></a>include <iostream></iostream></h1><h1 id="include-2"><a href="#include-2" class="headerlink" title="include "></a>include <algorithm></algorithm></h1><p>using namespace std;<br>struct node<br>{<br>    int x;//x轴<br>    int y;//y轴<br>}pos[50001];//定义一个结构类型，是来存储各个坐标的<br>int compare(node a,node b)<br>{<br>    return a.x<b.x; } compare函数，是用于stl算法库中函数sort附加函数的，不然编译不过。至于为什么这样写请goto至line27 int main() { ios::sync_with_stdio(false); 数据流读入优化 auto n,i,j,k(-1); k用于不断寻找最大值，也就是尽可能大的坐标 static s; 静态变量static，没什么新鲜的 a[50001]="{};//a数组用来标记极大值点，和自动变量s配套使用" cin>&gt;n;//n读入n个坐标<br>    for(i=1;i&lt;=n;i++)<br>    {<br>        cin&gt;&gt;pos[i].x&gt;&gt;pos[i].y;//读入坐标(xi,yi)<br>    }<br>    sort(pos+1,pos+n+1,compare);//将x坐标排序，这里我从小往大排，当然从大往小排也可以<br>    for(i=n;i&gt;=1;i—)//从小往大，就逆序处理<br>    {<br>        if(pos[i].y&gt;k)//如果当前y坐标大于之前的y坐标<br>        {<br>            s++;//那么很显然，这个坐标需要我们标记，s代表标记到多少个极大值点<br>            a[s]=i;//将当前坐标标记至a数组<br>            k=pos[i].y;//最大值更新<br>        }<br>    }//ok,这就是贪心策略了<br>    for(i=s;i&gt;1;i—)//仍然地，还要从大往小检索。之所以从s开始，是因为我们要输出的极大值点在之前已经用s累计过了<br>    {<br>        printf(“(%d,%d),”,pos[a[i]].x,pos[a[i]].y);<br>    }<br>    printf(“(%d,%d)”,pos[a[i]].x,pos[a[i]].y);//特殊处理最后的逗号<br>    return 0;<br>}</b.x;></p>
-<p>很可惜，这份算法，只能得90分。(艹)</p>
-<p>难道是极大值点的定义和图片在骗我？</p>
-<p>那好吧，我们再回归图片。</p>
-<p><img src="https://img-blog.csdn.net/20180717203931720?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0Fwcm8xMDY2/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="例2"></p>
-<p>发现问题了吧？</p>
-<p>是的，判定条件包括这一列！</p>
-<p>所以我们要在排序时，当x相等时比较y。这样，才能AC。（哈，任何题目都有它嘴恶的丑脸。啊不，丑恶的嘴脸。）</p>
-<p>//100分程序 </p>
-<h1 id="include-3"><a href="#include-3" class="headerlink" title="include "></a>include <stdio.h></stdio.h></h1><h1 id="include-4"><a href="#include-4" class="headerlink" title="include "></a>include <iostream></iostream></h1><h1 id="include-5"><a href="#include-5" class="headerlink" title="include "></a>include <algorithm></algorithm></h1><p>using namespace std;<br>struct node<br>{<br>    int x;//x轴<br>    int y;//y轴<br>}pos[50001];//定义一个结构类型，是来存储各个坐标的<br>int compare(node a,node b)<br>{<br>    if(a.x!=b.x)<br>        return a.x<b.x; else return a.y<b.y; 本题的一个大坑。请在line16看极大值点的定义。 对于任意一个点，如果它的y值比它右边（包括这一列）的点都要大，那么该点为极大点。 包括这一列！！也就是说，当x坐标相等的时候，我们就需要比较y坐标，本题ac。 } compare函数，是用于stl算法库中函数sort附加函数的，不然编译不过。至于为什么这样写请goto至line31 int main() { ios::sync_with_stdio(false); 数据流读入优化 auto n,i,j,k(-1); k用于不断寻找最大值，也就是尽可能大的坐标 static s; 静态变量static，没什么新鲜的 a[50001]="{};//a数组用来标记极大值点，和自动变量s配套使用" cin>&gt;n;//n读入n个坐标<br>    for(i=1;i&lt;=n;i++)<br>    {<br>        cin&gt;&gt;pos[i].x&gt;&gt;pos[i].y;//读入坐标(xi,yi)<br>    }<br>    sort(pos+1,pos+n+1,compare);//将x坐标排序，这里我从小往大排，当然从大往小排也可以<br>    for(i=n;i&gt;=1;i—)//从小往大，就逆序处理<br>    {<br>        if(pos[i].y&gt;k)//如果当前y坐标大于之前的y坐标<br>        {<br>            s++;//那么很显然，这个坐标需要我们标记，s代表标记到多少个极大值点<br>            a[s]=i;//将当前坐标标记至a数组<br>            k=pos[i].y;//最大值更新<br>        }<br>    }//ok,这就是贪心策略了<br>    for(i=s;i&gt;1;i—)//仍然地，还要从大往小检索。之所以从s开始，是因为我们要输出的极大值点在之前已经用s累计过了<br>    {<br>        printf(“(%d,%d),”,pos[a[i]].x,pos[a[i]].y);<br>    }<br>    printf(“(%d,%d)”,pos[a[i]].x,pos[a[i]].y);//特殊处理最后的逗号<br>    return 0;<br>}</b.x;></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">普及/提高-</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">贪心</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/洛谷OJ题解//" class="article-tag-list-link color2">洛谷OJ题解</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/07/17/洛谷-P2772 寻找平面上的极大点/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/12/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><a class="page-number" href="/page/12/">12</a><span class="page-number current">13</span><a class="page-number" href="/page/14/">14</a><a class="extend next" rel="next" href="/page/14/">Next &raquo;</a>
@@ -1586,22 +1583,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
     </div>
 
 </div>
-  </div>
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-        tex2jax: {
-            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
-            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
-            processEscapes: true
-        }
-    });
-    MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax();
-        for (var i = 0; i < all.length; ++i)
-            all[i].SourceElement().parentNode.className += ' has-jax';
-    });
-</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
-<!-- script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  </div><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </body>
 </html>

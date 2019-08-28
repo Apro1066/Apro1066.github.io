@@ -168,6 +168,206 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-洛谷-P2285 [HNOI2004]打鼹鼠" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/08/28/洛谷-P2285 [HNOI2004]打鼹鼠/">洛谷-P2285 [HNOI2004]打鼹鼠</a>
+    </h1>
+  
+
+        
+        <a href="/2019/08/28/洛谷-P2285 [HNOI2004]打鼹鼠/" class="archive-article-date">
+  	<time datetime="2019-08-28T15:45:22.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-28</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p><del>一开始想用3维dp的，一想肯定爆。三维dp的状态定义是令$dp[i][j][k]$为机器人走到$(i,j)$时，消耗的时间为$k$时，能打到的最多鼹鼠量是多少。</del><br>令$dp[i]$表示到第$i$只鼹鼠，最多能抓多少只小鼠。很容易看出它能从第$i$个时间点前的任意一个时间点转移来，则：</p>
+<script type="math/tex; mode=display">dp[i]=min(dp[i],dp[j]+1)</script><p>你有没有发现，这不就是LIS吗？！是的，因为题目告诉我们<strong>时间按递增的顺序给出</strong>。<br>在任何时候，都至少能打死一只鼹鼠，所以任意$dp[i]=1$。<br>此题涉及能否到达，所以在转移前判断曼哈顿距离是否小于时间差。<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> inf 2e9+7</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> maxn 300001</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> n,cnt,head[maxn],s,dp[maxn][<span class="number">3</span>];</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">node</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="keyword">int</span> to,nxt;</span><br><span class="line">&#125;e[maxn&lt;&lt;<span class="number">1</span>];</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> u,<span class="keyword">int</span> v)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	e[++cnt].to=v;</span><br><span class="line">	e[cnt].nxt=head[u];</span><br><span class="line">	head[u]=cnt;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> i,<span class="keyword">int</span> fa)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">bool</span> <span class="title">f</span><span class="params">(<span class="number">0</span>)</span></span>;</span><br><span class="line">	<span class="keyword">register</span> <span class="keyword">int</span> j,p(inf);</span><br><span class="line">	<span class="keyword">for</span>(j=head[i];j;j=e[j].nxt)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="function"><span class="keyword">int</span> <span class="title">v</span><span class="params">(e[j].to)</span></span>;</span><br><span class="line">		<span class="keyword">if</span>(v==fa) <span class="keyword">continue</span>;</span><br><span class="line">		dfs(v,i);</span><br><span class="line">		dp[i][<span class="number">0</span>]+=min(dp[v][<span class="number">1</span>],min(dp[v][<span class="number">0</span>],dp[v][<span class="number">2</span>]));</span><br><span class="line">		dp[i][<span class="number">1</span>]+=min(dp[v][<span class="number">0</span>],dp[v][<span class="number">2</span>]);</span><br><span class="line">		dp[i][<span class="number">2</span>]+=min(dp[v][<span class="number">0</span>],dp[v][<span class="number">2</span>]);</span><br><span class="line">		p=min(p,dp[v][<span class="number">0</span>]-min(dp[v][<span class="number">2</span>],dp[v][<span class="number">0</span>]));<span class="comment">//表示其它儿子的总和</span></span><br><span class="line">	&#125;</span><br><span class="line">	dp[i][<span class="number">2</span>]+=p;<span class="comment">//最后再进行反悔操作</span></span><br><span class="line">	dp[i][<span class="number">0</span>]++;<span class="comment">//最后再进行放置信号塔操作 </span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">signed</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	ios::sync_with_stdio(<span class="literal">false</span>);</span><br><span class="line">	<span class="built_in">cin</span>.tie(<span class="number">0</span>);</span><br><span class="line">	<span class="built_in">cout</span>.tie(<span class="number">0</span>);</span><br><span class="line">	<span class="keyword">register</span> <span class="keyword">int</span> i,j;</span><br><span class="line">	<span class="built_in">cin</span>&gt;&gt;n;</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=n<span class="number">-1</span>;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">int</span> u,v;</span><br><span class="line">		<span class="built_in">cin</span>&gt;&gt;u&gt;&gt;v;</span><br><span class="line">		add(u,v);</span><br><span class="line">		add(v,u);</span><br><span class="line">	&#125;</span><br><span class="line">	dfs(<span class="number">1</span>,<span class="number">-1</span>);</span><br><span class="line">	<span class="built_in">cout</span>&lt;&lt;min(dp[<span class="number">1</span>][<span class="number">0</span>],dp[<span class="number">1</span>][<span class="number">2</span>])&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">提高+/省选-</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">动态规划</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">动态规划-线性dp</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">各省省选</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/洛谷OJ题解//" class="article-tag-list-link color2">洛谷OJ题解</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/08/28/洛谷-P2285 [HNOI2004]打鼹鼠/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-洛谷-P2899 [USACO08JAN]手机网络" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/08/28/洛谷-P2899 [USACO08JAN]手机网络/">洛谷-P2899 [USACO08JAN]手机网络</a>
+    </h1>
+  
+
+        
+        <a href="/2019/08/28/洛谷-P2899 [USACO08JAN]手机网络/" class="archive-article-date">
+  	<time datetime="2019-08-28T14:46:19.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-28</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>有一点像树的最大独立集。<br>首先对于每个节点$i$，都有如下3种选择：<br>不选自己，选儿子；<br>不选自己，选父亲；<br>我自己选我自己。<br>令$dp[i][0/1/2]$为节点$i$及其节点$i$的子树中全部被信号覆盖所需的最小信号塔数，$dp[i][0]$表示点$i$有信号塔，$dp[i][1]$为点$i$没有信号，也就是就是父亲有信号塔，$dp[i][2]$表示节点$i$被间接信号，也就是儿子有信号塔。<br><strong>1.$dp[i][0]$</strong><br>因为节点$i$有信息塔，所以对于$i$的子节点$son$，它可以没有信号塔，也可以有信号塔，也可以从$son$的子节点转移过来。因此：</p>
+<script type="math/tex; mode=display">dp[i][0]=∑min(dp[son][1],dp[son][0],dp[son][2])+1</script><p>这里$+1$是因为自己本身放置了一个信号塔。<br><strong>2.$dp[i][1]$</strong><br>因为节点$i$没有信息塔，靠的是节点$i$的父亲才有信号的，所以对于节点$i$的子节点$son$是不可能选父亲的。所以$dp[i][1]$可以从$dp[son][0]$转移过来（子节点有信息塔），也可以从$dp[son][2]$转移过来（子节点的儿子有信息塔）。</p>
+<script type="math/tex; mode=display">dp[i][1]=∑min(dp[son][0[,dp[son][2])</script><p><strong>3.$dp[i][2]$</strong><br>因为节点$i$没有信息塔，靠它儿子，所以节点$i$的子节点$son$也不可能选父亲，必然可以从$dp[son][0]$转移过来，也可以从$dp[son][2]$转移过来。</p>
+<script type="math/tex; mode=display">dp[i][2]=∑min(dp[son][0],dp[son][2])</script><p>很快会发现，如果的确是这样的话，如果$dp[i][2]$<strong>全</strong>从$dp[son][2]$转移过来，也就是若<strong>恒有</strong>$dp[son][2] \leq dp[son][0]$，<strong>就意味着节点i的所有子节点都没有信息塔！</strong>（<del>那不就凉了</del>）怎么办？<br>所以我们要设立一个<strong>反悔机制</strong>。<strong>我只需要一个儿子选</strong>。只需要用$p$来记录每一次$dp[son][0]-min(dp[son][2],dp[son][0])$，这样就保证，<strong>就算恒有$dp[son][2] \leq dp[son][0]$，也一定有一个是儿子选了的</strong>，如果不选$dp[son][2]$，最后$p$的状态也为$0$。若不信，我们做个推导：<br>记$p=min(p,dp[son][0]-min(dp[son][0],dp[son][2]))$</p>
+<p>$dp[i][2]=min(dp[son][0],dp[son][2])+p$</p>
+<p>$=min(dp[son][0],dp[son][2])+dp[son][0]-min(dp[son][0],dp[son][2])$<br>若$dp[son][2] \leq dp[son][0]$恒成立<strong>（注意我说的是恒成立，意思是说$dp[i][2]$全是从$dp[son][2]$转移过来）</strong><br>原式$=dp[son][2]+dp[son][0]-dp[son][2]$</p>
+<p>$=dp[son][0]$</p>
+<p><strong>也就是把$dp[son][2]$强制转换成了$dp[son][0]$！</strong><br>若$dp[son][2]&gt;dp[son][0]$<br>原式$=dp[son][0]+dp[son][0]-dp[son][0]$</p>
+<p>$=dp[son][0]$</p>
+<p>也就是说并不影响$dp[son][0]$的正常取值！<br>最后答案为$min(dp[root][0],dp[root][2])$。<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> inf 2e9+7</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> maxn 300001</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> n,cnt,head[maxn],s,dp[maxn][<span class="number">3</span>];</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">node</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="keyword">int</span> to,nxt;</span><br><span class="line">&#125;e[maxn&lt;&lt;<span class="number">1</span>];</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> u,<span class="keyword">int</span> v)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	e[++cnt].to=v;</span><br><span class="line">	e[cnt].nxt=head[u];</span><br><span class="line">	head[u]=cnt;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> i,<span class="keyword">int</span> fa)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">bool</span> <span class="title">f</span><span class="params">(<span class="number">0</span>)</span></span>;</span><br><span class="line">	<span class="keyword">register</span> <span class="keyword">int</span> j,p(inf);</span><br><span class="line">	<span class="keyword">for</span>(j=head[i];j;j=e[j].nxt)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="function"><span class="keyword">int</span> <span class="title">v</span><span class="params">(e[j].to)</span></span>;</span><br><span class="line">		<span class="keyword">if</span>(v==fa) <span class="keyword">continue</span>;</span><br><span class="line">		dfs(v,i);</span><br><span class="line">		dp[i][<span class="number">0</span>]+=min(dp[v][<span class="number">1</span>],min(dp[v][<span class="number">0</span>],dp[v][<span class="number">2</span>]));</span><br><span class="line">		dp[i][<span class="number">1</span>]+=min(dp[v][<span class="number">0</span>],dp[v][<span class="number">2</span>]);</span><br><span class="line">		dp[i][<span class="number">2</span>]+=min(dp[v][<span class="number">0</span>],dp[v][<span class="number">2</span>]);</span><br><span class="line">		p=min(p,dp[v][<span class="number">0</span>]-min(dp[v][<span class="number">2</span>],dp[v][<span class="number">0</span>]));<span class="comment">//表示其它儿子的总和</span></span><br><span class="line">	&#125;</span><br><span class="line">	dp[i][<span class="number">2</span>]+=p;<span class="comment">//最后再进行反悔操作</span></span><br><span class="line">	dp[i][<span class="number">0</span>]++;<span class="comment">//最后再进行放置信号塔操作 </span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">signed</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	ios::sync_with_stdio(<span class="literal">false</span>);</span><br><span class="line">	<span class="built_in">cin</span>.tie(<span class="number">0</span>);</span><br><span class="line">	<span class="built_in">cout</span>.tie(<span class="number">0</span>);</span><br><span class="line">	<span class="keyword">register</span> <span class="keyword">int</span> i,j;</span><br><span class="line">	<span class="built_in">cin</span>&gt;&gt;n;</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=n<span class="number">-1</span>;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">int</span> u,v;</span><br><span class="line">		<span class="built_in">cin</span>&gt;&gt;u&gt;&gt;v;</span><br><span class="line">		add(u,v);</span><br><span class="line">		add(v,u);</span><br><span class="line">	&#125;</span><br><span class="line">	dfs(<span class="number">1</span>,<span class="number">-1</span>);</span><br><span class="line">	<span class="built_in">cout</span>&lt;&lt;min(dp[<span class="number">1</span>][<span class="number">0</span>],dp[<span class="number">1</span>][<span class="number">2</span>])&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">提高+/省选-</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">动态规划</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">动态规划-树形dp</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/洛谷OJ题解//" class="article-tag-list-link color2">洛谷OJ题解</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/08/28/洛谷-P2899 [USACO08JAN]手机网络/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-[高中数学必修4]齐次式" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -942,194 +1142,6 @@
 
 
   
-    <article id="post-洛谷-P2014 选课" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/08/22/洛谷-P2014 选课/">洛谷-P2014 选课</a>
-    </h1>
-  
-
-        
-        <a href="/2019/08/22/洛谷-P2014 选课/" class="archive-article-date">
-  	<time datetime="2019-08-22T13:11:22.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-22</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>树形dp。<br>每门课的直接先修课最多只有$1$门，将每门课的先修课与其相连，将会构成一颗或者多颗树。所以这会是一个森林。我们可以建立一个$0$号节点，将所有树的根节点都连向$0$号节点。$0$号节点的学分为$0$，并且允许选修的课数量要自加$1$。这样做的好处就是避免了最后还要链接每个根节点。然后我们会很方便对这棵以$0$为根节点的数进行树形dp。<br>对于节点$i$，它可以是$0$个或者$1$个或者多个节点的先修课，也就是父节点。令$dp[i][j]$为节点$i$选择$j$门课（包含自身）能获得的最大学分。选择节点$i$的子节点的前提是必须要选择节点$i$，所以令$dp[i][1]=value[i]$，其中$value[i]$为对于节点$i$的学分。<br>用邻接表存图后，遍历节点i的所有子节点。当遍历到节点$son$时（$son$是$i$的子节点，下面的代码中用$v$表示$son$），假设此时已经得到了所有$dp[son][j]$的值。由于此时$dp[i][j]$还没有$son$节点及其子树的学分，不妨通过$son$节点来更新$i$节点。则：</p>
-<script type="math/tex; mode=display">dp[i][j]=max(dp[i][j],dp[i][j-k]+dp[son][k])</script><p>其中$k$为枚举选多少个节点，此时$1 \leq j \leq m+1，0 \leq k \leq j-1$。为什么$k$取不到$j$呢？因为$j-k=0$，就说明节点$i$无法取到！$i$是$son$的先修课，怎么可能取不到？所以$k<j$。 $k$是枚举多少个节点，要注意的是$dp[i][j]$是从$dp[i][j-k]$得到的，此时$j$要逆序枚举，因为如果顺推，在$dp[i][j]$上，显然已经转移过$dp[i][j-k]$，所以要保证更新$dp[i][j]$时$dp[i][j-k]$没被更新。 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> n,m,s,head[<span class="number">1001</span>],cnt,dp[<span class="number">1001</span>][<span class="number">1001</span>],value[<span class="number">1001</span>];</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">node</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="keyword">int</span> nxt,to;</span><br><span class="line">&#125;e[<span class="number">2001</span>];</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> u,<span class="keyword">int</span> v)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	e[++cnt].to=v;</span><br><span class="line">	e[cnt].nxt=head[u];</span><br><span class="line">	head[u]=cnt;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> i)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	dp[i][<span class="number">1</span>]=value[i];</span><br><span class="line">	<span class="keyword">register</span> <span class="keyword">int</span> j,k,u;</span><br><span class="line">	<span class="keyword">for</span>(u=head[i];u;u=e[u].nxt)<span class="comment">//遍历u的所有子节点 </span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="function"><span class="keyword">int</span> <span class="title">v</span><span class="params">(e[u].to)</span></span>;<span class="comment">//子节点 </span></span><br><span class="line">		dfs(v);</span><br><span class="line">		<span class="keyword">for</span>(j=m;j&gt;=<span class="number">1</span>;j--)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">for</span>(k=<span class="number">1</span>;k&lt;=j<span class="number">-1</span>;k++)</span><br><span class="line">			&#123;</span><br><span class="line">				dp[i][j]=max(dp[i][j],dp[i][j-k]+dp[v][k]);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">signed</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	ios::sync_with_stdio(<span class="literal">false</span>);</span><br><span class="line">	<span class="built_in">cin</span>.tie(<span class="number">0</span>);</span><br><span class="line">	<span class="built_in">cout</span>.tie(<span class="number">0</span>);</span><br><span class="line">	<span class="keyword">register</span> <span class="keyword">int</span> i,j;</span><br><span class="line">	<span class="built_in">cin</span>&gt;&gt;n&gt;&gt;m;</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">int</span> u;</span><br><span class="line">		<span class="built_in">cin</span>&gt;&gt;u&gt;&gt;value[i];</span><br><span class="line">		add(u,i);</span><br><span class="line">	&#125;</span><br><span class="line">	m++;<span class="comment">//由于0号节点的参与，m+1 </span></span><br><span class="line">	dfs(<span class="number">0</span>);</span><br><span class="line">	<span class="built_in">cout</span>&lt;&lt;dp[<span class="number">0</span>][m]&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></j$。></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">提高+/省选-</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">动态规划</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">动态规划-树形dp</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/洛谷OJ题解//" class="article-tag-list-link color2">洛谷OJ题解</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/08/22/洛谷-P2014 选课/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-洛谷-P4084 [USACO17DEC]Barn Painting" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/08/21/洛谷-P4084 [USACO17DEC]Barn Painting/">洛谷-P4084 [USACO17DEC]Barn Painting</a>
-    </h1>
-  
-
-        
-        <a href="/2019/08/21/洛谷-P4084 [USACO17DEC]Barn Painting/" class="archive-article-date">
-  	<time datetime="2019-08-21T15:46:37.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-21</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>树形dp好题。和没有丧尸的舞会那题有点像。<br>令$dp[i][j]$为在节点$i$染第$j$种颜色的方案数，把$1$号节点看成根。<br>由于相邻的点颜色不能相同，所以转移的时候只能由颜色不同的转移过来。由乘法原理，当前节点i的方案数应为其子树方案数的乘积。</p>
-<script type="math/tex; mode=display">dp[i][1]= \prod (dp[son][2]+dp[son][3])</script><script type="math/tex; mode=display">dp[i][2]= \prod (dp[son][1]+dp[son][3])</script><script type="math/tex; mode=display">dp[i][3]= \prod (dp[son][1]+dp[son][2])</script><p>对于一个最初没有涂色的点i，刚遍历到的时候设置点i的初始值$dp[i][1]=dp[i][2]=dp[i][3]=1$。如果点$i$已经被上色了，那么只有被上的颜色的数组才能为$1$。<br>最后答案就是$dp[root][1]+dp[root][2]+dp[root][3]$了。<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ll long long int </span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> mod 1000000007</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> maxn 100001</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line">ll n,m,s,cnt,head[maxn],color[maxn];</span><br><span class="line">ll dp[maxn][<span class="number">4</span>];</span><br><span class="line"><span class="keyword">bool</span> vis[maxn];</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">node</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	ll nxt,to;</span><br><span class="line">&#125;e[maxn&lt;&lt;<span class="number">1</span>];</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> u,<span class="keyword">int</span> v)</span><span class="comment">//前向星存图 </span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	e[++cnt].to=v;</span><br><span class="line">	e[cnt].nxt=head[u];</span><br><span class="line">	head[u]=cnt;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> i)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	vis[i]=<span class="number">1</span>;</span><br><span class="line">	<span class="keyword">if</span>(color[i])<span class="comment">//如果该节点i已经上过色 </span></span><br><span class="line">	&#123;</span><br><span class="line">		dp[i][color[i]]=<span class="number">1</span>;<span class="comment">//该种颜色都有，其他2种方案数为0 </span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span><span class="comment">//如果没上过色 </span></span><br><span class="line">	&#123;</span><br><span class="line">		dp[i][<span class="number">1</span>]=<span class="number">1</span>;<span class="comment">//其他颜色都有可能被上 </span></span><br><span class="line">		dp[i][<span class="number">2</span>]=<span class="number">1</span>;</span><br><span class="line">		dp[i][<span class="number">3</span>]=<span class="number">1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">register</span> ll j=head[i];j;j=e[j].nxt)<span class="comment">//找节点i的子节点 </span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="function"><span class="keyword">int</span> <span class="title">v</span><span class="params">(e[j].to)</span></span>;</span><br><span class="line">		<span class="keyword">if</span>(vis[v]==<span class="number">0</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			dfs(v);</span><br><span class="line">			dp[i][<span class="number">1</span>]=dp[i][<span class="number">1</span>]*((dp[v][<span class="number">2</span>]+dp[v][<span class="number">3</span>])%mod)%mod;</span><br><span class="line">			dp[i][<span class="number">2</span>]=dp[i][<span class="number">2</span>]*((dp[v][<span class="number">1</span>]+dp[v][<span class="number">3</span>])%mod)%mod;</span><br><span class="line">			dp[i][<span class="number">3</span>]=dp[i][<span class="number">3</span>]*((dp[v][<span class="number">1</span>]+dp[v][<span class="number">2</span>])%mod)%mod;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">signed</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	ios::sync_with_stdio(<span class="literal">false</span>);</span><br><span class="line">	<span class="built_in">cin</span>.tie(<span class="number">0</span>);</span><br><span class="line">	<span class="built_in">cout</span>.tie(<span class="number">0</span>);</span><br><span class="line">	<span class="keyword">register</span> ll i,j,u,v;</span><br><span class="line">	<span class="built_in">cin</span>&gt;&gt;n&gt;&gt;m;</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=n<span class="number">-1</span>;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">cin</span>&gt;&gt;u&gt;&gt;v;</span><br><span class="line">		add(u,v);<span class="comment">//无向 </span></span><br><span class="line">		add(v,u);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=m;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">cin</span>&gt;&gt;u&gt;&gt;v;</span><br><span class="line">		color[u]=v;<span class="comment">//u为节点，v为颜色种类 </span></span><br><span class="line">	&#125;</span><br><span class="line">	dfs(<span class="number">1</span>);<span class="comment">//令节点1为根节点 </span></span><br><span class="line">	<span class="built_in">cout</span>&lt;&lt;(dp[<span class="number">1</span>][<span class="number">1</span>]+dp[<span class="number">1</span>][<span class="number">2</span>]+dp[<span class="number">1</span>][<span class="number">3</span>])%mod&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">提高+/省选-</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">动态规划</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">动态规划-树形dp</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/洛谷OJ题解//" class="article-tag-list-link color2">洛谷OJ题解</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/08/21/洛谷-P4084 [USACO17DEC]Barn Painting/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/14/">14</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
@@ -1579,22 +1591,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
     </div>
 
 </div>
-  </div>
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-        tex2jax: {
-            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
-            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
-            processEscapes: true
-        }
-    });
-    MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax();
-        for (var i = 0; i < all.length; ++i)
-            all[i].SourceElement().parentNode.className += ' has-jax';
-    });
-</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
-<!-- script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  </div><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </body>
 </html>
