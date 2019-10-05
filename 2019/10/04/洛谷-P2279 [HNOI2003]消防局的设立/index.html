@@ -6,15 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives: 2019 | A.pro&#39;s blog</title>
+  <title>洛谷-P2279 [HNOI2003]消防局的设立 | A.pro&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="A.pro&#39;s blog">
-<meta property="og:url" content="http://yoursite.com/archives/2019/index.html">
+  <meta name="description" content="思路其实和P2899 [USACO08JAN]手机网络有点类似，有兴趣的同学可以去看一看，该题我也写了题解。链接1链接2题目大意是给出一个树，一个消防站能够覆盖与他距离$≤2$的点。求覆盖整个树的所有节点至少需要多少个消防站。树形dp的常规操作是每个节点都可以成为根节点，然后在这个节点搜索它的子树获取最优解。这个我在P2016那题说过。我们根据P2899那题的经验，对一颗子树划分为5个状态。令$d">
+<meta name="keywords" content="提高+&#x2F;省选-,动态规划,动态规划-树形dp,各省省选">
+<meta property="og:type" content="article">
+<meta property="og:title" content="洛谷-P2279 [HNOI2003]消防局的设立">
+<meta property="og:url" content="http://yoursite.com/2019/10/04/洛谷-P2279 [HNOI2003]消防局的设立/index.html">
 <meta property="og:site_name" content="A.pro&#39;s blog">
+<meta property="og:description" content="思路其实和P2899 [USACO08JAN]手机网络有点类似，有兴趣的同学可以去看一看，该题我也写了题解。链接1链接2题目大意是给出一个树，一个消防站能够覆盖与他距离$≤2$的点。求覆盖整个树的所有节点至少需要多少个消防站。树形dp的常规操作是每个节点都可以成为根节点，然后在这个节点搜索它的子树获取最优解。这个我在P2016那题说过。我们根据P2899那题的经验，对一颗子树划分为5个状态。令$d">
 <meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-10-05T13:28:31.564Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="A.pro&#39;s blog">
+<meta name="twitter:title" content="洛谷-P2279 [HNOI2003]消防局的设立">
+<meta name="twitter:description" content="思路其实和P2899 [USACO08JAN]手机网络有点类似，有兴趣的同学可以去看一看，该题我也写了题解。链接1链接2题目大意是给出一个树，一个消防站能够覆盖与他距离$≤2$的点。求覆盖整个树的所有节点至少需要多少个消防站。树形dp的常规操作是每个节点都可以成为根节点，然后在这个节点搜索它的子树获取最优解。这个我在P2016那题说过。我们根据P2899那题的经验，对一颗子树划分为5个状态。令$d">
   
     <link rel="alternative" href="/atom.xml" title="A.pro&#39;s blog" type="application/atom+xml">
   
@@ -166,97 +171,47 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-洛谷-P2279 [HNOI2003]消防局的设立" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/10/05/洛谷-P2458 [SDOI2006]保安站岗/" class="archive-article-date">
-  	<time datetime="2019-10-05T12:54:32.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-05</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/10/05/洛谷-P2458 [SDOI2006]保安站岗/">洛谷-P2458 [SDOI2006]保安站岗</a>
+    <h1 class="article-title" itemprop="name">
+      洛谷-P2279 [HNOI2003]消防局的设立
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">提高+/省选-</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">动态规划</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">动态规划-树形dp</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">各省省选</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/洛谷OJ题解//" class="article-tag-list-link color2">洛谷OJ题解</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/10/04/洛谷-P2279 [HNOI2003]消防局的设立/" class="archive-article-date">
+        
+        <a href="/2019/10/04/洛谷-P2279 [HNOI2003]消防局的设立/" class="archive-article-date">
   	<time datetime="2019-10-04T15:36:22.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-04</time>
 </a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/10/04/洛谷-P2279 [HNOI2003]消防局的设立/">洛谷-P2279 [HNOI2003]消防局的设立</a>
-    </h1>
-  
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>其实和<a href="https://www.luogu.org/problem/P2899" target="_blank" rel="noopener">P2899 [USACO08JAN]手机网络</a>有点类似，有兴趣的同学可以去看一看，该题我也写了题解。<a href="https://blog.csdn.net/Apro1066/article/details/100127421" target="_blank" rel="noopener">链接1</a><a href="https://apro1066.top/2019/08/28/%E6%B4%9B%E8%B0%B7-P2899%20%5BUSACO08JAN%5D%E6%89%8B%E6%9C%BA%E7%BD%91%E7%BB%9C/" target="_blank" rel="noopener">链接2</a><br>题目大意是给出一个树，一个消防站能够覆盖与他距离$≤2$的点。求覆盖整个树的所有节点至少需要多少个消防站。<br>树形dp的常规操作是<strong>每个节点都可以成为根节点，然后在这个节点搜索它的子树获取最优解</strong>。这个我在P2016那题说过。我们根据P2899那题的经验，对一颗子树划分为5个状态。<br>令$dp[i][0/1/2/3/4]$为节点$i$及其节点$i$的子树中全部被覆盖所需的最小消防局数。$dp[i][0]$为节点$i$父亲的父亲及以下节点完全被覆盖所需的最小代价，$dp[i][1]$为节点$i$的父亲及以下节点完全被覆盖所需的最小代价，$dp[i][2]$为节点$i$及以下节点完全被覆盖所需要的最小代价。显然，这3种情况是节点i一定被覆盖的情况。<br>$dp[i][3]$为节点$i$的儿子及以下节点完全被覆盖所需最小代价，$dp[i][4]$为节点$i$儿子的儿子及以下节点完全被覆盖所需的最小代价。显然，这2种情况是节点i不一定被覆盖的情况。是不是和P2899迷之相似？这样感觉就对了！<br>简段洁说，$dp[i][0]$:选$i$为消防局；$dp[i][1]$:至少选$i$的一个儿子为消防局；$dp[i][2]$:至少选$i$的一个孙子为消防局。这3种状态显然节点$i$被覆盖。$dp[i][3]$:选$i$的所有儿子被覆盖;$dp[i][4]$:选$i$的所有孙子被覆盖。这2种状态节点$i$不一定被覆盖。<br><strong>1.1.$dp[i][0]$</strong><br>因为节点$i$有消防局，所以孙子会被覆盖到。要求孙子全部被覆盖，儿子0-4的状态都满足。所以：</p>
+<script type="math/tex; mode=display">dp[i][0]=min( \sum dp[son][0...4])+1</script><p>这里$+1$是因为本身放了一个消防局。<br><strong>1.2.$dp[i][1]$</strong><br>​选了儿子中的一个节点，所以其他儿子也会被覆盖到。但是其他儿子的儿子无法被覆盖到。所以在转移时，选取一个点放消防站，并要求$i$的儿子被覆盖到。</p>
+<script type="math/tex; mode=display">dp[i][1]=min(dp[son1][0]+ \sum (son1≠son2)min(dp[son2][0...3]))</script><p><strong>1.3.$dp[i][2]$</strong><br>同理有：</p>
+<script type="math/tex; mode=display">dp[i][2]=min(dp[son1][1]+ \sum (son1≠son2)min(dp[son2][0...2]))</script><p><strong>1.4.$dp[i][3]$</strong><br>要让节点$i$的儿子都被覆盖，就是让它们本身都覆盖。</p>
+<script type="math/tex; mode=display">dp[i][3]= \sum dp[son][0...2]</script><p><strong>1.5.$dp[i][4]$</strong><br>同理有：</p>
+<script type="math/tex; mode=display">dp[i][4]= \sum dp[son][0...3]</script><h5 id="推好了！可是……特别的乱！多！烦！-那就看能不能合并吧。"><a href="#推好了！可是……特别的乱！多！烦！-那就看能不能合并吧。" class="headerlink" title="推好了！可是……特别的乱！多！烦！ 那就看能不能合并吧。"></a>推好了！可是……特别的乱！多！<del>烦！</del> 那就看能不能合并吧。</h5><p><strong>2.1.$dp[i][0],dp[i][3],dp[i][4]$</strong><br>$dp[i][0]$可以从4个儿子节点的状态里得到。但显然$dp[son][4]$是最优的。因为$dp[son][4]= \sum dp[grandson][0…3]$。<br>所以：</p>
+<script type="math/tex; mode=display">dp[i][0]=Σdp[son][4]</script><p>同理有：</p>
+<script type="math/tex; mode=display">dp[i][3]=Σdp[son][2]</script><script type="math/tex; mode=display">dp[i][4]=Σdp[son][3]</script><p><strong>状态0,3,4已经优化完成，事实上我们还可以利用它们进行优化状态1,2。<br>2.2.$dp[i][1],dp[i][2]$</strong></p>
+<p>$dp[i][1]=min(dp[son1][0]+Σ(son1!=son2)dp[son2][0…3])$</p>
+<p>=<strong>$dp[i][4]+min(dp[son1][0]-dp[son1][3])$</strong></p>
+<p>同理有：</p>
+<p>$dp[i][2]=min(dp[son1][1]+Σ(son1≠son2)min(dp[son2][0…2]))$</p>
+<p>=$dp[i][3]+min(dp[son1][2]-dp[son1][1])$<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> inf 2e9+7</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> N 1001</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> n,cnt,head[N],s,dp[N][<span class="number">5</span>];</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">node</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="keyword">int</span> to,nxt;</span><br><span class="line">&#125;e[N&lt;&lt;<span class="number">1</span>];</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> u,<span class="keyword">int</span> v)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	e[++cnt].to=v;</span><br><span class="line">	e[cnt].nxt=head[u];</span><br><span class="line">	head[u]=cnt;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> u,<span class="keyword">int</span> fa)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	dp[u][<span class="number">1</span>]=inf;</span><br><span class="line">	dp[u][<span class="number">2</span>]=inf;</span><br><span class="line">	<span class="keyword">register</span> <span class="keyword">int</span> j,i;</span><br><span class="line">	<span class="keyword">for</span>(i=head[u];i;i=e[i].nxt)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="function"><span class="keyword">int</span> <span class="title">v</span><span class="params">(e[i].to)</span></span>;</span><br><span class="line">		<span class="keyword">if</span>(v==fa) <span class="keyword">continue</span>;</span><br><span class="line">		dfs(v,u);</span><br><span class="line">		dp[u][<span class="number">0</span>]+=dp[v][<span class="number">4</span>];</span><br><span class="line">		dp[u][<span class="number">3</span>]+=dp[v][<span class="number">2</span>];</span><br><span class="line">		dp[u][<span class="number">4</span>]+=dp[v][<span class="number">3</span>];</span><br><span class="line">		dp[u][<span class="number">2</span>]=min(dp[u][<span class="number">2</span>],dp[v][<span class="number">1</span>]-dp[v][<span class="number">2</span>]);</span><br><span class="line">		dp[u][<span class="number">1</span>]=min(dp[u][<span class="number">1</span>],dp[v][<span class="number">0</span>]-dp[v][<span class="number">3</span>]);</span><br><span class="line">		</span><br><span class="line">	&#125;</span><br><span class="line">	dp[u][<span class="number">0</span>]++;</span><br><span class="line">	dp[u][<span class="number">2</span>]+=dp[u][<span class="number">3</span>];</span><br><span class="line">	dp[u][<span class="number">1</span>]+=dp[u][<span class="number">4</span>];</span><br><span class="line">	dp[u][<span class="number">1</span>]=min(dp[u][<span class="number">1</span>],dp[u][<span class="number">0</span>]);</span><br><span class="line">	dp[u][<span class="number">2</span>]=min(dp[u][<span class="number">2</span>],dp[u][<span class="number">1</span>]);</span><br><span class="line">	dp[u][<span class="number">3</span>]=min(dp[u][<span class="number">3</span>],dp[u][<span class="number">2</span>]);</span><br><span class="line">	dp[u][<span class="number">4</span>]=min(dp[u][<span class="number">4</span>],dp[u][<span class="number">3</span>]);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">signed</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	ios::sync_with_stdio(<span class="literal">false</span>);</span><br><span class="line">	<span class="built_in">cin</span>.tie(<span class="number">0</span>);</span><br><span class="line">	<span class="built_in">cout</span>.tie(<span class="number">0</span>);</span><br><span class="line">	<span class="keyword">register</span> <span class="keyword">int</span> i,j;</span><br><span class="line">	<span class="built_in">cin</span>&gt;&gt;n;</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">2</span>;i&lt;=n;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">int</span> u;</span><br><span class="line">		<span class="built_in">cin</span>&gt;&gt;u;</span><br><span class="line">		add(u,i);</span><br><span class="line">		add(i,u);</span><br><span class="line">	&#125;</span><br><span class="line">	dfs(<span class="number">1</span>,<span class="number">-1</span>);</span><br><span class="line">	<span class="built_in">cout</span>&lt;&lt;dp[<span class="number">1</span>][<span class="number">2</span>]&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 
-        <div class="article-info info-on-right">
-          
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -280,7 +235,7 @@
 		</ul>
 	</div>
 
-          
+      
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
@@ -293,476 +248,125 @@
 	</div>
 
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/10/04/洛谷-P2279 [HNOI2003]消防局的设立/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/10/03/洛谷-P1736 创意吃鱼法/" class="archive-article-date">
-  	<time datetime="2019-10-03T15:34:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-03</time>
-</a>
+<nav id="article-nav">
+  
+    <a href="/2019/10/05/洛谷-P2458 [SDOI2006]保安站岗/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          洛谷-P2458 [SDOI2006]保安站岗
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/10/03/洛谷-P1736 创意吃鱼法/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">洛谷-P1736 创意吃鱼法</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/10/03/洛谷-P1736 创意吃鱼法/">洛谷-P1736 创意吃鱼法</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">提高+/省选-</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">搜索</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">动态规划</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">动态规划-线性dp</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">搜索-记忆化搜索</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/洛谷OJ题解//" class="article-tag-list-link color2">洛谷OJ题解</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#思路"><span class="toc-number">1.</span> <span class="toc-text">思路</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#推好了！可是……特别的乱！多！烦！-那就看能不能合并吧。"><span class="toc-number">1.0.0.1.</span> <span class="toc-text">推好了！可是……特别的乱！多！烦！ 那就看能不能合并吧。</span></a></li></ol></li></ol>
+                    </div>
+                </span>
+            </div>
         </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/10/03/洛谷-P3406 海底高铁/" class="archive-article-date">
-  	<time datetime="2019-10-03T12:53:24.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-03</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/10/03/洛谷-P3406 海底高铁/">洛谷-P3406 海底高铁</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">普及/提高-</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">模拟</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/洛谷OJ题解//" class="article-tag-list-link color2">洛谷OJ题解</a>
-        		</li>
-      		
-		</ul>
-	</div>
+        
+    </div>
+</aside>
 
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/08/28/洛谷-P2285 [HNOI2004]打鼹鼠/" class="archive-article-date">
-  	<time datetime="2019-08-28T15:45:22.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-28</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/08/28/洛谷-P2285 [HNOI2004]打鼹鼠/">洛谷-P2285 [HNOI2004]打鼹鼠</a>
-    </h1>
-  
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">提高+/省选-</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">动态规划</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">动态规划-线性dp</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">各省省选</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/洛谷OJ题解//" class="article-tag-list-link color2">洛谷OJ题解</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/08/28/洛谷-P2899 [USACO08JAN]手机网络/" class="archive-article-date">
-  	<time datetime="2019-08-28T14:46:19.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-28</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/08/28/洛谷-P2899 [USACO08JAN]手机网络/">洛谷-P2899 [USACO08JAN]手机网络</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">提高+/省选-</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">动态规划</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">动态规划-树形dp</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/洛谷OJ题解//" class="article-tag-list-link color2">洛谷OJ题解</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/08/27/[高中数学必修4]齐次式/" class="archive-article-date">
-  	<time datetime="2019-08-27T08:05:51.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-27</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/08/27/[高中数学必修4]齐次式/">【高中数学必修4】齐次式</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">数学/数论</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/数学//" class="article-tag-list-link color3">数学</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/08/25/洛谷-P2380 狗哥采矿/" class="archive-article-date">
-  	<time datetime="2019-08-25T15:44:22.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-25</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/08/25/洛谷-P2380 狗哥采矿/">洛谷-P2380 狗哥采矿</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">普及+/提高</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">动态规划</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">动态规划-线性dp</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/洛谷OJ题解//" class="article-tag-list-link color2">洛谷OJ题解</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/08/25/洛谷-P2308 添加括号/" class="archive-article-date">
-  	<time datetime="2019-08-25T14:13:40.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-25</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/08/25/洛谷-P2308 添加括号/">洛谷-P2308 添加括号</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">普及+/提高</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">动态规划</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">动态规划-区间dp</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/洛谷OJ题解//" class="article-tag-list-link color2">洛谷OJ题解</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/08/23/洛谷-P1336 最佳课题选择/" class="archive-article-date">
-  	<time datetime="2019-08-23T15:50:02.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-23</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/08/23/洛谷-P1336 最佳课题选择/">洛谷-P1336 最佳课题选择</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">普及+/提高</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">动态规划</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">动态规划-线性dp</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/洛谷OJ题解//" class="article-tag-list-link color2">洛谷OJ题解</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
   
-    </div></section>
   
 
-    
-    <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/archives/2019/page/2/">2</a><a class="page-number" href="/archives/2019/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/archives/2019/page/13/">13</a><a class="extend next" rel="next" href="/archives/2019/page/2/">Next &raquo;</a>
-    </nav>
+  
+
+  
+
   
 
 
@@ -786,8 +390,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: true,
