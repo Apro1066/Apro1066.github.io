@@ -168,6 +168,99 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-洛谷-P2853 [USACO06DEC]牛的野餐Cow Picnic" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/07/15/洛谷-P2853 [USACO06DEC]牛的野餐Cow Picnic/">洛谷-P2853 [USACO06DEC]牛的野餐Cow Picnic</a>
+    </h1>
+  
+
+        
+        <a href="/2019/07/15/洛谷-P2853 [USACO06DEC]牛的野餐Cow Picnic/" class="archive-article-date">
+  	<time datetime="2019-07-15T12:59:22.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-15</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>真的是一道练习图的遍历的好题。<br>题意：对每个奶牛所在的点跑一遍深度优先遍历，找到遍历的次数正好等于$k$（奶牛数）的点，输出这样的点的数量。<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> a[<span class="number">1001</span>][<span class="number">1001</span>],cow[<span class="number">1001</span>],n,m,k,s[<span class="number">1001</span>],vis[<span class="number">1001</span>],lxy;<span class="comment">//a是邻接矩阵，cow是奶牛的点，s为每个点被遍历的次数，vis判断点是否被访问过，lxy是答案 </span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> i)</span><span class="comment">//图的深度优先遍历 </span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	++s[i];<span class="comment">//这个点的遍历次数+1 </span></span><br><span class="line">	vis[i]=<span class="number">1</span>;<span class="comment">//标记已经访问过 </span></span><br><span class="line">	<span class="keyword">register</span> <span class="keyword">int</span> j;</span><br><span class="line">	<span class="keyword">for</span>(j=<span class="number">1</span>;j&lt;=n;j++)<span class="comment">//搜索当前点是否还有连边 </span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span>(vis[j]==<span class="number">0</span> &amp;&amp; a[i][j])<span class="comment">//没被访问过 &amp;&amp; 当前节点有连边 </span></span><br><span class="line">		&#123;</span><br><span class="line">			dfs(j);<span class="comment">//从j开始继续遍历 </span></span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">signed</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	ios::sync_with_stdio(<span class="literal">false</span>);</span><br><span class="line">	<span class="built_in">cin</span>.tie(<span class="number">0</span>);</span><br><span class="line">	<span class="built_in">cout</span>.tie(<span class="number">0</span>);</span><br><span class="line">	<span class="keyword">register</span> <span class="keyword">int</span> i,j;</span><br><span class="line">	<span class="built_in">cin</span>&gt;&gt;k&gt;&gt;n&gt;&gt;m;</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=k;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">cin</span>&gt;&gt;cow[i];</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=m;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">int</span> u,v;</span><br><span class="line">		<span class="built_in">cin</span>&gt;&gt;u&gt;&gt;v;</span><br><span class="line">		a[u][v]=<span class="number">1</span>;<span class="comment">//注意是有向边 </span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=k;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">memset</span>(vis,<span class="number">0</span>,<span class="keyword">sizeof</span>(vis));</span><br><span class="line">		dfs(cow[i]);<span class="comment">//对每个枚举的点进行深度优先遍历 </span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span>(s[i]==k)</span><br><span class="line">		&#123;</span><br><span class="line">			lxy++;<span class="comment">//统计答案 </span></span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">cout</span>&lt;&lt;lxy&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">普及/提高-</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">图论</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">图论-图的遍历</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/洛谷OJ题解//" class="article-tag-list-link color2">洛谷OJ题解</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/07/15/洛谷-P2853 [USACO06DEC]牛的野餐Cow Picnic/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-洛谷-P1498 南蛮图腾" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -993,99 +1086,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2019/06/08/CF1157A Reachable Numbers/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-洛谷-P3918 [国家集训队]特技飞行" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/06/07/洛谷-P3918 [国家集训队]特技飞行/">洛谷-P3918 [国家集训队]特技飞行</a>
-    </h1>
-  
-
-        
-        <a href="/2019/06/07/洛谷-P3918 [国家集训队]特技飞行/" class="archive-article-date">
-  	<time datetime="2019-06-07T14:46:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-07</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>首先看到总价值最大容易想到贪心或dp。<br>然后我们可以发现，对于同一个动作，做第一次是没有价值的，至少要做$2$次才有。<strong>但是同一动作的价值，无论进行几次都与$C_{i}$无关！也就是说，如果我们想要得到最大价值，只有改变动作的顺序，也就是改变极差。</strong><br>显然，<strong>极差越大价值越高</strong>。<br>那么，思路就很明显喽，贪心，将$C_{i}$从大往小排序，让$C$更大的动作尽量安排在两边，这样就使得它们相隔的时间最长。然后我们定义$l$和$r$来缩小范围。<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> n,k,s,a[<span class="number">1001</span>],l(<span class="number">1</span>),r;</span><br><span class="line"><span class="function"><span class="keyword">signed</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	ios::sync_with_stdio(<span class="literal">false</span>);</span><br><span class="line">	<span class="built_in">cin</span>.tie(<span class="number">0</span>);</span><br><span class="line">	<span class="built_in">cout</span>.tie(<span class="number">0</span>);</span><br><span class="line">	<span class="keyword">register</span> <span class="keyword">int</span> i;</span><br><span class="line">	<span class="built_in">cin</span>&gt;&gt;n&gt;&gt;k;</span><br><span class="line">	r=n;</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=k;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">cin</span>&gt;&gt;a[i];<span class="comment">//输入价值 </span></span><br><span class="line">	&#125;</span><br><span class="line">	sort(a+<span class="number">1</span>,a+k+<span class="number">1</span>,greater&lt;<span class="keyword">int</span>&gt;());<span class="comment">//从大往小排序 </span></span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=k;i++)<span class="comment">//扫一遍价值数组 </span></span><br><span class="line">	&#123;</span><br><span class="line">		s=s+a[i]*(r-l);<span class="comment">//加上价值，显然，这是一个动态的过程，一开始我们已经将价值从大往小排序</span></span><br><span class="line">		<span class="comment">//这时r-l也一定是最大的</span></span><br><span class="line">		r--;<span class="comment">//缩小范围 </span></span><br><span class="line">		l++;</span><br><span class="line">		<span class="keyword">if</span>(l&gt;=r)<span class="comment">//这个一定要加上，两个位置相同了就退掉，剩下的动作全部不要 </span></span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">cout</span>&lt;&lt;s&lt;&lt;<span class="built_in">endl</span>;<span class="comment">//最大价值 </span></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">贪心</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">普及+/提高</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">国家集训队</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/洛谷OJ题解//" class="article-tag-list-link color2">洛谷OJ题解</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/06/07/洛谷-P3918 [国家集训队]特技飞行/">展开全文 >></a>
         </p>
       
 

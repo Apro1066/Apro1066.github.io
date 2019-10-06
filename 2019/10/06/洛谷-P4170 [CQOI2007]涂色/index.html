@@ -6,15 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Tag: 提高/省选- | A.pro&#39;s blog</title>
+  <title>洛谷-P4170 [CQOI2007]涂色 | A.pro&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="A.pro&#39;s blog">
-<meta property="og:url" content="http://yoursite.com/tags/提高-省选/index.html">
+  <meta name="description" content="思路题目说把一段连续的木板涂成一个给定的颜色，那就不是说把一个区间改成一个指定的值吗？而且不难看出这是个合并类问题，所以可以考虑使用区间dp。令$dp[i][j]$为区间$[i,j]$修改为目标状态的最少步数。$dp[i][i]$初始为$1$，因为长度为$1$的区间肯定已经涂了一次颜色。 当$str[i]==str[j]$时，dp[i][j]=min(dp[i+1][j],dp[i][j-1])">
+<meta name="keywords" content="动态规划,动态规划-区间dp,提高&#x2F;省选-">
+<meta property="og:type" content="article">
+<meta property="og:title" content="洛谷-P4170 [CQOI2007]涂色">
+<meta property="og:url" content="http://yoursite.com/2019/10/06/洛谷-P4170 [CQOI2007]涂色/index.html">
 <meta property="og:site_name" content="A.pro&#39;s blog">
+<meta property="og:description" content="思路题目说把一段连续的木板涂成一个给定的颜色，那就不是说把一个区间改成一个指定的值吗？而且不难看出这是个合并类问题，所以可以考虑使用区间dp。令$dp[i][j]$为区间$[i,j]$修改为目标状态的最少步数。$dp[i][i]$初始为$1$，因为长度为$1$的区间肯定已经涂了一次颜色。 当$str[i]==str[j]$时，dp[i][j]=min(dp[i+1][j],dp[i][j-1])">
 <meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-10-06T16:11:11.412Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="A.pro&#39;s blog">
+<meta name="twitter:title" content="洛谷-P4170 [CQOI2007]涂色">
+<meta name="twitter:description" content="思路题目说把一段连续的木板涂成一个给定的颜色，那就不是说把一个区间改成一个指定的值吗？而且不难看出这是个合并类问题，所以可以考虑使用区间dp。令$dp[i][j]$为区间$[i,j]$修改为目标状态的最少步数。$dp[i][i]$初始为$1$，因为长度为$1$的区间肯定已经涂了一次颜色。 当$str[i]==str[j]$时，dp[i][j]=min(dp[i+1][j],dp[i][j-1])">
   
     <link rel="alternative" href="/atom.xml" title="A.pro&#39;s blog" type="application/atom+xml">
   
@@ -166,36 +171,38 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-洛谷-P4170 [CQOI2007]涂色" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/10/06/洛谷-P4170 [CQOI2007]涂色/" class="archive-article-date">
-  	<time datetime="2019-10-06T15:26:14.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-06</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/10/06/洛谷-P4170 [CQOI2007]涂色/">洛谷-P4170 [CQOI2007]涂色</a>
+    <h1 class="article-title" itemprop="name">
+      洛谷-P4170 [CQOI2007]涂色
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2019/10/06/洛谷-P4170 [CQOI2007]涂色/" class="archive-article-date">
+  	<time datetime="2019-10-06T15:26:14.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-06</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>题目说把一段连续的木板涂成一个给定的颜色，那就不是说把一个区间改成一个指定的值吗？而且不难看出这是个合并类问题，所以可以考虑使用区间dp。<br>令$dp[i][j]$为区间$[i,j]$修改为目标状态的最少步数。$dp[i][i]$初始为$1$，因为长度为$1$的区间肯定已经涂了一次颜色。</p>
+<p>当$str[i]==str[j]$时，<script type="math/tex">dp[i][j]=min(dp[i+1][j],dp[i][j-1])</script></p>
+<p>其他情况</p>
+<script type="math/tex; mode=display">dp[i][j]=min(dp[i][j],dp[i][k]+dp[k+1][j])</script><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> inf 2e9+7</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">char</span> str[<span class="number">51</span>];</span><br><span class="line"><span class="keyword">int</span> dp[<span class="number">51</span>][<span class="number">51</span>],n,s;</span><br><span class="line"><span class="function"><span class="keyword">signed</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	ios::sync_with_stdio(<span class="literal">false</span>);</span><br><span class="line">	<span class="built_in">cin</span>.tie(<span class="number">0</span>);</span><br><span class="line">	<span class="built_in">cout</span>.tie(<span class="number">0</span>);</span><br><span class="line">	<span class="keyword">register</span> <span class="keyword">int</span> i,j,k,l;</span><br><span class="line">	<span class="built_in">cin</span>&gt;&gt;str+<span class="number">1</span>;</span><br><span class="line">	n=<span class="built_in">strlen</span>(str+<span class="number">1</span>);</span><br><span class="line">	<span class="built_in">memset</span>(dp,inf,<span class="keyword">sizeof</span>(dp));</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		dp[i][i]=<span class="number">1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(l=<span class="number">2</span>;l&lt;=n;l++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">		&#123;</span><br><span class="line">			j=i+l<span class="number">-1</span>;</span><br><span class="line">			<span class="keyword">if</span>(j&gt;n) <span class="keyword">break</span>;<span class="comment">//这句话一定要加，否则会越字符串数组的界 </span></span><br><span class="line">			<span class="keyword">if</span>(str[i]==str[j])</span><br><span class="line">			&#123;</span><br><span class="line">				dp[i][j]=min(dp[i+<span class="number">1</span>][j],dp[i][j<span class="number">-1</span>]);</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">for</span>(k=i;k&lt;=j;k++)</span><br><span class="line">			&#123;</span><br><span class="line">				dp[i][j]=min(dp[i][j],dp[i][k]+dp[k+<span class="number">1</span>][j]);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">cout</span>&lt;&lt;dp[<span class="number">1</span>][n]&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -215,7 +222,7 @@
 		</ul>
 	</div>
 
-          
+      
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
@@ -228,78 +235,117 @@
 	</div>
 
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/10/06/洛谷-P4170 [CQOI2007]涂色/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/07/25/洛谷-P2278 [HNOI2003]操作系统/" class="archive-article-date">
-  	<time datetime="2019-07-25T12:45:24.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-25</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2019/10/05/洛谷-P2458 [SDOI2006]保安站岗/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">洛谷-P2458 [SDOI2006]保安站岗</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/07/25/洛谷-P2278 [HNOI2003]操作系统/">洛谷-P2278 [HNOI2003]操作系统</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据结构</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据结构-优先队列</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">各省省选</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">提高/省选-</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/洛谷OJ题解//" class="article-tag-list-link color2">洛谷OJ题解</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#思路"><span class="toc-number">1.</span> <span class="toc-text">思路</span></a></li></ol>
+                    </div>
+                </span>
+            </div>
         </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
+        
+    </div>
+</aside>
+
+
+
   
   
-    </div></section>
   
 
-    
+  
+
+  
+
+  
 
 
           </div>
@@ -322,9 +368,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: true,
 		toc_hide_index: true,
