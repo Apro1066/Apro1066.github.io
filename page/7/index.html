@@ -168,6 +168,102 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-洛谷-P1352 没有上司的舞会" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/07/19/洛谷-P1352 没有上司的舞会/">洛谷-P1352 没有上司的舞会</a>
+    </h1>
+  
+
+        
+        <a href="/2019/07/19/洛谷-P1352 没有上司的舞会/" class="archive-article-date">
+  	<time datetime="2019-07-19T15:15:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-19</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>超级棒的树形dp题目。<br>令$dp[i][0]$为以$i$为根的子树，且如果$i$不参加的最大快乐值；$dp[i][1]$为以$i$为根的子树，且如果$i$参加的最大快乐值。<br>显然，如果你不去，那你的下属想去就去。</p>
+<p><script type="math/tex">dp[i][0]=sum(max(dp[son][0],dp[son][1]))</script>其中son是i的儿子</p>
+<p>显然，如果你去了，那你的下属肯定不能去。</p>
+<p><script type="math/tex">dp[i][1]=sum(dp[son][0])+happy[i]</script> 其中son是i的儿子<br>答案为$max(dp[root][0],dp[root][1])$。<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> happy[<span class="number">6001</span>],a[<span class="number">6001</span>],dp[<span class="number">6001</span>][<span class="number">2</span>],n,m,s;</span><br><span class="line"><span class="keyword">bool</span> vis[<span class="number">6001</span>];</span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; son[<span class="number">6001</span>];</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> i)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">register</span> <span class="keyword">int</span> j;</span><br><span class="line">	dp[i][<span class="number">0</span>]=<span class="number">0</span>;</span><br><span class="line">	dp[i][<span class="number">1</span>]=happy[i];</span><br><span class="line">	<span class="keyword">for</span>(j=<span class="number">0</span>;j&lt;son[i].size();j++)<span class="comment">//遍历所有儿子节点 </span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">int</span> Son=son[i][j];</span><br><span class="line">		dfs(Son);</span><br><span class="line">		dp[i][<span class="number">0</span>]+=max(dp[Son][<span class="number">0</span>],dp[Son][<span class="number">1</span>]);</span><br><span class="line">		dp[i][<span class="number">1</span>]+=dp[Son][<span class="number">0</span>];</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">signed</span> <span class="title">main</span><span class="params">()</span> </span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	ios::sync_with_stdio(<span class="literal">false</span>);</span><br><span class="line">	<span class="built_in">cin</span>.tie(<span class="number">0</span>);</span><br><span class="line">	<span class="built_in">cout</span>.tie(<span class="number">0</span>);</span><br><span class="line">	<span class="keyword">register</span> <span class="keyword">int</span> i,j;</span><br><span class="line">	<span class="built_in">cin</span>&gt;&gt;n;</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">cin</span>&gt;&gt;happy[i];</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=n<span class="number">-1</span>;i++)<span class="comment">//叶子节点没有儿子 </span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">int</span> fa,Son;</span><br><span class="line">		<span class="built_in">cin</span>&gt;&gt;Son&gt;&gt;fa;</span><br><span class="line">		son[fa].push_back(Son);</span><br><span class="line">		vis[Son]=<span class="number">1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">int</span> root;</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=n;i++)<span class="comment">//找根 </span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span>(vis[i]==<span class="number">0</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			root=i;</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	dfs(root);</span><br><span class="line">	<span class="built_in">cout</span>&lt;&lt;max(dp[root][<span class="number">0</span>],dp[root][<span class="number">1</span>])&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">普及+/提高</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">动态规划</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">动态规划-树形dp</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/洛谷OJ题解//" class="article-tag-list-link color2">洛谷OJ题解</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/07/19/洛谷-P1352 没有上司的舞会/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-洛谷-P3609 [USACO17JAN]Hoof, Paper, Scissor" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -990,99 +1086,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2019/07/17/洛谷-P2434 [SDOI2005]区间/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-洛谷-P1816 忠诚" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/07/17/洛谷-P1816 忠诚/">洛谷-P1816 忠诚</a>
-    </h1>
-  
-
-        
-        <a href="/2019/07/17/洛谷-P1816 忠诚/" class="archive-article-date">
-  	<time datetime="2019-07-17T02:27:11.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-17</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>线段树求区间最小值的模版。<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ll long long </span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> maxn 100005</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line">ll <span class="keyword">int</span> a[maxn],tag[maxn&lt;&lt;<span class="number">2</span>],n,s,m,cnt;<span class="comment">//a是序列</span></span><br><span class="line">ll <span class="keyword">int</span> minx[maxn&lt;&lt;<span class="number">2</span>],maxx[maxn&lt;&lt;<span class="number">2</span>];<span class="comment">//区间最小值和最大值</span></span><br><span class="line"><span class="function"><span class="keyword">inline</span> ll <span class="keyword">int</span> <span class="title">leftnode</span><span class="params">(ll <span class="keyword">int</span> p)</span> </span>&#123;<span class="keyword">return</span> p&lt;&lt;<span class="number">1</span>;&#125;<span class="comment">//左节点（左儿子） </span></span><br><span class="line"><span class="function"><span class="keyword">inline</span> ll <span class="keyword">int</span> <span class="title">rightnode</span><span class="params">(ll <span class="keyword">int</span> p)</span> </span>&#123;<span class="keyword">return</span> p&lt;&lt;<span class="number">1</span>|<span class="number">1</span>;&#125;<span class="comment">//右节点（右儿子） </span></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">push_up</span><span class="params">(ll <span class="keyword">int</span> node)</span><span class="comment">//维护父子节点之间的逻辑关系（合并2个儿子节点） </span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	minx[node]=min(minx[leftnode(node)],minx[rightnode(node)]);<span class="comment">//最小值 </span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">build</span><span class="params">(ll <span class="keyword">int</span> node,ll <span class="keyword">int</span> start,ll <span class="keyword">int</span> end)</span><span class="comment">//建树，node是当前节点，start和end是范围（是指a数组的范围）</span></span></span><br><span class="line"><span class="function"></span>&#123;<span class="comment">//线段树自底向上回溯，所以线段树的叶子节点在会被赋值，如果左右区间相同（start==end），说明这是叶子节点 </span></span><br><span class="line">	<span class="keyword">if</span>(start==end)</span><br><span class="line">	&#123;</span><br><span class="line">		minx[node]=a[++cnt];<span class="comment">//区间最小值 </span></span><br><span class="line">		<span class="keyword">return</span>; </span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">register</span> ll <span class="keyword">int</span> mid=(start+end)&gt;&gt;<span class="number">1</span>;</span><br><span class="line">		build(leftnode(node),start,mid);</span><br><span class="line">		build(rightnode(node),mid+<span class="number">1</span>,end);<span class="comment">//把当前根节点的儿子分别当成新节点，继续建立线段树</span></span><br><span class="line">		push_up(node);<span class="comment">//维护线段树（区间和） </span></span><br><span class="line">		<span class="comment">//区间最小值与最大值代码类似 </span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function">ll <span class="keyword">int</span> <span class="title">query</span><span class="params">(ll <span class="keyword">int</span> node,ll <span class="keyword">int</span> start,ll <span class="keyword">int</span> end,ll <span class="keyword">int</span> cl,ll <span class="keyword">int</span> cr)</span><span class="comment">//node是当前节点，start和end是范围（是指a数组的范围），L和R是在区间[L,R]里计算和</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(start&gt;=cl &amp;&amp; end&lt;=cr)<span class="comment">//如果修改的区间包括当前遍历的区间 </span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">return</span> minx[node];<span class="comment">//返回这一区间的区间和 </span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">register</span> ll <span class="keyword">int</span> mid=(start+end)&gt;&gt;<span class="number">1</span>,s(<span class="number">99999999</span>);</span><br><span class="line">	<span class="comment">//push_down(node,start,end,mid);//标记下传</span></span><br><span class="line">	<span class="keyword">if</span>(cl&lt;=mid)</span><br><span class="line">	&#123;</span><br><span class="line">		s=min(s,query(leftnode(node),start,mid,cl,cr));</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span>(mid&lt;cr)</span><br><span class="line">	&#123;</span><br><span class="line">		s=min(s,query(rightnode(node),mid+<span class="number">1</span>,end,cl,cr));</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> s;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">signed</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	ios::sync_with_stdio(<span class="literal">false</span>);</span><br><span class="line">	<span class="built_in">cin</span>.tie(<span class="number">0</span>);</span><br><span class="line">	<span class="built_in">cout</span>.tie(<span class="number">0</span>);</span><br><span class="line">	<span class="keyword">register</span> ll <span class="keyword">int</span> i;</span><br><span class="line">	<span class="built_in">cin</span>&gt;&gt;n&gt;&gt;m;<span class="comment">//有n个数，m个操作 </span></span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">cin</span>&gt;&gt;a[i];</span><br><span class="line">	&#125;</span><br><span class="line">	build(<span class="number">1</span>,<span class="number">1</span>,n);<span class="comment">//我要建立一棵树，从1号节点出发，范围是a数组的1~n</span></span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=m;i++)<span class="comment">//处理m条操作 </span></span><br><span class="line">	&#123;</span><br><span class="line">		ll <span class="keyword">int</span> start,end;</span><br><span class="line">		<span class="built_in">cin</span>&gt;&gt;start&gt;&gt;end;</span><br><span class="line">		<span class="built_in">cout</span>&lt;&lt;query(<span class="number">1</span>,<span class="number">1</span>,n,start,end)&lt;&lt;<span class="string">' '</span>;</span><br><span class="line">	&#125;<span class="built_in">cout</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">普及+/提高</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据结构</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">数据结构-线段树</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/洛谷OJ题解//" class="article-tag-list-link color2">洛谷OJ题解</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/07/17/洛谷-P1816 忠诚/">展开全文 >></a>
         </p>
       
 

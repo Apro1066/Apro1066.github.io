@@ -6,20 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>洛谷-P3374 【模板】树状数组 1 | A.pro&#39;s blog</title>
+  <title>CF545C Woodcutters | A.pro&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="思路(Posted on 2019.02.07)123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354#include &amp;lt;stdio.h&amp;gt;#include &amp;lt;iostream&amp;gt;using namespace std;int n,m,">
-<meta name="keywords" content="普及&#x2F;提高-,数据结构,数据结构-树状数组">
+  <meta name="description" content="思路题意：现在有$n$棵树，对应每个树都有一个位子，并且有一个对应的高度，现在我们想砍最多数量的树，使得其倒下之后，不会压倒其他的树，树可以向左倒下，也可以向右倒下。令$dp[i][0]$为第$i$棵树向左倒的最多能砍掉的树，$dp[i][1]$为第$i$棵树向右倒的最多能砍掉的树，则：1.不砍，第$i-1$树的最优状态转移到第$i$棵（本质上是预处理，为2,3,4情况服务） dp[i][0]=d">
+<meta name="keywords" content="提高+&#x2F;省选-,动态规划,动态规划-线性dp">
 <meta property="og:type" content="article">
-<meta property="og:title" content="洛谷-P3374 【模板】树状数组 1">
-<meta property="og:url" content="http://yoursite.com/2019/02/07/洛谷-P3374 [模板]树状数组 1/index.html">
+<meta property="og:title" content="CF545C Woodcutters">
+<meta property="og:url" content="http://yoursite.com/2019/10/14/CF545C Woodcutters/index.html">
 <meta property="og:site_name" content="A.pro&#39;s blog">
-<meta property="og:description" content="思路(Posted on 2019.02.07)123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354#include &amp;lt;stdio.h&amp;gt;#include &amp;lt;iostream&amp;gt;using namespace std;int n,m,">
+<meta property="og:description" content="思路题意：现在有$n$棵树，对应每个树都有一个位子，并且有一个对应的高度，现在我们想砍最多数量的树，使得其倒下之后，不会压倒其他的树，树可以向左倒下，也可以向右倒下。令$dp[i][0]$为第$i$棵树向左倒的最多能砍掉的树，$dp[i][1]$为第$i$棵树向右倒的最多能砍掉的树，则：1.不砍，第$i-1$树的最优状态转移到第$i$棵（本质上是预处理，为2,3,4情况服务） dp[i][0]=d">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-04-24T05:18:49.082Z">
+<meta property="og:updated_time" content="2019-10-14T15:51:42.598Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="洛谷-P3374 【模板】树状数组 1">
-<meta name="twitter:description" content="思路(Posted on 2019.02.07)123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354#include &amp;lt;stdio.h&amp;gt;#include &amp;lt;iostream&amp;gt;using namespace std;int n,m,">
+<meta name="twitter:title" content="CF545C Woodcutters">
+<meta name="twitter:description" content="思路题意：现在有$n$棵树，对应每个树都有一个位子，并且有一个对应的高度，现在我们想砍最多数量的树，使得其倒下之后，不会压倒其他的树，树可以向左倒下，也可以向右倒下。令$dp[i][0]$为第$i$棵树向左倒的最多能砍掉的树，$dp[i][1]$为第$i$棵树向右倒的最多能砍掉的树，则：1.不砍，第$i-1$树的最优状态转移到第$i$棵（本质上是预处理，为2,3,4情况服务） dp[i][0]=d">
   
     <link rel="alternative" href="/atom.xml" title="A.pro&#39;s blog" type="application/atom+xml">
   
@@ -171,27 +171,31 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-洛谷-P3374 [模板]树状数组 1" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-CF545C Woodcutters" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      洛谷-P3374 【模板】树状数组 1
+      CF545C Woodcutters
     </h1>
   
 
         
-        <a href="/2019/02/07/洛谷-P3374 [模板]树状数组 1/" class="archive-article-date">
-  	<time datetime="2019-02-07T01:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-02-07</time>
+        <a href="/2019/10/14/CF545C Woodcutters/" class="archive-article-date">
+  	<time datetime="2019-10-14T15:13:41.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-14</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>(Posted on 2019.02.07)<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> n,m,bit[<span class="number">2000001</span>],s;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">lowbit</span><span class="params">(<span class="keyword">int</span> x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> x&amp;(-x);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> x,<span class="keyword">int</span> k)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">while</span>(x&lt;=n)</span><br><span class="line">	&#123;</span><br><span class="line">		bit[x]+=k;</span><br><span class="line">		x+=lowbit(x);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">sum</span><span class="params">(<span class="keyword">int</span> x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">int</span> <span class="title">ans</span><span class="params">(<span class="number">0</span>)</span></span>;</span><br><span class="line">	<span class="keyword">while</span>(x!=<span class="number">0</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		ans+=bit[x];</span><br><span class="line">		x-=lowbit(x);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	ios::sync_with_stdio(<span class="literal">false</span>);</span><br><span class="line">	<span class="built_in">cin</span>.tie(<span class="number">0</span>);</span><br><span class="line">	<span class="built_in">cout</span>.tie(<span class="number">0</span>);</span><br><span class="line">	<span class="keyword">register</span> <span class="keyword">int</span> i,j;</span><br><span class="line">	<span class="built_in">cin</span>&gt;&gt;n&gt;&gt;m;</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">int</span> x;</span><br><span class="line">		<span class="built_in">cin</span>&gt;&gt;x;</span><br><span class="line">		add(i,x);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=m;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">int</span> a,b,c;</span><br><span class="line">		<span class="built_in">cin</span>&gt;&gt;a&gt;&gt;b&gt;&gt;c;</span><br><span class="line">		<span class="keyword">if</span>(a==<span class="number">1</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			add(b,c);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">		&#123;</span><br><span class="line">			<span class="built_in">cout</span>&lt;&lt;sum(c)-sum(b<span class="number">-1</span>)&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+        <h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>题意：现在有$n$棵树，对应每个树都有一个位子，并且有一个对应的高度，现在我们想砍最多数量的树，使得其倒下之后，不会压倒其他的树，树可以向左倒下，也可以向右倒下。<br>令$dp[i][0]$为第$i$棵树向左倒的最多能砍掉的树，$dp[i][1]$为第$i$棵树向右倒的最多能砍掉的树，则：<br><strong>1.不砍，第$i-1$树的最优状态转移到第$i$棵（本质上是预处理，为2,3,4情况服务）</strong></p>
+<script type="math/tex; mode=display">dp[i][0]=dp[i][1]=max(dp[i-1][0],dp[i-1][1])</script><p><strong>2.第$i$棵向左倒，第$i-1$棵也向左倒</strong><br>当$a[i].position-a[i].height&gt;a[i-1].position$时</p>
+<script type="math/tex; mode=display">dp[i][0]=max(dp[i][0],dp[i-1][0]+1)</script><p>不砍或砍。<br><strong>3.第$i$棵向左倒，第$i-1$棵向右倒</strong><br>当$a[i].position-a[i].height&gt;a[i-1].position+a[i-1].height$时</p>
+<script type="math/tex; mode=display">dp[i][0]=max(dp[i][0],dp[i-1][1]+1)</script><p>不砍或砍。<br><strong>4.第$i$棵向右倒</strong><br>当$a[i].position+a[i].height&lt;a[i+1].position$时</p>
+<script type="math/tex; mode=display">dp[i][1]=dp[i][1]+1</script><p>答案为$max(dp[n][0],dp[n][1])$。<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> N 100001</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> inf 2e9+7</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">node</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="keyword">int</span> position,height;</span><br><span class="line">&#125;a[N];</span><br><span class="line"><span class="keyword">int</span> dp[N][<span class="number">2</span>],n,s;</span><br><span class="line"><span class="function"><span class="keyword">signed</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	ios::sync_with_stdio(<span class="literal">false</span>);</span><br><span class="line">	<span class="built_in">cin</span>.tie(<span class="number">0</span>);</span><br><span class="line">	<span class="built_in">cout</span>.tie(<span class="number">0</span>);</span><br><span class="line">	<span class="keyword">register</span> <span class="keyword">int</span> i,j;</span><br><span class="line">	<span class="built_in">cin</span>&gt;&gt;n;</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">cin</span>&gt;&gt;a[i].position&gt;&gt;a[i].height;</span><br><span class="line">	&#125;</span><br><span class="line">	a[n+<span class="number">1</span>].height=inf;</span><br><span class="line">	a[n+<span class="number">1</span>].position=inf;</span><br><span class="line">	a[<span class="number">0</span>].height=-inf;</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		dp[i][<span class="number">1</span>]=dp[i][<span class="number">0</span>]=max(dp[i<span class="number">-1</span>][<span class="number">0</span>],dp[i<span class="number">-1</span>][<span class="number">1</span>]);</span><br><span class="line">		<span class="keyword">if</span>(a[i].position-a[i].height&gt;a[i<span class="number">-1</span>].position)</span><br><span class="line">		&#123;</span><br><span class="line">			dp[i][<span class="number">0</span>]=max(dp[i][<span class="number">0</span>],dp[i<span class="number">-1</span>][<span class="number">0</span>]+<span class="number">1</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span>(a[i].position-a[i].height&gt;a[i<span class="number">-1</span>].position+a[i<span class="number">-1</span>].height)</span><br><span class="line">		&#123;</span><br><span class="line">			dp[i][<span class="number">0</span>]=max(dp[i][<span class="number">0</span>],dp[i<span class="number">-1</span>][<span class="number">1</span>]+<span class="number">1</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">if</span>(a[i].position+a[i].height&lt;a[i+<span class="number">1</span>].position)</span><br><span class="line">		&#123;</span><br><span class="line">			dp[i][<span class="number">1</span>]++;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">cout</span>&lt;&lt;max(dp[n][<span class="number">0</span>],dp[n][<span class="number">1</span>])&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 
       
 
@@ -205,15 +209,15 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">普及/提高-</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">提高+/省选-</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据结构</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">动态规划</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据结构-树状数组</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">动态规划-线性dp</a>
         		</li>
       		
 		</ul>
@@ -225,11 +229,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/洛谷OJ题解//" class="article-tag-list-link color2">洛谷OJ题解</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/洛谷OJ题解/OI模板//" class="article-tag-list-link color5">OI模板</a>
+        			<a href="/categories/Codeforces题解//" class="article-tag-list-link color3">Codeforces题解</a>
         		</li>
       		
 		</ul>
@@ -284,7 +284,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/02/07/洛谷-P3374 [模板]树状数组 1/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/10/14/CF545C Woodcutters/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -298,18 +298,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2019/02/07/洛谷-P1440 求m区间内的最小值/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          洛谷-P1440 求m区间内的最小值
-        
-      </div>
-    </a>
   
-  
-    <a href="/2019/02/06/洛谷-P1880 [NOI1995]石子合并/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">洛谷-P1880 [NOI1995]石子合并</div>
+    <a href="/2019/10/10/洛谷-P1541 乌龟棋/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">洛谷-P1541 乌龟棋</div>
       <i class="icon-circle-right"></i>
     </a>
   
