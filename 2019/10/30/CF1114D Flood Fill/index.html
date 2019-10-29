@@ -6,20 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>洛谷-P3918 [国家集训队]特技飞行 | A.pro&#39;s blog</title>
+  <title>CF1114D Flood Fill | A.pro&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="思路首先看到总价值最大容易想到贪心或dp。然后我们可以发现，对于同一个动作，做第一次是没有价值的，至少要做$2$次才有。但是同一动作的价值，无论进行几次都与$C_{i}$无关！也就是说，如果我们想要得到最大价值，只有改变动作的顺序，也就是改变极差。显然，极差越大价值越高。那么，思路就很明显喽，贪心，将$C_{i}$从大往小排序，让$C$更大的动作尽量安排在两边，这样就使得它们相隔的时间最长。然后我">
-<meta name="keywords" content="贪心,普及+&#x2F;提高,国家集训队">
+  <meta name="description" content="思路区间dp。因为$p$所在的颜色联通块就是一个区间。这个区间只会往外扩张，不会往里收缩。首先先把连通块压成一块，不影响答案。压缩后长度为$cnt$。令$dp[i][j]$为区间$[i,j]$是最长连通块，且不被其他连通块包含，将$[1,cnt]$变为连通块的最小步数。如果$a[i]=a[j]$，也就是两边颜色相同 dp[i][j]=dp[i+1][j-1]+1因为是合并，步数$+1$。如果$a[">
+<meta name="keywords" content="动态规划,动态规划-区间dp,省选&#x2F;NOI-">
 <meta property="og:type" content="article">
-<meta property="og:title" content="洛谷-P3918 [国家集训队]特技飞行">
-<meta property="og:url" content="http://yoursite.com/2019/06/07/洛谷-P3918 [国家集训队]特技飞行/index.html">
+<meta property="og:title" content="CF1114D Flood Fill">
+<meta property="og:url" content="http://yoursite.com/2019/10/30/CF1114D Flood Fill/index.html">
 <meta property="og:site_name" content="A.pro&#39;s blog">
-<meta property="og:description" content="思路首先看到总价值最大容易想到贪心或dp。然后我们可以发现，对于同一个动作，做第一次是没有价值的，至少要做$2$次才有。但是同一动作的价值，无论进行几次都与$C_{i}$无关！也就是说，如果我们想要得到最大价值，只有改变动作的顺序，也就是改变极差。显然，极差越大价值越高。那么，思路就很明显喽，贪心，将$C_{i}$从大往小排序，让$C$更大的动作尽量安排在两边，这样就使得它们相隔的时间最长。然后我">
+<meta property="og:description" content="思路区间dp。因为$p$所在的颜色联通块就是一个区间。这个区间只会往外扩张，不会往里收缩。首先先把连通块压成一块，不影响答案。压缩后长度为$cnt$。令$dp[i][j]$为区间$[i,j]$是最长连通块，且不被其他连通块包含，将$[1,cnt]$变为连通块的最小步数。如果$a[i]=a[j]$，也就是两边颜色相同 dp[i][j]=dp[i+1][j-1]+1因为是合并，步数$+1$。如果$a[">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-06-07T14:58:13.242Z">
+<meta property="og:updated_time" content="2019-10-29T16:22:37.718Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="洛谷-P3918 [国家集训队]特技飞行">
-<meta name="twitter:description" content="思路首先看到总价值最大容易想到贪心或dp。然后我们可以发现，对于同一个动作，做第一次是没有价值的，至少要做$2$次才有。但是同一动作的价值，无论进行几次都与$C_{i}$无关！也就是说，如果我们想要得到最大价值，只有改变动作的顺序，也就是改变极差。显然，极差越大价值越高。那么，思路就很明显喽，贪心，将$C_{i}$从大往小排序，让$C$更大的动作尽量安排在两边，这样就使得它们相隔的时间最长。然后我">
+<meta name="twitter:title" content="CF1114D Flood Fill">
+<meta name="twitter:description" content="思路区间dp。因为$p$所在的颜色联通块就是一个区间。这个区间只会往外扩张，不会往里收缩。首先先把连通块压成一块，不影响答案。压缩后长度为$cnt$。令$dp[i][j]$为区间$[i,j]$是最长连通块，且不被其他连通块包含，将$[1,cnt]$变为连通块的最小步数。如果$a[i]=a[j]$，也就是两边颜色相同 dp[i][j]=dp[i+1][j-1]+1因为是合并，步数$+1$。如果$a[">
   
     <link rel="alternative" href="/atom.xml" title="A.pro&#39;s blog" type="application/atom+xml">
   
@@ -171,27 +171,29 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-洛谷-P3918 [国家集训队]特技飞行" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-CF1114D Flood Fill" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      洛谷-P3918 [国家集训队]特技飞行
+      CF1114D Flood Fill
     </h1>
   
 
         
-        <a href="/2019/06/07/洛谷-P3918 [国家集训队]特技飞行/" class="archive-article-date">
-  	<time datetime="2019-06-07T14:46:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-07</time>
+        <a href="/2019/10/30/CF1114D Flood Fill/" class="archive-article-date">
+  	<time datetime="2019-10-29T16:02:17.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-30</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>首先看到总价值最大容易想到贪心或dp。<br>然后我们可以发现，对于同一个动作，做第一次是没有价值的，至少要做$2$次才有。<strong>但是同一动作的价值，无论进行几次都与$C_{i}$无关！也就是说，如果我们想要得到最大价值，只有改变动作的顺序，也就是改变极差。</strong><br>显然，<strong>极差越大价值越高</strong>。<br>那么，思路就很明显喽，贪心，将$C_{i}$从大往小排序，让$C$更大的动作尽量安排在两边，这样就使得它们相隔的时间最长。然后我们定义$l$和$r$来缩小范围。<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> n,k,s,a[<span class="number">1001</span>],l(<span class="number">1</span>),r;</span><br><span class="line"><span class="function"><span class="keyword">signed</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	ios::sync_with_stdio(<span class="literal">false</span>);</span><br><span class="line">	<span class="built_in">cin</span>.tie(<span class="number">0</span>);</span><br><span class="line">	<span class="built_in">cout</span>.tie(<span class="number">0</span>);</span><br><span class="line">	<span class="keyword">register</span> <span class="keyword">int</span> i;</span><br><span class="line">	<span class="built_in">cin</span>&gt;&gt;n&gt;&gt;k;</span><br><span class="line">	r=n;</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=k;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">cin</span>&gt;&gt;a[i];<span class="comment">//输入价值 </span></span><br><span class="line">	&#125;</span><br><span class="line">	sort(a+<span class="number">1</span>,a+k+<span class="number">1</span>,greater&lt;<span class="keyword">int</span>&gt;());<span class="comment">//从大往小排序 </span></span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=k;i++)<span class="comment">//扫一遍价值数组 </span></span><br><span class="line">	&#123;</span><br><span class="line">		s=s+a[i]*(r-l);<span class="comment">//加上价值，显然，这是一个动态的过程，一开始我们已经将价值从大往小排序</span></span><br><span class="line">		<span class="comment">//这时r-l也一定是最大的</span></span><br><span class="line">		r--;<span class="comment">//缩小范围 </span></span><br><span class="line">		l++;</span><br><span class="line">		<span class="keyword">if</span>(l&gt;=r)<span class="comment">//这个一定要加上，两个位置相同了就退掉，剩下的动作全部不要 </span></span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">cout</span>&lt;&lt;s&lt;&lt;<span class="built_in">endl</span>;<span class="comment">//最大价值 </span></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+        <h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>区间dp。因为$p$所在的颜色联通块就是一个区间。这个区间只会往外扩张，不会往里收缩。<br>首先先把连通块压成一块，不影响答案。压缩后长度为$cnt$。<br>令$dp[i][j]$为区间$[i,j]$是最长连通块，且不被其他连通块包含，将$[1,cnt]$变为连通块的最小步数。<br><strong>如果$a[i]=a[j]$，也就是两边颜色相同</strong></p>
+<script type="math/tex; mode=display">dp[i][j]=dp[i+1][j-1]+1</script><p>因为是合并，步数$+1$。<br><strong>如果$a[i]≠a[j]$，那就两边分别取最优即可。</strong></p>
+<script type="math/tex; mode=display">dp[i][j]=min(dp[i+1][j],dp[i][j-1])+1</script><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> N 5001</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> n,s,cnt,a[N],dp[N][N],x,y;</span><br><span class="line"><span class="function"><span class="keyword">signed</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	ios::sync_with_stdio(<span class="literal">false</span>);</span><br><span class="line">	<span class="built_in">cin</span>.tie(<span class="number">0</span>);</span><br><span class="line">	<span class="built_in">cout</span>.tie(<span class="number">0</span>);</span><br><span class="line">	<span class="keyword">register</span> <span class="keyword">int</span> i,j,k,l;</span><br><span class="line">	<span class="built_in">cin</span>&gt;&gt;n;</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=n;i++)<span class="comment">//压缩连通块 </span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">cin</span>&gt;&gt;x;</span><br><span class="line">		<span class="keyword">if</span>(x!=y)</span><br><span class="line">		&#123;</span><br><span class="line">			a[++cnt]=x;</span><br><span class="line">		&#125;</span><br><span class="line">		y=x;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(l=<span class="number">1</span>;l&lt;=cnt;l++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=cnt;i++)</span><br><span class="line">		&#123;</span><br><span class="line">			j=i+l;</span><br><span class="line">			<span class="keyword">if</span>(a[i]==a[j])</span><br><span class="line">			&#123;</span><br><span class="line">				dp[i][j]=dp[i+<span class="number">1</span>][j<span class="number">-1</span>]+<span class="number">1</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">else</span></span><br><span class="line">			&#123;</span><br><span class="line">				dp[i][j]=min(dp[i+<span class="number">1</span>][j],dp[i][j<span class="number">-1</span>])+<span class="number">1</span>;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">cout</span>&lt;&lt;dp[<span class="number">1</span>][cnt]&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
       
 
@@ -205,15 +207,15 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">贪心</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">动态规划</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">普及+/提高</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">动态规划-区间dp</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">国家集训队</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">省选/NOI-</a>
         		</li>
       		
 		</ul>
@@ -225,7 +227,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="/categories/洛谷OJ题解//" class="article-tag-list-link color2">洛谷OJ题解</a>
+        			<a href="/categories/Codeforces题解//" class="article-tag-list-link color3">Codeforces题解</a>
         		</li>
       		
 		</ul>
@@ -280,7 +282,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/06/07/洛谷-P3918 [国家集训队]特技飞行/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/10/30/CF1114D Flood Fill/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -294,18 +296,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2019/06/08/CF1157A Reachable Numbers/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          CF1157A Reachable Numbers
-        
-      </div>
-    </a>
   
-  
-    <a href="/2019/05/24/洛谷-P2879 [USACO07JAN]区间统计Tallest Cow/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">洛谷-P2879 [USACO07JAN]区间统计Tallest Cow</div>
+    <a href="/2019/10/24/洛谷-P2647 最大收益/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">洛谷-P2647 最大收益</div>
       <i class="icon-circle-right"></i>
     </a>
   
