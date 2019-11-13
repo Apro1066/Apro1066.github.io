@@ -168,6 +168,106 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-洛谷-P2458 [SDOI2006]保安站岗" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/10/05/洛谷-P2458 [SDOI2006]保安站岗/">洛谷-P2458 [SDOI2006]保安站岗</a>
+    </h1>
+  
+
+        
+        <a href="/2019/10/05/洛谷-P2458 [SDOI2006]保安站岗/" class="archive-article-date">
+  	<time datetime="2019-10-05T12:54:32.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-05</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>我感觉和<a href="https://www.luogu.org/problem/P2899" target="_blank" rel="noopener">P2899 手机网络</a>是一模一样的题目……相比之下，只需要改2处代码……（<del>双倍经验</del> ）对于P2899那道题，<a href="https://apro1066.top/2019/08/28/%E6%B4%9B%E8%B0%B7-P2899%20%5BUSACO08JAN%5D%E6%89%8B%E6%9C%BA%E7%BD%91%E7%BB%9C/" target="_blank" rel="noopener">我已经写了详细的题解</a>。<br>首先对于每个节点$i$，都有如下3种选择：<br>不选自己，选儿子；<br>不选自己，选父亲；<br>我自己选我自己。<br>令$dp[i][0/1/2]$为节点$i$及其节点$i$的子树中全部被覆盖所需的最小保安数，$dp[i][0]$表示点$i$有保安，$dp[i][1]$为点$i$没有保安，也就是就是父亲有信号塔，$dp[i][2]$表示节点$i$被间接管辖，也就是儿子有保安。<br><strong>1.$dp[i][0]$</strong><br>因为节点$i$有保安，所以对于$i$的子节点$son$，它可以没有保安，也可以有保安，也可以从$son$的子节点转移过来。因此：</p>
+<script type="math/tex; mode=display">dp[i][0]= \sum min(dp[son][1],dp[son][0],dp[son][2])+val[i]</script><p>这里$+val[i]$是因为自己本身放置了一个保安，产生的代价。<br><strong>2.$dp[i][1]$</strong><br>因为节点$i$没有保安，靠的是节点$i$的父亲才被覆盖的，所以对于节点$i$的子节点$son$是不可能选父亲的。所以$dp[i][1]$可以从$dp[son][0]$转移过来（子节点有保安），也可以从$dp[son][2]$转移过来（子节点的儿子有保安）。</p>
+<script type="math/tex; mode=display">dp[i][1]=\sum min(dp[son][0[,dp[son][2])</script><p><strong>3.$dp[i][2]$</strong><br>因为节点$i$没有保安，靠它儿子，所以节点$i$的子节点$son$也不可能选父亲，必然可以从$dp[son][0]$转移过来，也可以从$dp[son][2]$转移过来。</p>
+<script type="math/tex; mode=display">dp[i][2]= \sum min(dp[son][0],dp[son][2])</script><p>很快会发现，如果的确是这样的话，如果$dp[i][2]$<strong>全</strong>从$dp[son][2]$转移过来，也就是若<strong>恒有</strong>$dp[son][2] ≤ dp[son][0]$，<strong>就意味着节点$i$的所有子节点都没有保安！</strong>（<del>那不就凉了</del> ）怎么办？<br>所以我们要设立一个<strong>反悔机制</strong>。<strong>我只需要一个儿子选</strong>。只需要用$p$来记录每一次$dp[son][0]-min(dp[son][2],dp[son][0])$，这样就保证，就算<strong>恒有$dp[son][2] ≤ dp[son][0]$，也一定有一个是儿子选了的</strong>，如果不选$dp[son][2]$，最后$p$的状态也为$0$。若不信，我们做个推导：<br>记$p=min(p,dp[son][0]-min(dp[son][0],dp[son][2]))$<br>$dp[i][2]=min(dp[son][0],dp[son][2])+p$<br>$=min(dp[son][0],dp[son][2])+dp[son][0]-min(dp[son][0],dp[son][2])$<br>若$dp[son][2] ≤ dp[son][0]$<strong>恒成立</strong>（<strong>注意我说的是恒成立，意思是说$dp[i][2]$全是从$dp[son][2]$转移过来</strong>）<br>原式$=dp[son][2]+dp[son][0]-dp[son][2]$<br>$=dp[son][0]$<br><strong>也就是把$dp[son][2]$强制转换成了$dp[son][0]$</strong>！<br>若$dp[son][2]&gt;dp[son][0]$<br>原式$=dp[son][0]+dp[son][0]-dp[son][0]$<br>$=dp[son][0]$<br><strong>也就是说并不影响$dp[son][0]$的正常取值！</strong><br>最后答案为$min(dp[root][0],dp[root][2])$。<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> inf 2e9+7</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> N 2001</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> n,m,s,dp[N][<span class="number">3</span>],head[N],cnt,val[N];</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">node</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="keyword">int</span> nxt,to;</span><br><span class="line">&#125;e[N&lt;&lt;<span class="number">1</span>];</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> u,<span class="keyword">int</span> v)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	e[++cnt].to=v;</span><br><span class="line">	e[cnt].nxt=head[u];</span><br><span class="line">	head[u]=cnt;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> u,<span class="keyword">int</span> fa)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">register</span> <span class="keyword">int</span> i,p(inf);</span><br><span class="line">	dp[u][<span class="number">0</span>]=val[u];</span><br><span class="line">	<span class="keyword">for</span>(i=head[u];i;i=e[i].nxt)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="function"><span class="keyword">int</span> <span class="title">v</span><span class="params">(e[i].to)</span></span>;</span><br><span class="line">		<span class="keyword">if</span>(v==fa) <span class="keyword">continue</span>;</span><br><span class="line">		dfs(v,u);</span><br><span class="line">		dp[u][<span class="number">0</span>]+=min(dp[v][<span class="number">0</span>],min(dp[v][<span class="number">1</span>],dp[v][<span class="number">2</span>]));</span><br><span class="line">		dp[u][<span class="number">1</span>]+=min(dp[v][<span class="number">0</span>],dp[v][<span class="number">2</span>]);</span><br><span class="line">		dp[u][<span class="number">2</span>]+=min(dp[v][<span class="number">0</span>],dp[v][<span class="number">2</span>]);</span><br><span class="line">		p=min(p,dp[v][<span class="number">0</span>]-min(dp[v][<span class="number">2</span>],dp[v][<span class="number">0</span>]));<span class="comment">//表示其它儿子的总和</span></span><br><span class="line">	&#125;</span><br><span class="line">	dp[u][<span class="number">2</span>]+=p;<span class="comment">//建立反悔机制 </span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">signed</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	ios::sync_with_stdio(<span class="literal">false</span>);</span><br><span class="line">	<span class="built_in">cin</span>.tie(<span class="number">0</span>);</span><br><span class="line">	<span class="built_in">cout</span>.tie(<span class="number">0</span>);</span><br><span class="line">	<span class="keyword">register</span> <span class="keyword">int</span> i,j,k;</span><br><span class="line">	<span class="built_in">cin</span>&gt;&gt;n;</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">int</span> u,v;</span><br><span class="line">		<span class="built_in">cin</span>&gt;&gt;u;</span><br><span class="line">		<span class="built_in">cin</span>&gt;&gt;val[u]&gt;&gt;m;</span><br><span class="line">		<span class="keyword">while</span>(m--)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="built_in">cin</span>&gt;&gt;v;</span><br><span class="line">			add(u,v);</span><br><span class="line">			add(v,u);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	dfs(<span class="number">1</span>,<span class="number">-1</span>);</span><br><span class="line">	<span class="built_in">cout</span>&lt;&lt;min(dp[<span class="number">1</span>][<span class="number">0</span>],dp[<span class="number">1</span>][<span class="number">2</span>])&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">动态规划</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">提高+/省选-</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">动态规划-树形dp</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">各省省选</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/洛谷OJ题解//" class="article-tag-list-link color2">洛谷OJ题解</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/10/05/洛谷-P2458 [SDOI2006]保安站岗/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-洛谷-P2279 [HNOI2003]消防局的设立" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1069,103 +1169,6 @@
 
 
   
-    <article id="post-洛谷-P3371 [模板]单源最短路径（弱化版）" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/08/23/洛谷-P3371 [模板]单源最短路径（弱化版）/">洛谷-P3371 【模板】单源最短路径（弱化版）</a>
-    </h1>
-  
-
-        
-        <a href="/2019/08/23/洛谷-P3371 [模板]单源最短路径（弱化版）/" class="archive-article-date">
-  	<time datetime="2019-08-23T11:00:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-23</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p><a href="https://blog.csdn.net/Apro1066/article/details/84951008" target="_blank" rel="noopener">Dijkstra详解</a><br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;memory.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> inf 2147483647 <span class="comment">//不连通输出2147483647 </span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> maxn 500001</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> n,m,dis[maxn],vis[maxn],cnt,s,start,head[maxn];<span class="comment">//dis数组表示从起点到点i的最短路径 </span></span><br><span class="line"><span class="keyword">bool</span> check;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">node</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="keyword">int</span> nxt,to,w,from;</span><br><span class="line">&#125;e[maxn&lt;&lt;<span class="number">1</span>];</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> u,<span class="keyword">int</span> v,<span class="keyword">int</span> w)</span><span class="comment">//链式前向星存图 </span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	e[++cnt].to=v;</span><br><span class="line">	e[cnt].from=u;</span><br><span class="line">	e[cnt].w=w;</span><br><span class="line">	e[cnt].nxt=head[u];</span><br><span class="line">	head[u]=cnt;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">signed</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	ios::sync_with_stdio(<span class="literal">false</span>);</span><br><span class="line">	<span class="built_in">cin</span>.tie(<span class="number">0</span>);</span><br><span class="line">	<span class="built_in">cout</span>.tie(<span class="number">0</span>);</span><br><span class="line">	<span class="keyword">register</span> <span class="keyword">int</span> i,j;</span><br><span class="line">	<span class="built_in">cin</span>&gt;&gt;n&gt;&gt;m&gt;&gt;start;</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=m;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">int</span> u,v,val;</span><br><span class="line">		<span class="built_in">cin</span>&gt;&gt;u&gt;&gt;v&gt;&gt;val;</span><br><span class="line">		add(u,v,val);<span class="comment">//有向存图 </span></span><br><span class="line">		dis[i]=inf;</span><br><span class="line">	&#125;</span><br><span class="line">	dis[start]=<span class="number">0</span>;</span><br><span class="line">	<span class="function"><span class="keyword">int</span> <span class="title">pos</span><span class="params">(start)</span></span>;<span class="comment">//起点 </span></span><br><span class="line">	<span class="keyword">while</span>(vis[pos]==<span class="number">0</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="function"><span class="keyword">int</span> <span class="title">minx</span><span class="params">(inf)</span></span>;</span><br><span class="line">		vis[pos]=<span class="number">1</span>;</span><br><span class="line">		<span class="keyword">for</span>(i=head[pos];i;i=e[i].nxt)<span class="comment">//枚举与点pos的连通点 </span></span><br><span class="line">		&#123;</span><br><span class="line">			<span class="function"><span class="keyword">int</span> <span class="title">v</span><span class="params">(e[i].to)</span></span>;<span class="comment">//连通点 </span></span><br><span class="line">			<span class="keyword">if</span>(vis[v]==<span class="number">0</span> &amp;&amp; dis[v]&gt;dis[pos]+e[i].w)</span><br><span class="line">			&#123;</span><br><span class="line">				dis[v]=dis[pos]+e[i].w;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=n;i++)<span class="comment">//枚举所有点 </span></span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span>(dis[i]&lt;minx &amp;&amp; vis[i]==<span class="number">0</span>)<span class="comment">//没访问过且小 </span></span><br><span class="line">			&#123;</span><br><span class="line">				minx=dis[i];<span class="comment">//更新最小值 </span></span><br><span class="line">				pos=i;<span class="comment">//更新下一个点 </span></span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">cout</span>&lt;&lt;dis[i]&lt;&lt;<span class="string">' '</span>;</span><br><span class="line">	&#125;<span class="built_in">cout</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">普及/提高-</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">图论</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">图论-最短路</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/洛谷OJ题解//" class="article-tag-list-link color2">洛谷OJ题解</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/洛谷OJ题解/OI模版//" class="article-tag-list-link color5">OI模版</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/08/23/洛谷-P3371 [模板]单源最短路径（弱化版）/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/2/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/16/">16</a><a class="extend next" rel="next" href="/page/4/">Next &raquo;</a>
@@ -1331,11 +1334,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">二分答案</a>
+                <a href="javascript:void(0)" class="js-tag color3">图论</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">图论</a>
+                <a href="javascript:void(0)" class="js-tag color5">二分答案</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1363,15 +1366,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">搜索-记忆化搜索</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">Noip普及组</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">普及-</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">搜索-记忆化搜索</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1415,11 +1418,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">归并排序</a>
+                <a href="javascript:void(0)" class="js-tag color2">数据结构-栈</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">数据结构-栈</a>
+                <a href="javascript:void(0)" class="js-tag color5">归并排序</a>
               </li>
              
               <li class="article-tag-list-item">
