@@ -9,7 +9,7 @@
   <title>洛谷-P1736 创意吃鱼法 | A.pro&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="思路拿到这题立马想到了最大正方形那题，可是却不会推方程。写了个记忆化搜索。怎么去搜？对于任意一个子正方形，要满足鱼都在对角线，也就是对角线的数字不为$0$；子正方形其他地方没有鱼，也就是对角线以外都是$0$。假如$(x,y)$有鱼，那就可以$dfs(x+1,y+1)$和$dfs(x+1,y-1)$来判断对角线上是否有鱼。既然一个子正方形只有对角线有鱼，那么该正方形的数字和就是对角线的长度。所以利用">
-<meta name="keywords" content="动态规划,提高+&#x2F;省选-,动态规划-线性dp,搜索,搜索-记忆化搜索">
+<meta name="keywords" content="动态规划,提高+&#x2F;省选-,搜索,动态规划-线性dp,搜索-记忆化搜索">
 <meta property="og:type" content="article">
 <meta property="og:title" content="洛谷-P1736 创意吃鱼法">
 <meta property="og:url" content="http://yoursite.com/2019/10/03/洛谷-P1736 创意吃鱼法/index.html">
@@ -215,11 +215,11 @@
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">动态规划-线性dp</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">搜索</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">搜索</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">动态规划-线性dp</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
@@ -466,6 +466,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">贪心</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">普及+/提高</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">数学/数论</a>
               </li>
              
@@ -475,14 +483,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">普及/提高-</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">贪心</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">普及+/提高</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -518,10 +518,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">动态规划-线性dp</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">二分答案</a>
               </li>
              
@@ -538,15 +534,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">动态规划-线性dp</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">闲聊</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">数据结构-线段树</a>
+                <a href="javascript:void(0)" class="js-tag color3">Noip提高组</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Noip提高组</a>
+                <a href="javascript:void(0)" class="js-tag color4">数据结构-线段树</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -602,7 +602,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">NOI</a>
+                <a href="javascript:void(0)" class="js-tag color2">数据结构-栈</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -610,7 +610,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">数据结构-栈</a>
+                <a href="javascript:void(0)" class="js-tag color4">NOI</a>
               </li>
              
               <li class="article-tag-list-item">
