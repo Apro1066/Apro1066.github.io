@@ -8,20 +8,20 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>洛谷-P2772 寻找平面上的极大点 | A.pro&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="思路(Posted on 2018.07.17)这道题应该是单调队列的模版题，但是A.pro的水平有限，不用数据结构做，就纯贪心。 好的，回归题目。题目对于“极大值点”的定义如下： 对于任意一个点，如果它的y值不小于任何一个点使这个“任何一个点”x值大于给定点的x值，那么该点为极大点。 什么？没看懂？看样子这段话说了不少废话，那我们参见图片。 图中有序数对前的星号都表示极大值点。 由图中不难发现：">
+  <meta name="description" content="思路这道题应该是单调队列的模版题，但是A.pro的水平有限，不用数据结构做，就纯贪心。 好的，回归题目。题目对于“极大值点”的定义如下： 对于任意一个点，如果它的y值不小于任何一个点使这个“任何一个点”x值大于给定点的x值，那么该点为极大点。">
 <meta name="keywords" content="贪心,普及&#x2F;提高-">
 <meta property="og:type" content="article">
 <meta property="og:title" content="洛谷-P2772 寻找平面上的极大点">
 <meta property="og:url" content="http://yoursite.com/2018/07/17/洛谷-P2772 寻找平面上的极大点/index.html">
 <meta property="og:site_name" content="A.pro&#39;s blog">
-<meta property="og:description" content="思路(Posted on 2018.07.17)这道题应该是单调队列的模版题，但是A.pro的水平有限，不用数据结构做，就纯贪心。 好的，回归题目。题目对于“极大值点”的定义如下： 对于任意一个点，如果它的y值不小于任何一个点使这个“任何一个点”x值大于给定点的x值，那么该点为极大点。 什么？没看懂？看样子这段话说了不少废话，那我们参见图片。 图中有序数对前的星号都表示极大值点。 由图中不难发现：">
+<meta property="og:description" content="思路这道题应该是单调队列的模版题，但是A.pro的水平有限，不用数据结构做，就纯贪心。 好的，回归题目。题目对于“极大值点”的定义如下： 对于任意一个点，如果它的y值不小于任何一个点使这个“任何一个点”x值大于给定点的x值，那么该点为极大点。">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="https://img-blog.csdn.net/20180717202331691?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0Fwcm8xMDY2/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
 <meta property="og:image" content="https://img-blog.csdn.net/20180717203931720?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0Fwcm8xMDY2/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
-<meta property="og:updated_time" content="2019-03-01T15:02:58.684Z">
+<meta property="og:updated_time" content="2020-03-13T15:20:55.112Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="洛谷-P2772 寻找平面上的极大点">
-<meta name="twitter:description" content="思路(Posted on 2018.07.17)这道题应该是单调队列的模版题，但是A.pro的水平有限，不用数据结构做，就纯贪心。 好的，回归题目。题目对于“极大值点”的定义如下： 对于任意一个点，如果它的y值不小于任何一个点使这个“任何一个点”x值大于给定点的x值，那么该点为极大点。 什么？没看懂？看样子这段话说了不少废话，那我们参见图片。 图中有序数对前的星号都表示极大值点。 由图中不难发现：">
+<meta name="twitter:description" content="思路这道题应该是单调队列的模版题，但是A.pro的水平有限，不用数据结构做，就纯贪心。 好的，回归题目。题目对于“极大值点”的定义如下： 对于任意一个点，如果它的y值不小于任何一个点使这个“任何一个点”x值大于给定点的x值，那么该点为极大点。">
 <meta name="twitter:image" content="https://img-blog.csdn.net/20180717202331691?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0Fwcm8xMDY2/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70">
   
     <link rel="alternative" href="/atom.xml" title="A.pro&#39;s blog" type="application/atom+xml">
@@ -194,10 +194,9 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>(Posted on 2018.07.17)<br>这道题应该是单调队列的模版题，但是A.pro的水平有限，不用数据结构做，就纯贪心。</p>
+        <h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>这道题应该是单调队列的模版题，但是A.pro的水平有限，不用数据结构做，就纯贪心。</p>
 <p>好的，回归题目。题目对于“极大值点”的定义如下：</p>
-<p>对于任意一个点，如果它的y值不小于任何一个点使这个“任何一个点”x值大于给定点的x值，那么该点为极大点。</p>
-<p>什么？没看懂？看样子这段话说了不少废话，那我们参见图片。</p>
+<p>对于任意一个点，如果它的y值不小于任何一个点使这个“任何一个点”x值大于给定点的x值，那么该点为极大点。<br><a id="more"></a><br>什么？没看懂？看样子这段话说了不少废话，那我们参见图片。</p>
 <p><img src="https://img-blog.csdn.net/20180717202331691?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0Fwcm8xMDY2/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="例1"><br>图中有序数对前的星号都表示极大值点。</p>
 <p>由图中不难发现：对于一个坐标点，如果y坐标比它大的点全部都在它的左边，那么该点为极大点。</p>
 <p>比如图中的坐标(2,3)，它的y值为3，比3大的点(1,4)在点(2,3)的左边，所以(2,3)就是极大值点了。</p>

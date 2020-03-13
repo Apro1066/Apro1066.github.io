@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="A.pro&#39;s blog">
 <meta property="og:description" content="思路区间dp好题！！！！！！！这题是和P1220有点相似的。给定一个理想数列，例如：$1701,1702,1703,1704$，求一共有多少种原队列。 通过排队方式很显然可以看出原队列的最后一位应该从$1701$和$1704$中选取。如果选择的是$1701$，那么原问题就产生一个子问题： 给定一个理想数列，$1702,1703,1704$求一共有多少种原队列；如果选择的是$1704$，那么原问题就">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-07-20T15:22:00.907Z">
+<meta property="og:updated_time" content="2020-03-13T15:22:25.529Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="洛谷-P3205 [HNOI2010]合唱队">
 <meta name="twitter:description" content="思路区间dp好题！！！！！！！这题是和P1220有点相似的。给定一个理想数列，例如：$1701,1702,1703,1704$，求一共有多少种原队列。 通过排队方式很显然可以看出原队列的最后一位应该从$1701$和$1704$中选取。如果选择的是$1701$，那么原问题就产生一个子问题： 给定一个理想数列，$1702,1703,1704$求一共有多少种原队列；如果选择的是$1704$，那么原问题就">
@@ -192,8 +192,7 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>区间dp好题！！！！！！！<br>这题是和<a href="https://apro1066.top/2019/07/19/%E6%B4%9B%E8%B0%B7-P1220%20%E5%85%B3%E8%B7%AF%E7%81%AF/" target="_blank" rel="noopener">P1220</a>有点相似的。给定一个理想数列，例如：$1701,1702,1703,1704$，求一共有多少种原队列。</p>
-<p>通过排队方式很显然可以看出原队列的最后一位应该从$1701$和$1704$中选取。如果选择的是$1701$，那么原问题就产生一个子问题： 给定一个理想数列，$1702,1703,1704$求一共有多少种原队列；如果选择的是$1704$，那么原问题就产生另一个子问题： 给定一个理想序列，$1701,1702,1703$求一共有多少种原序列。<strong>对于一个最终序列区间$[i,j]$，最后一个添加的只可能是第$i$个人或者第$j$个人。</strong></p>
-<p>所以如果最后一个是$i$，则对于这个区间$[i,j]$，$a[i]&lt;a[i+1]$或$a[i]&lt;a[j]$</p>
+<p>通过排队方式很显然可以看出原队列的最后一位应该从$1701$和$1704$中选取。如果选择的是$1701$，那么原问题就产生一个子问题： 给定一个理想数列，$1702,1703,1704$求一共有多少种原队列；如果选择的是$1704$，那么原问题就产生另一个子问题： 给定一个理想序列，$1701,1702,1703$求一共有多少种原序列。<strong>对于一个最终序列区间$[i,j]$，最后一个添加的只可能是第$i$个人或者第$j$个人。</strong><br><a id="more"></a><br>所以如果最后一个是$i$，则对于这个区间$[i,j]$，$a[i]&lt;a[i+1]$或$a[i]&lt;a[j]$</p>
 <p>如果最后一个是$j$，则对于这个区间$[i,j]$，$a[j]&gt;a[j-1]$或$a[j]&gt;a[i]$</p>
 <p>令$dp[i][j][0]$为在最终序列的区间$[i,j]$中，最后一个添加$i$的方案数；$dp[i][j][1]$为在最终序列的区间$[i,j]$中，最后一个添加$j$的方案数。$[i,j]$这个区间可以从$[i-1,j]$或$[i,j+1]$转移过来。</p>
 <p><strong>1.当$r$（右端点）的数大于上一个且上一个插在右端时</strong></p>
@@ -321,8 +320,8 @@
     </a>
   
   
-    <a href="/2019/07/20/洛谷-P1987 摇钱树/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">洛谷-P1987 摇钱树</div>
+    <a href="/2019/07/20/洛谷-P1417 烹调方案/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">洛谷-P1417 烹调方案</div>
       <i class="icon-circle-right"></i>
     </a>
   

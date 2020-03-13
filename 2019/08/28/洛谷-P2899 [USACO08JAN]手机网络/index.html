@@ -8,18 +8,18 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>洛谷-P2899 [USACO08JAN]手机网络 | A.pro&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="思路有一点像树的最大独立集。首先对于每个节点$i$，都有如下3种选择：不选自己，选儿子；不选自己，选父亲；我自己选我自己。令$dp[i][0/1/2]$为节点$i$及其节点$i$的子树中全部被信号覆盖所需的最小信号塔数，$dp[i][0]$表示点$i$有信号塔，$dp[i][1]$为点$i$没有信号，也就是就是父亲有信号塔，$dp[i][2]$表示节点$i$被间接信号，也就是儿子有信号塔。1.$d">
+  <meta name="description" content="思路有一点像树的最大独立集。首先对于每个节点$i$，都有如下3种选择：不选自己，选儿子；不选自己，选父亲；我自己选我自己。令$dp[i][0/1/2]$为节点$i$及其节点$i$的子树中全部被信号覆盖所需的最小信号塔数，$dp[i][0]$表示点$i$有信号塔，$dp[i][1]$为点$i$没有信号，也就是就是父亲有信号塔，$dp[i][2]$表示节点$i$被间接信号，也就是儿子有信号塔。">
 <meta name="keywords" content="动态规划,提高+&#x2F;省选-,动态规划-树形dp">
 <meta property="og:type" content="article">
 <meta property="og:title" content="洛谷-P2899 [USACO08JAN]手机网络">
 <meta property="og:url" content="http://yoursite.com/2019/08/28/洛谷-P2899 [USACO08JAN]手机网络/index.html">
 <meta property="og:site_name" content="A.pro&#39;s blog">
-<meta property="og:description" content="思路有一点像树的最大独立集。首先对于每个节点$i$，都有如下3种选择：不选自己，选儿子；不选自己，选父亲；我自己选我自己。令$dp[i][0/1/2]$为节点$i$及其节点$i$的子树中全部被信号覆盖所需的最小信号塔数，$dp[i][0]$表示点$i$有信号塔，$dp[i][1]$为点$i$没有信号，也就是就是父亲有信号塔，$dp[i][2]$表示节点$i$被间接信号，也就是儿子有信号塔。1.$d">
+<meta property="og:description" content="思路有一点像树的最大独立集。首先对于每个节点$i$，都有如下3种选择：不选自己，选儿子；不选自己，选父亲；我自己选我自己。令$dp[i][0/1/2]$为节点$i$及其节点$i$的子树中全部被信号覆盖所需的最小信号塔数，$dp[i][0]$表示点$i$有信号塔，$dp[i][1]$为点$i$没有信号，也就是就是父亲有信号塔，$dp[i][2]$表示节点$i$被间接信号，也就是儿子有信号塔。">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-08-28T15:46:43.235Z">
+<meta property="og:updated_time" content="2020-03-13T15:21:51.630Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="洛谷-P2899 [USACO08JAN]手机网络">
-<meta name="twitter:description" content="思路有一点像树的最大独立集。首先对于每个节点$i$，都有如下3种选择：不选自己，选儿子；不选自己，选父亲；我自己选我自己。令$dp[i][0/1/2]$为节点$i$及其节点$i$的子树中全部被信号覆盖所需的最小信号塔数，$dp[i][0]$表示点$i$有信号塔，$dp[i][1]$为点$i$没有信号，也就是就是父亲有信号塔，$dp[i][2]$表示节点$i$被间接信号，也就是儿子有信号塔。1.$d">
+<meta name="twitter:description" content="思路有一点像树的最大独立集。首先对于每个节点$i$，都有如下3种选择：不选自己，选儿子；不选自己，选父亲；我自己选我自己。令$dp[i][0/1/2]$为节点$i$及其节点$i$的子树中全部被信号覆盖所需的最小信号塔数，$dp[i][0]$表示点$i$有信号塔，$dp[i][1]$为点$i$没有信号，也就是就是父亲有信号塔，$dp[i][2]$表示节点$i$被间接信号，也就是儿子有信号塔。">
   
     <link rel="alternative" href="/atom.xml" title="A.pro&#39;s blog" type="application/atom+xml">
   
@@ -191,7 +191,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>有一点像树的最大独立集。<br>首先对于每个节点$i$，都有如下3种选择：<br>不选自己，选儿子；<br>不选自己，选父亲；<br>我自己选我自己。<br>令$dp[i][0/1/2]$为节点$i$及其节点$i$的子树中全部被信号覆盖所需的最小信号塔数，$dp[i][0]$表示点$i$有信号塔，$dp[i][1]$为点$i$没有信号，也就是就是父亲有信号塔，$dp[i][2]$表示节点$i$被间接信号，也就是儿子有信号塔。<br><strong>1.$dp[i][0]$</strong><br>因为节点$i$有信息塔，所以对于$i$的子节点$son$，它可以没有信号塔，也可以有信号塔，也可以从$son$的子节点转移过来。因此：</p>
+        <h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>有一点像树的最大独立集。<br>首先对于每个节点$i$，都有如下3种选择：<br>不选自己，选儿子；<br>不选自己，选父亲；<br>我自己选我自己。<br>令$dp[i][0/1/2]$为节点$i$及其节点$i$的子树中全部被信号覆盖所需的最小信号塔数，$dp[i][0]$表示点$i$有信号塔，$dp[i][1]$为点$i$没有信号，也就是就是父亲有信号塔，$dp[i][2]$表示节点$i$被间接信号，也就是儿子有信号塔。<br><a id="more"></a><br><strong>1.$dp[i][0]$</strong><br>因为节点$i$有信息塔，所以对于$i$的子节点$son$，它可以没有信号塔，也可以有信号塔，也可以从$son$的子节点转移过来。因此：</p>
 <script type="math/tex; mode=display">dp[i][0]=∑min(dp[son][1],dp[son][0],dp[son][2])+1</script><p>这里$+1$是因为自己本身放置了一个信号塔。<br><strong>2.$dp[i][1]$</strong><br>因为节点$i$没有信息塔，靠的是节点$i$的父亲才有信号的，所以对于节点$i$的子节点$son$是不可能选父亲的。所以$dp[i][1]$可以从$dp[son][0]$转移过来（子节点有信息塔），也可以从$dp[son][2]$转移过来（子节点的儿子有信息塔）。</p>
 <script type="math/tex; mode=display">dp[i][1]=∑min(dp[son][0[,dp[son][2])</script><p><strong>3.$dp[i][2]$</strong><br>因为节点$i$没有信息塔，靠它儿子，所以节点$i$的子节点$son$也不可能选父亲，必然可以从$dp[son][0]$转移过来，也可以从$dp[son][2]$转移过来。</p>
 <script type="math/tex; mode=display">dp[i][2]=∑min(dp[son][0],dp[son][2])</script><p>很快会发现，如果的确是这样的话，如果$dp[i][2]$<strong>全</strong>从$dp[son][2]$转移过来，也就是若<strong>恒有</strong>$dp[son][2] \leq dp[son][0]$，<strong>就意味着节点i的所有子节点都没有信息塔！</strong>（<del>那不就凉了</del>）怎么办？<br>所以我们要设立一个<strong>反悔机制</strong>。<strong>我只需要一个儿子选</strong>。只需要用$p$来记录每一次$dp[son][0]-min(dp[son][2],dp[son][0])$，这样就保证，<strong>就算恒有$dp[son][2] \leq dp[son][0]$，也一定有一个是儿子选了的</strong>，如果不选$dp[son][2]$，最后$p$的状态也为$0$。若不信，我们做个推导：<br>记$p=min(p,dp[son][0]-min(dp[son][0],dp[son][2]))$</p>
@@ -314,7 +314,7 @@
   
   
     <a href="/2019/08/27/math-qi-ci-shi/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">【高中数学必修4】齐次式</div>
+      <div class="article-nav-title">数学笔记-齐次式</div>
       <i class="icon-circle-right"></i>
     </a>
   

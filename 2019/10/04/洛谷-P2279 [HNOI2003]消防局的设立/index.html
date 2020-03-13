@@ -8,18 +8,18 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>洛谷-P2279 [HNOI2003]消防局的设立 | A.pro&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="思路其实和P2899 [USACO08JAN]手机网络有点类似，有兴趣的同学可以去看一看，该题我也写了题解。链接1链接2题目大意是给出一个树，一个消防站能够覆盖与他距离$≤2$的点。求覆盖整个树的所有节点至少需要多少个消防站。树形dp的常规操作是每个节点都可以成为根节点，然后在这个节点搜索它的子树获取最优解。这个我在P2016那题说过。我们根据P2899那题的经验，对一颗子树划分为5个状态。令$d">
+  <meta name="description" content="思路其实和P2899 [USACO08JAN]手机网络有点类似，有兴趣的同学可以去看一看，该题我也写了题解。链接1链接2题目大意是给出一个树，一个消防站能够覆盖与他距离$≤2$的点。求覆盖整个树的所有节点至少需要多少个消防站。树形dp的常规操作是每个节点都可以成为根节点，然后在这个节点搜索它的子树获取最优解。这个我在P2016那题说过。我们根据P2899那题的经验，对一颗子树划分为5个状态。">
 <meta name="keywords" content="动态规划,提高+&#x2F;省选-,动态规划-树形dp,各省省选">
 <meta property="og:type" content="article">
 <meta property="og:title" content="洛谷-P2279 [HNOI2003]消防局的设立">
 <meta property="og:url" content="http://yoursite.com/2019/10/04/洛谷-P2279 [HNOI2003]消防局的设立/index.html">
 <meta property="og:site_name" content="A.pro&#39;s blog">
-<meta property="og:description" content="思路其实和P2899 [USACO08JAN]手机网络有点类似，有兴趣的同学可以去看一看，该题我也写了题解。链接1链接2题目大意是给出一个树，一个消防站能够覆盖与他距离$≤2$的点。求覆盖整个树的所有节点至少需要多少个消防站。树形dp的常规操作是每个节点都可以成为根节点，然后在这个节点搜索它的子树获取最优解。这个我在P2016那题说过。我们根据P2899那题的经验，对一颗子树划分为5个状态。令$d">
+<meta property="og:description" content="思路其实和P2899 [USACO08JAN]手机网络有点类似，有兴趣的同学可以去看一看，该题我也写了题解。链接1链接2题目大意是给出一个树，一个消防站能够覆盖与他距离$≤2$的点。求覆盖整个树的所有节点至少需要多少个消防站。树形dp的常规操作是每个节点都可以成为根节点，然后在这个节点搜索它的子树获取最优解。这个我在P2016那题说过。我们根据P2899那题的经验，对一颗子树划分为5个状态。">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-10-05T13:28:31.564Z">
+<meta property="og:updated_time" content="2020-03-13T15:18:11.498Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="洛谷-P2279 [HNOI2003]消防局的设立">
-<meta name="twitter:description" content="思路其实和P2899 [USACO08JAN]手机网络有点类似，有兴趣的同学可以去看一看，该题我也写了题解。链接1链接2题目大意是给出一个树，一个消防站能够覆盖与他距离$≤2$的点。求覆盖整个树的所有节点至少需要多少个消防站。树形dp的常规操作是每个节点都可以成为根节点，然后在这个节点搜索它的子树获取最优解。这个我在P2016那题说过。我们根据P2899那题的经验，对一颗子树划分为5个状态。令$d">
+<meta name="twitter:description" content="思路其实和P2899 [USACO08JAN]手机网络有点类似，有兴趣的同学可以去看一看，该题我也写了题解。链接1链接2题目大意是给出一个树，一个消防站能够覆盖与他距离$≤2$的点。求覆盖整个树的所有节点至少需要多少个消防站。树形dp的常规操作是每个节点都可以成为根节点，然后在这个节点搜索它的子树获取最优解。这个我在P2016那题说过。我们根据P2899那题的经验，对一颗子树划分为5个状态。">
   
     <link rel="alternative" href="/atom.xml" title="A.pro&#39;s blog" type="application/atom+xml">
   
@@ -191,7 +191,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>其实和<a href="https://www.luogu.org/problem/P2899" target="_blank" rel="noopener">P2899 [USACO08JAN]手机网络</a>有点类似，有兴趣的同学可以去看一看，该题我也写了题解。<a href="https://blog.csdn.net/Apro1066/article/details/100127421" target="_blank" rel="noopener">链接1</a><a href="https://apro1066.top/2019/08/28/%E6%B4%9B%E8%B0%B7-P2899%20%5BUSACO08JAN%5D%E6%89%8B%E6%9C%BA%E7%BD%91%E7%BB%9C/" target="_blank" rel="noopener">链接2</a><br>题目大意是给出一个树，一个消防站能够覆盖与他距离$≤2$的点。求覆盖整个树的所有节点至少需要多少个消防站。<br>树形dp的常规操作是<strong>每个节点都可以成为根节点，然后在这个节点搜索它的子树获取最优解</strong>。这个我在P2016那题说过。我们根据P2899那题的经验，对一颗子树划分为5个状态。<br>令$dp[i][0/1/2/3/4]$为节点$i$及其节点$i$的子树中全部被覆盖所需的最小消防局数。$dp[i][0]$为节点$i$父亲的父亲及以下节点完全被覆盖所需的最小代价，$dp[i][1]$为节点$i$的父亲及以下节点完全被覆盖所需的最小代价，$dp[i][2]$为节点$i$及以下节点完全被覆盖所需要的最小代价。显然，这3种情况是节点i一定被覆盖的情况。<br>$dp[i][3]$为节点$i$的儿子及以下节点完全被覆盖所需最小代价，$dp[i][4]$为节点$i$儿子的儿子及以下节点完全被覆盖所需的最小代价。显然，这2种情况是节点i不一定被覆盖的情况。是不是和P2899迷之相似？这样感觉就对了！<br>简段洁说，$dp[i][0]$:选$i$为消防局；$dp[i][1]$:至少选$i$的一个儿子为消防局；$dp[i][2]$:至少选$i$的一个孙子为消防局。这3种状态显然节点$i$被覆盖。$dp[i][3]$:选$i$的所有儿子被覆盖;$dp[i][4]$:选$i$的所有孙子被覆盖。这2种状态节点$i$不一定被覆盖。<br><strong>1.1.$dp[i][0]$</strong><br>因为节点$i$有消防局，所以孙子会被覆盖到。要求孙子全部被覆盖，儿子0-4的状态都满足。所以：</p>
+        <h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>其实和<a href="https://www.luogu.org/problem/P2899" target="_blank" rel="noopener">P2899 [USACO08JAN]手机网络</a>有点类似，有兴趣的同学可以去看一看，该题我也写了题解。<a href="https://blog.csdn.net/Apro1066/article/details/100127421" target="_blank" rel="noopener">链接1</a><a href="https://apro1066.top/2019/08/28/%E6%B4%9B%E8%B0%B7-P2899%20%5BUSACO08JAN%5D%E6%89%8B%E6%9C%BA%E7%BD%91%E7%BB%9C/" target="_blank" rel="noopener">链接2</a><br>题目大意是给出一个树，一个消防站能够覆盖与他距离$≤2$的点。求覆盖整个树的所有节点至少需要多少个消防站。<br>树形dp的常规操作是<strong>每个节点都可以成为根节点，然后在这个节点搜索它的子树获取最优解</strong>。这个我在P2016那题说过。我们根据P2899那题的经验，对一颗子树划分为5个状态。<br><a id="more"></a><br>令$dp[i][0/1/2/3/4]$为节点$i$及其节点$i$的子树中全部被覆盖所需的最小消防局数。$dp[i][0]$为节点$i$父亲的父亲及以下节点完全被覆盖所需的最小代价，$dp[i][1]$为节点$i$的父亲及以下节点完全被覆盖所需的最小代价，$dp[i][2]$为节点$i$及以下节点完全被覆盖所需要的最小代价。显然，这3种情况是节点i一定被覆盖的情况。<br>$dp[i][3]$为节点$i$的儿子及以下节点完全被覆盖所需最小代价，$dp[i][4]$为节点$i$儿子的儿子及以下节点完全被覆盖所需的最小代价。显然，这2种情况是节点i不一定被覆盖的情况。是不是和P2899迷之相似？这样感觉就对了！<br>简段洁说，$dp[i][0]$:选$i$为消防局；$dp[i][1]$:至少选$i$的一个儿子为消防局；$dp[i][2]$:至少选$i$的一个孙子为消防局。这3种状态显然节点$i$被覆盖。$dp[i][3]$:选$i$的所有儿子被覆盖;$dp[i][4]$:选$i$的所有孙子被覆盖。这2种状态节点$i$不一定被覆盖。<br><strong>1.1.$dp[i][0]$</strong><br>因为节点$i$有消防局，所以孙子会被覆盖到。要求孙子全部被覆盖，儿子0-4的状态都满足。所以：</p>
 <script type="math/tex; mode=display">dp[i][0]=min( \sum dp[son][0...4])+1</script><p>这里$+1$是因为本身放了一个消防局。<br><strong>1.2.$dp[i][1]$</strong><br>​选了儿子中的一个节点，所以其他儿子也会被覆盖到。但是其他儿子的儿子无法被覆盖到。所以在转移时，选取一个点放消防站，并要求$i$的儿子被覆盖到。</p>
 <script type="math/tex; mode=display">dp[i][1]=min(dp[son1][0]+ \sum (son1≠son2)min(dp[son2][0...3]))</script><p><strong>1.3.$dp[i][2]$</strong><br>同理有：</p>
 <script type="math/tex; mode=display">dp[i][2]=min(dp[son1][1]+ \sum (son1≠son2)min(dp[son2][0...2]))</script><p><strong>1.4.$dp[i][3]$</strong><br>要让节点$i$的儿子都被覆盖，就是让它们本身都覆盖。</p>
