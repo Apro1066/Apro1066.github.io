@@ -18,7 +18,7 @@
 <meta property="og:locale" content="default">
 <meta property="og:image" content="https://i.loli.net/2020/03/13/FNQ9lvTW2JP4SEn.png">
 <meta property="og:image" content="https://i.loli.net/2020/03/13/yr2wgihvlaoGSzI.png">
-<meta property="og:updated_time" content="2020-03-13T13:14:49.341Z">
+<meta property="og:updated_time" content="2020-03-13T13:17:20.224Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="数学笔记-二维柯西不等式">
 <meta name="twitter:description" content="目录1.1 题目1.2 一般解法2.1 二维柯西不等式及其三角形式2.2 代数法3 番外1.1 题目如图，点$A(a,3)$,$B(b,1)$都在双曲线$y=\dfrac{3}{x}$上，点C,D分别是x轴、y轴上的动点，则四边形ABCD周长的最小值是多少？ 1.2 一般解法先把$A(a,3)$,$B(b,1)$带入双曲线方程可以得到$a=1$,$b=3$，所以$A(1,3)$,$B(3,1)$。">
@@ -203,7 +203,7 @@
 <script type="math/tex; mode=display">(\sqrt{a^{2}+b^{2}}+\sqrt{c^{2}+d^{2}})^{2} \ge \sqrt{(a+c)^{2}+(b+d)^2}</script><p>这个就是柯西不等式的三角形式，我们来证明一下。<br>$(\sqrt{a^{2}+b^{2}}+\sqrt{c^{2}+d^{2}})^{2} \ge \sqrt{(a+c)^{2}+(b+d)^2}$<br>$⇔a^{2}+b^{2}+c^{2}+d^{2}+2\sqrt{a^{2}+b^{2}}×\sqrt{c^{2}+d^{2}} \ge a^{2}+b^{2}+c^{2}+d^{2}+2ac+2bd$<br>$⇔\sqrt{(a^{2}+b^{2})(c^{2}+d^{2})} \ge ac+bd$<br>$⇔a^{2}c^{2}+b^{2}d^{2}+a^{2}d^{2}+b^{2}c^{2} \ge a^{2}c^{2}+2abcd+b^{2}d^{2}$<br>$⇔(ad-bc)^2 \ge 0$<br>显然成立！<br>如果要让$⇔(ad-bc)^2 \ge 0$中的等号成立的话，必须要让$ad=bc$。换句话说，仅当$ad=bc$时，$\sqrt{a^{2}+b^{2}}+\sqrt{c^{2}+d^{2}})^{2}$取最小值。</p>
 <h3 id="2-2-代数法-1"><a href="#2-2-代数法-1" class="headerlink" title="2.2 代数法"></a>2.2 代数法</h3><p>再来反观本题，设$C(x,0),D(0,y)$，则由距离公式得到<br>$AD+CD+BC$<br>$=\sqrt{(1-0)^{2}+(3-y)^{2}}+\sqrt{(x-0)^{2}+(0-y)^{2}}+\sqrt{(3-x)^{2}+(1-0)^{2}}$<br>$=\sqrt{1^{2}+(3-y)^{2}}+\sqrt{x^{2}+y^{2}}+\sqrt{(3-x)^{2}+1^{2}}$<br>$=\sqrt{x^{2}+y^{2}}+\sqrt{(3-x)^{2}+1^{2}}+\sqrt{1^{2}+(3-y)^{2}}$<br>$=\sqrt{3^{2}+(y+1)^{2}}+\sqrt{1^{2}+(3-y)^{2}}$<br>$=\sqrt{4^{2}+4^{2}}$<br>$=4\sqrt{2}$<br>$∴C_{四边形ABCD} = AB+BC+CD+AD = 2\sqrt{2}+4\sqrt(2) = 6\sqrt{2}$</p>
 <h3 id="3-番外-1"><a href="#3-番外-1" class="headerlink" title="3 番外"></a>3 番外</h3><p>dbxxx大佬:诶，A.pro，你这柯西不等式的三角形式为什么和高中数学选修4-5不一样啊？书上的是</p>
-<script type="math/tex; mode=display">(\sqrt{a^{2}+b^{2}}+\sqrt{c^{2}-d^{2}})^{2} \ge \sqrt{(a+c)^{2}-(b+d)^2}</script><p>事实上，这2个不等式没有本质区别。我们发现当其中一个不等式的$c,d$为相反数时和另一个不等式完全一样。<br>我们可用从向量的角度理解：第1个是向量长度的和大于他们和的长度，第2个是向量长度的和大于他们差的长度，这两个向量都能构成一个三角形。</p>
+<script type="math/tex; mode=display">(\sqrt{a^{2}+b^{2}}+\sqrt{c^{2}+d^{2}})^{2} \ge \sqrt{(a-c)^{2}+(b-d)^2}</script><p>事实上，这2个不等式没有本质区别。我们发现当其中一个不等式的$c,d$为相反数时和另一个不等式完全一样。<br>我们可用从向量的角度理解：第1个是向量长度的和大于他们和的长度，第2个是向量长度的和大于他们差的长度，这两个向量都能构成一个三角形。</p>
 <p>但是如果你用这两个不等式分别算一下上面的题，你会发现得到的两个结果不！一！样！<br>我们求最小值的依据是$ad=bc$，但是由于$a,b,c,d$的正负性我们并不知道，所以才会导致我们出现了2个“最小值”。<br>处理也很简单，只需要将$ad=bc$两边平方，得到$a^{2}d^{2}=b^{2}c^{2}$，这时候我们一定能得到关于$x$的二次方程，把x解出来，能得到关于x的2个解，把2个x分别代入原式，比较得到的结果，取更小即可。</p>
 
       
