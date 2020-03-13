@@ -168,6 +168,103 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-洛谷-P3594 [POI2015]WIL-Wilcze doły" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/10/08/洛谷-P3594 [POI2015]WIL-Wilcze doły/">洛谷-P3594 [POI2015]WIL-Wilcze doły</a>
+    </h1>
+  
+
+        
+        <a href="/2019/10/08/洛谷-P3594 [POI2015]WIL-Wilcze doły/" class="archive-article-date">
+  	<time datetime="2019-10-08T15:39:31.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-08</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>选择每一个位置$i$作为结尾能形成的最长区间的左端点是单调不降的。<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;deque&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> N 2000001</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ll long long int </span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line">ll n,p,d,s,t[N],last(<span class="number">1</span>);</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">node</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	ll val;</span><br><span class="line">	ll position;</span><br><span class="line">	ll sum;</span><br><span class="line">&#125;a[N];</span><br><span class="line"><span class="built_in">deque</span>&lt;node&gt; dq;</span><br><span class="line"><span class="function"><span class="keyword">signed</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	ios::sync_with_stdio(<span class="literal">false</span>);</span><br><span class="line">	<span class="built_in">cin</span>.tie(<span class="number">0</span>);</span><br><span class="line">	<span class="built_in">cout</span>.tie(<span class="number">0</span>);</span><br><span class="line">	<span class="keyword">register</span> ll i,j;</span><br><span class="line">	<span class="built_in">cin</span>&gt;&gt;n&gt;&gt;p&gt;&gt;d;</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">cin</span>&gt;&gt;a[i].val;<span class="comment">//a[i]</span></span><br><span class="line">		a[i].position=i;<span class="comment">//序列位置 </span></span><br><span class="line">		a[i].sum=a[i<span class="number">-1</span>].sum+a[i].val;<span class="comment">//前缀和 </span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span>(i=d;i&lt;=n;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		t[i]=a[i].sum-a[i-d].sum;<span class="comment">//算区间[i-d+1,i]的和 </span></span><br><span class="line">	&#125;</span><br><span class="line">	s=d;<span class="comment">//答案至少为d </span></span><br><span class="line">	a[<span class="number">0</span>].position=d;</span><br><span class="line">	dq.push_back(a[<span class="number">0</span>]);</span><br><span class="line">	<span class="keyword">for</span>(i=d+<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">while</span>(!dq.empty() &amp;&amp; t[dq.back().position]&lt;t[i])</span><br><span class="line">			dq.pop_back();</span><br><span class="line">		dq.push_back(a[i]);</span><br><span class="line">		<span class="keyword">while</span>(!dq.empty() &amp;&amp; dq.front().position-d+<span class="number">1</span>&lt;last)<span class="comment">//如果队首元素的左端点比last小，那就弹出 </span></span><br><span class="line">			dq.pop_front();</span><br><span class="line">		<span class="keyword">while</span>(!dq.empty() &amp;&amp; a[i].sum-a[last<span class="number">-1</span>].sum-t[dq.front().position]&gt;p)</span><br><span class="line">		&#123;</span><br><span class="line">			last++;</span><br><span class="line">			<span class="keyword">while</span>(!dq.empty() &amp;&amp; dq.front().position-d+<span class="number">1</span>&lt;last)</span><br><span class="line">				dq.pop_front();</span><br><span class="line">		&#125;</span><br><span class="line">		s=max(s,i-last+<span class="number">1</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">cout</span>&lt;&lt;s&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">贪心</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据结构</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">提高+/省选-</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据结构-单调队列</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/洛谷OJ题解//" class="article-tag-list-link color2">洛谷OJ题解</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/10/08/洛谷-P3594 [POI2015]WIL-Wilcze doły/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-洛谷-P1006 传纸条" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -985,31 +1082,31 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>定义：每个单项式得次数相同，或分子分母得次数相同。齐次式一般指<strong>正弦</strong>和<strong>余弦</strong>的次数。</p>
-<p>例如下面的式子都属于齐次式：<br>一次齐次式：$x+y+z$,<br>二次齐次式：$x^{2}+xy+y^{2}$<br>在三角函数中，$sin$和$cos$算作1次的，而$tan$为<strong>广义零次式</strong>。为什么呢？因为$tan\alpha=\frac{sin\alpha}{cos\alpha}$，即$\frac{1次式}{1次式}$，所以就是零次式了。<br>而下面的式子不属于齐次式：<br>$x+z+1$<br>齐次式可以干嘛呢？我们可以看一道例题。</p>
-<h5 id="1-已知-tan-alpha-2-则-frac-2sin-alpha-cos-alpha-sin-alpha-2cos-alpha-的值为多少？"><a href="#1-已知-tan-alpha-2-则-frac-2sin-alpha-cos-alpha-sin-alpha-2cos-alpha-的值为多少？" class="headerlink" title="1.已知$tan \alpha =2$,则$\frac{2sin \alpha -cos \alpha}{sin \alpha +2cos\alpha}$的值为多少？"></a>1.已知$tan \alpha =2$,则$\frac{2sin \alpha -cos \alpha}{sin \alpha +2cos\alpha}$的值为多少？</h5><p>分析：要求的式子里都有正弦余弦，条件是$tan \alpha =2$，那么这道题就是要通过$\alpha$的正切值，<strong>知一求二</strong>，把$\alpha$的正弦和余弦算出来。</p>
-<p>求解过程并不难，我们先把$tan \alpha$化成$\frac{sin \alpha}{cos \alpha}=2$，然后联立$sin^{2} \alpha + cos^{2} \alpha =1$解方程。</p>
+<p>例如下面的式子都属于齐次式：<br>一次齐次式：$x+y+z$,<br>二次齐次式：$x^{2}+xy+y^{2}$<br>在三角函数中，$sin$和$cos$算作1次的，而$tan$为<strong>广义零次式</strong>。为什么呢？因为$tan\alpha=\dfrac{sin\alpha}{cos\alpha}$，即$\dfrac{1次式}{1次式}$，所以就是零次式了。<br>而下面的式子不属于齐次式：<br>$x+z+1$<br>齐次式可以干嘛呢？我们可以看一道例题。</p>
+<h5 id="1-已知-tan-alpha-2-则-dfrac-2sin-alpha-cos-alpha-sin-alpha-2cos-alpha-的值为多少？"><a href="#1-已知-tan-alpha-2-则-dfrac-2sin-alpha-cos-alpha-sin-alpha-2cos-alpha-的值为多少？" class="headerlink" title="1.已知$tan \alpha =2$,则$\dfrac{2sin \alpha -cos \alpha}{sin \alpha +2cos\alpha}$的值为多少？"></a>1.已知$tan \alpha =2$,则$\dfrac{2sin \alpha -cos \alpha}{sin \alpha +2cos\alpha}$的值为多少？</h5><p>分析：要求的式子里都有正弦余弦，条件是$tan \alpha =2$，那么这道题就是要通过$\alpha$的正切值，<strong>知一求二</strong>，把$\alpha$的正弦和余弦算出来。</p>
+<p>求解过程并不难，我们先把$tan \alpha$化成$\dfrac{sin \alpha}{cos \alpha}=2$，然后联立$sin^{2} \alpha + cos^{2} \alpha =1$解方程。</p>
 <h4 id="解方程的步骤很繁琐，有没有更快的解法呢？"><a href="#解方程的步骤很繁琐，有没有更快的解法呢？" class="headerlink" title="解方程的步骤很繁琐，有没有更快的解法呢？"></a>解方程的步骤很繁琐，有没有更快的解法呢？</h4><p>没错，通过我之前介绍的<strong>齐次式</strong>，只需一步就可以秒出答案。睁大眼睛——<br>$∵tan \alpha =2$<br>$∴$显然$cos \alpha≠0$<br>让所求式的分子分母同除以$cos \alpha$，得</p>
-<p>$\frac{(2sin \alpha -cos \alpha)÷cos \alpha}{(sin \alpha +2cos\alpha)÷cos \alpha}$</p>
-<p>$=\frac{\frac{2sin \alpha -cos \alpha}{cos \alpha}}{\frac{sin \alpha +2cos\alpha}{cos \alpha}}$</p>
-<p>$=\frac{2\frac{sin\alpha}{cos\alpha}-1}{\frac{sin\alpha}{cos\alpha}+2}$</p>
-<p>$∵tan\alpha=\frac{sin\alpha}{cos\alpha},$又$tan\alpha=2$</p>
-<p>$∴ys=\frac{2\frac{sin\alpha}{cos\alpha}-1}{\frac{sin\alpha}{cos\alpha}+2}$</p>
-<p>$=\frac{2×2-1}{2+2}$</p>
-<p>$=\frac{3}{4}$</p>
-<p>搞定。<br>回顾一下我们上面的神奇操作，为什么可以想到同时除以$cos\alpha$呢？因为原式$\frac{2sin \alpha -cos \alpha}{sin \alpha +2cos\alpha}$显然是$\frac{1次式}{1次式}$，而我们最后显然是想得到一个常数，也就是<strong>广义零次式</strong>，所以我们就可以同时除以$cos\alpha$来达到目的。需要$tan\alpha=\frac{sin\alpha}{cos\alpha}$来做桥梁。<br><del>双倍经验</del> </p>
-<h5 id="2-已知-tan-alpha-frac-1-3-，求-sin-alpha-cos-alpha-的值。"><a href="#2-已知-tan-alpha-frac-1-3-，求-sin-alpha-cos-alpha-的值。" class="headerlink" title="2.已知$tan\alpha=\frac{1}{3}$，求$sin\alpha cos\alpha$的值。"></a>2.已知$tan\alpha=\frac{1}{3}$，求$sin\alpha cos\alpha$的值。</h5><p>分析：这里并没有给出$\frac{2次式}{2次式}$啊，怎么办呢？</p>
+<p>$\dfrac{(2sin \alpha -cos \alpha)÷cos \alpha}{(sin \alpha +2cos\alpha)÷cos \alpha}$</p>
+<p>$=\dfrac{\dfrac{2sin \alpha -cos \alpha}{cos \alpha}}{\dfrac{sin \alpha +2cos\alpha}{cos \alpha}}$</p>
+<p>$=\dfrac{2\dfrac{sin\alpha}{cos\alpha}-1}{\dfrac{sin\alpha}{cos\alpha}+2}$</p>
+<p>$∵tan\alpha=\dfrac{sin\alpha}{cos\alpha},$又$tan\alpha=2$</p>
+<p>$∴原式=\dfrac{2\dfrac{sin\alpha}{cos\alpha}-1}{\dfrac{sin\alpha}{cos\alpha}+2}$</p>
+<p>$=\dfrac{2×2-1}{2+2}$</p>
+<p>$=\dfrac{3}{4}$</p>
+<p>搞定。<br>回顾一下我们上面的神奇操作，为什么可以想到同时除以$cos\alpha$呢？因为原式$\dfrac{2sin \alpha -cos \alpha}{sin \alpha +2cos\alpha}$显然是$\dfrac{1次式}{1次式}$，而我们最后显然是想得到一个常数，也就是<strong>广义零次式</strong>，所以我们就可以同时除以$cos\alpha$来达到目的。需要$tan\alpha=\dfrac{sin\alpha}{cos\alpha}$来做桥梁。<br><del>双倍经验</del> </p>
+<h5 id="2-已知-tan-alpha-dfrac-1-3-，求-sin-alpha-cos-alpha-的值。"><a href="#2-已知-tan-alpha-dfrac-1-3-，求-sin-alpha-cos-alpha-的值。" class="headerlink" title="2.已知$tan\alpha=\dfrac{1}{3}$，求$sin\alpha cos\alpha$的值。"></a>2.已知$tan\alpha=\dfrac{1}{3}$，求$sin\alpha cos\alpha$的值。</h5><p>分析：这里并没有给出$\dfrac{2次式}{2次式}$啊，怎么办呢？</p>
 <p>别忘了，还有一个恒等式：$sin^{2} \alpha + cos^{2} \alpha =1$。<br>所以把原式写成这样：<br>$sin\alpha cos\alpha$</p>
-<p>$=\frac{sin\alpha cos\alpha}{sin^{2} \alpha + cos^{2} \alpha }$</p>
+<p>$=\dfrac{sin\alpha cos\alpha}{sin^{2} \alpha + cos^{2} \alpha }$</p>
 <p>上下同除以$cos^{2}$得</p>
-<p>$=\frac{\frac{sin\alpha cos\alpha}{cos^{2}}}{\frac{sin^{2} \alpha + cos^{2} \alpha }{cos^{2}}}$</p>
-<p>$=\frac{tan\alpha}{tan^{2}\alpha+1}$</p>
-<p>$=\frac{3}{10}$</p>
+<p>$=\dfrac{\dfrac{sin\alpha cos\alpha}{cos^{2}}}{\dfrac{sin^{2} \alpha + cos^{2} \alpha }{cos^{2}}}$</p>
+<p>$=\dfrac{tan\alpha}{tan^{2}\alpha+1}$</p>
+<p>$=\dfrac{3}{10}$</p>
 <p>怎么样？厉害吧？再来一道比较难的题吧。</p>
 <h5 id="3-已知-1-cos-2-theta-3sin-theta-cos-theta-，求-tan-theta-的值。"><a href="#3-已知-1-cos-2-theta-3sin-theta-cos-theta-，求-tan-theta-的值。" class="headerlink" title="3.已知$1+cos^{2}\theta=3sin\theta cos\theta$，求$tan\theta$的值。"></a>3.已知$1+cos^{2}\theta=3sin\theta cos\theta$，求$tan\theta$的值。</h5><p>分析：还是考虑齐次化的思想。方程中，$cos^{2}\theta，3sin\theta cos\theta$属于二次式，只有$1$是常数。那我们还是用$sin^{2} \theta + cos^{2} \theta =1$进行<strong>次数转换</strong>，把$1$换成$sin^{2} \theta + cos^{2} \theta$，就变成了：<br>$sin^{2} \theta + cos^{2} \theta+cos^{2}\theta=3sin\theta cos\theta$<br>$=sin^{2} \theta + 2cos^{2}\theta=3sin\theta cos\theta$</p>
 <p>现在呢，要求的$tan\theta$是一个<strong>广义零次式</strong>，那我们只要把方程变成零次式就ok啦！<br>显然，这里$cos\theta≠0$</p>
 <p>$∴$方程两边同时除以$cos^{2}\theta$，得</p>
-<p>$\frac{sin^{2} \theta + 2cos^{2}\theta}{cos^{2}\theta}=\frac{3sin\theta cos\theta}{cos^{2}\theta}$</p>
-<p>由$tan\theta=\frac{sin\theta}{cos\theta}$</p>
+<p>$\dfrac{sin^{2} \theta + 2cos^{2}\theta}{cos^{2}\theta}=\dfrac{3sin\theta cos\theta}{cos^{2}\theta}$</p>
+<p>由$tan\theta=\dfrac{sin\theta}{cos\theta}$</p>
 <p>$∴tan^{2}\theta+2=3tan\theta$</p>
 <p>移项，得：<br>$tan^{2}\theta -3tan\theta +2=0$</p>
 <p>咦？这不就是个<strong>一元二次方程</strong>吗？十字相乘得：</p>
@@ -1052,100 +1149,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2019/08/27/[高中数学必修4]齐次式/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-洛谷-P2380 狗哥采矿" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/08/25/洛谷-P2380 狗哥采矿/">洛谷-P2380 狗哥采矿</a>
-    </h1>
-  
-
-        
-        <a href="/2019/08/25/洛谷-P2380 狗哥采矿/" class="archive-article-date">
-  	<time datetime="2019-08-25T15:44:22.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-25</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>令$dp[i][j]$为以点$(i,j)$为右下角时的矩阵中最大采矿量。由于传送带不能转弯，所以在点$(i,j)$上，向左就会一直向左，向上就会一直向上。所以点$(i,j)$如果向左挖矿，可以从点$(i,j-1)$转移过来，而$(i,j-1)$也可以从点$(i,j-2)$转移过来，一直到$(i,1)$。同理，点$(i,j)$如果向上挖矿，可以从点$(i-1,j)$转移过来，而$(i-1,j)$也可以从点$(i-2,j)$转移过来，一直到$(1,j)$。<br>在挖矿的过程中，能影响$dp[i][j]$的值只有挖矿方向。用$a[i][j]$来记录向上的矿的前缀和，用$b[i][j]$来记录向左的矿的前缀和。则：</p>
-<script type="math/tex; mode=display">dp[i][j]=max(dp[i][j-1]+a[i][j],dp[i-1][j]+b[i][j])</script><p>答案为$dp[n][m]$。<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;memory.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> maxn 501</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> n,m,a[maxn][maxn],b[maxn][maxn],dp[maxn][maxn],inf;</span><br><span class="line"><span class="function"><span class="keyword">signed</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	ios::sync_with_stdio(<span class="literal">false</span>);</span><br><span class="line">	<span class="built_in">cin</span>.tie(<span class="number">0</span>);</span><br><span class="line">	<span class="built_in">cout</span>.tie(<span class="number">0</span>);</span><br><span class="line">	<span class="keyword">register</span> <span class="keyword">int</span> i,j,k,x,y;</span><br><span class="line">	<span class="built_in">cin</span>&gt;&gt;n&gt;&gt;m;</span><br><span class="line">	<span class="keyword">while</span>(n!=<span class="number">0</span> &amp;&amp; m!=<span class="number">0</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">memset</span>(dp,<span class="number">0</span>,<span class="keyword">sizeof</span>(dp));</span><br><span class="line">		<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">for</span>(j=<span class="number">1</span>;j&lt;=m;j++)</span><br><span class="line">			&#123;</span><br><span class="line">				<span class="built_in">cin</span>&gt;&gt;a[i][j];</span><br><span class="line">				a[i][j]+=a[i][j<span class="number">-1</span>];</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">for</span>(j=<span class="number">1</span>;j&lt;=m;j++)</span><br><span class="line">			&#123;</span><br><span class="line">				<span class="built_in">cin</span>&gt;&gt;b[i][j];</span><br><span class="line">				b[i][j]+=b[i<span class="number">-1</span>][j];</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">for</span>(j=<span class="number">1</span>;j&lt;=m;j++)</span><br><span class="line">			&#123;</span><br><span class="line">				dp[i][j]=max(dp[i<span class="number">-1</span>][j]+a[i][j],dp[i][j<span class="number">-1</span>]+b[i][j]);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="built_in">cout</span>&lt;&lt;dp[n][m]&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">		<span class="built_in">cin</span>&gt;&gt;n&gt;&gt;m;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">普及+/提高</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">动态规划</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">动态规划-线性dp</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/洛谷OJ题解//" class="article-tag-list-link color2">洛谷OJ题解</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/08/25/洛谷-P2380 狗哥采矿/">展开全文 >></a>
         </p>
       
 
@@ -1565,6 +1568,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           
             <li class="search-li">
               <a href="https://killerxuuuuu.github.io" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>KillerXu的博客</a>
+            </li>
+          
+            <li class="search-li">
+              <a href="https://catalan1906.github.io" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>Catalan1906的博客</a>
             </li>
           
             <li class="search-li">
